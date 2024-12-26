@@ -1,21 +1,12 @@
 use fuel_core_chain_config::TableEntry;
 use fuel_core_storage::{
-    tables::{
-        merkle::ContractsAssetsMerkleMetadata,
-        ContractsAssets,
-    },
-    ContractsAssetKey,
-    Error as StorageError,
-    StorageAsRef,
-    StorageBatchMutate,
+    tables::{merkle::ContractsAssetsMerkleMetadata, ContractsAssets},
+    ContractsAssetKey, Error as StorageError, StorageAsRef, StorageBatchMutate,
     StorageInspect,
 };
 use fuel_core_types::{
     fuel_asm::Word,
-    fuel_types::{
-        AssetId,
-        ContractId,
-    },
+    fuel_types::{AssetId, ContractId},
 };
 use itertools::Itertools;
 
@@ -102,26 +93,13 @@ where
 
 #[cfg(test)]
 mod tests {
-    use std::{
-        collections::HashSet,
-        iter::repeat_with,
-    };
+    use std::{collections::HashSet, iter::repeat_with};
 
     use super::*;
-    use crate::database::{
-        database_description::on_chain::OnChain,
-        Database,
-    };
-    use fuel_core_storage::{
-        transactional::IntoTransaction,
-        StorageAsMut,
-    };
+    use crate::database::{database_description::on_chain::OnChain, Database};
+    use fuel_core_storage::{transactional::IntoTransaction, StorageAsMut};
     use fuel_core_types::fuel_types::AssetId;
-    use rand::{
-        rngs::StdRng,
-        Rng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, Rng, SeedableRng};
 
     fn random_asset_id<R>(rng: &mut R) -> AssetId
     where
@@ -134,11 +112,7 @@ mod tests {
 
     #[test]
     fn init_contract_balances_works() {
-        use rand::{
-            rngs::StdRng,
-            RngCore,
-            SeedableRng,
-        };
+        use rand::{rngs::StdRng, RngCore, SeedableRng};
 
         let rng = &mut StdRng::seed_from_u64(1234);
         let gen = || Some((random_asset_id(rng), rng.next_u64()));
@@ -197,13 +171,9 @@ mod tests {
     mod update_contract_balance {
         use fuel_core_chain_config::Randomize;
         use fuel_core_storage::{
-            iter::IteratorOverTable,
-            transactional::WriteTransaction,
+            iter::IteratorOverTable, transactional::WriteTransaction,
         };
-        use fuel_core_types::fuel_merkle::sparse::{
-            self,
-            MerkleTreeKey,
-        };
+        use fuel_core_types::fuel_merkle::sparse::{self, MerkleTreeKey};
 
         use super::*;
 

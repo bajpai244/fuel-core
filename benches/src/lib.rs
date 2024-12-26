@@ -1,43 +1,20 @@
 use fuel_core::database::GenesisDatabase;
 use fuel_core_storage::{
-    transactional::{
-        IntoTransaction,
-        StorageTransaction,
-    },
+    transactional::{IntoTransaction, StorageTransaction},
     StorageAsMut,
 };
 use fuel_core_types::{
-    fuel_asm::{
-        op,
-        GTFArgs,
-        Instruction,
-        RegId,
-    },
+    fuel_asm::{op, GTFArgs, Instruction, RegId},
     fuel_tx::*,
-    fuel_types::{
-        BlockHeight,
-        Word,
-    },
+    fuel_types::{BlockHeight, Word},
     fuel_vm::{
-        checked_transaction::{
-            CheckPredicateParams,
-            EstimatePredicates,
-            IntoChecked,
-        },
+        checked_transaction::{CheckPredicateParams, EstimatePredicates, IntoChecked},
         consts::*,
-        interpreter::{
-            diff,
-            InterpreterParams,
-            MemoryInstance,
-            ReceiptsCtx,
-        },
+        interpreter::{diff, InterpreterParams, MemoryInstance, ReceiptsCtx},
         *,
     },
 };
-use std::{
-    iter,
-    mem,
-};
+use std::{iter, mem};
 
 pub mod default_gas_costs;
 pub mod import;

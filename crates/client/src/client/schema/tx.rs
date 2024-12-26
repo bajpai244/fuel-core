@@ -1,38 +1,18 @@
 use crate::client::{
     schema::{
-        schema,
-        tx::transparent_receipt::Receipt,
-        Address,
-        ConnectionArgsFields,
-        ConversionError,
-        HexString,
-        PageInfo,
-        Tai64Timestamp,
-        TransactionId,
-        U32,
-        U64,
+        schema, tx::transparent_receipt::Receipt, Address, ConnectionArgsFields,
+        ConversionError, HexString, PageInfo, Tai64Timestamp, TransactionId, U32, U64,
     },
     types::TransactionResponse,
-    PageDirection,
-    PaginatedResult,
-    PaginationRequest,
+    PageDirection, PaginatedResult, PaginationRequest,
 };
 use fuel_core_types::{
     fuel_tx,
-    fuel_types::{
-        canonical::Deserialize,
-        Bytes32,
-    },
+    fuel_types::{canonical::Deserialize, Bytes32},
     fuel_vm,
-    services::executor::{
-        TransactionExecutionResult,
-        TransactionExecutionStatus,
-    },
+    services::executor::{TransactionExecutionResult, TransactionExecutionStatus},
 };
-use std::convert::{
-    TryFrom,
-    TryInto,
-};
+use std::convert::{TryFrom, TryInto};
 
 pub mod transparent_receipt;
 pub mod transparent_tx;

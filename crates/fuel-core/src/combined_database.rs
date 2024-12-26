@@ -3,29 +3,18 @@ use crate::state::historical_rocksdb::StateRewindPolicy;
 use crate::{
     database::{
         database_description::{
-            gas_price::GasPriceDatabase,
-            off_chain::OffChain,
-            on_chain::OnChain,
+            gas_price::GasPriceDatabase, off_chain::OffChain, on_chain::OnChain,
             relayer::Relayer,
         },
-        Database,
-        GenesisDatabase,
-        Result as DatabaseResult,
+        Database, GenesisDatabase, Result as DatabaseResult,
     },
     service::DbType,
 };
 #[cfg(feature = "test-helpers")]
-use fuel_core_chain_config::{
-    StateConfig,
-    StateConfigBuilder,
-};
+use fuel_core_chain_config::{StateConfig, StateConfigBuilder};
 #[cfg(feature = "test-helpers")]
 use fuel_core_storage::tables::{
-    Coins,
-    ContractsAssets,
-    ContractsLatestUtxo,
-    ContractsRawCode,
-    ContractsState,
+    Coins, ContractsAssets, ContractsLatestUtxo, ContractsRawCode, ContractsState,
     Messages,
 };
 use fuel_core_storage::Result as StorageResult;

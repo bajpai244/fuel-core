@@ -1,26 +1,15 @@
 use crate::{
     fuel_core_graphql_api::ports::ConsensusModulePort,
     service::adapters::{
-        BlockImporterAdapter,
-        BlockProducerAdapter,
-        P2PAdapter,
-        PoAAdapter,
-        TxPoolAdapter,
+        BlockImporterAdapter, BlockProducerAdapter, P2PAdapter, PoAAdapter, TxPoolAdapter,
     },
 };
 use anyhow::anyhow;
 use fuel_core_poa::{
     ports::{
-        BlockImporter,
-        P2pPort,
-        PredefinedBlocks,
-        TransactionPool,
-        TransactionsSource,
+        BlockImporter, P2pPort, PredefinedBlocks, TransactionPool, TransactionsSource,
     },
-    service::{
-        Mode,
-        SharedState,
-    },
+    service::{Mode, SharedState},
 };
 use fuel_core_services::stream::BoxStream;
 use fuel_core_storage::transactional::Changes;
@@ -30,22 +19,15 @@ use fuel_core_types::{
     fuel_types::BlockHeight,
     services::{
         block_importer::{
-            BlockImportInfo,
-            UncommittedResult as UncommittedImporterResult,
+            BlockImportInfo, UncommittedResult as UncommittedImporterResult,
         },
         executor::UncommittedResult,
     },
     tai64::Tai64,
 };
-use std::path::{
-    Path,
-    PathBuf,
-};
+use std::path::{Path, PathBuf};
 use tokio::sync::watch;
-use tokio_stream::{
-    wrappers::BroadcastStream,
-    StreamExt,
-};
+use tokio_stream::{wrappers::BroadcastStream, StreamExt};
 
 impl PoAAdapter {
     pub fn new(shared_state: Option<SharedState>) -> Self {

@@ -1,15 +1,7 @@
 use crate::graphql_api::database::ReadDatabase;
 use async_graphql::{
-    extensions::{
-        Extension,
-        ExtensionContext,
-        ExtensionFactory,
-        NextPrepareRequest,
-    },
-    Pos,
-    Request,
-    ServerError,
-    ServerResult,
+    extensions::{Extension, ExtensionContext, ExtensionFactory, NextPrepareRequest},
+    Pos, Request, ServerError, ServerResult,
 };
 use std::sync::Arc;
 

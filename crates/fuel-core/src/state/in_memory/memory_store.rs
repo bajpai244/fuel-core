@@ -1,45 +1,18 @@
 use crate::{
-    database::database_description::{
-        on_chain::OnChain,
-        DatabaseDescription,
-    },
+    database::database_description::{on_chain::OnChain, DatabaseDescription},
     state::{
         in_memory::memory_view::MemoryView,
-        iterable_key_value_view::IterableKeyValueViewWrapper,
-        IterDirection,
-        IterableKeyValueView,
-        KeyValueView,
-        TransactableStorage,
+        iterable_key_value_view::IterableKeyValueViewWrapper, IterDirection,
+        IterableKeyValueView, KeyValueView, TransactableStorage,
     },
 };
 use fuel_core_storage::{
-    iter::{
-        iterator,
-        keys_iterator,
-        BoxedIter,
-        IntoBoxedIter,
-        IterableStore,
-    },
-    kv_store::{
-        KVItem,
-        KeyItem,
-        KeyValueInspect,
-        StorageColumn,
-        Value,
-        WriteOperation,
-    },
-    transactional::{
-        Changes,
-        ReferenceBytesKey,
-    },
+    iter::{iterator, keys_iterator, BoxedIter, IntoBoxedIter, IterableStore},
+    kv_store::{KVItem, KeyItem, KeyValueInspect, StorageColumn, Value, WriteOperation},
+    transactional::{Changes, ReferenceBytesKey},
     Result as StorageResult,
 };
-use std::{
-    collections::BTreeMap,
-    fmt::Debug,
-    ops::Deref,
-    sync::Mutex,
-};
+use std::{collections::BTreeMap, fmt::Debug, ops::Deref, sync::Mutex};
 
 #[derive(Debug)]
 pub struct MemoryStore<Description = OnChain>
@@ -219,9 +192,7 @@ where
 mod tests {
     use super::*;
     use fuel_core_storage::{
-        column::Column,
-        kv_store::KeyValueMutate,
-        transactional::ReadTransaction,
+        column::Column, kv_store::KeyValueMutate, transactional::ReadTransaction,
     };
 
     impl<Description> KeyValueMutate for MemoryStore<Description>

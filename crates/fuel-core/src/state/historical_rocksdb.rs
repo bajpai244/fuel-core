@@ -1,68 +1,30 @@
 use crate::{
     database::{
-        database_description::{
-            DatabaseDescription,
-            DatabaseHeight,
-        },
-        Error as DatabaseError,
-        Result as DatabaseResult,
+        database_description::{DatabaseDescription, DatabaseHeight},
+        Error as DatabaseError, Result as DatabaseResult,
     },
     state::{
         historical_rocksdb::{
-            description::{
-                historical_duplicate_column_id,
-                Column,
-                Historical,
-            },
+            description::{historical_duplicate_column_id, Column, Historical},
             view_at_height::ViewAtHeight,
         },
         iterable_key_value_view::IterableKeyValueViewWrapper,
         key_value_view::KeyValueViewWrapper,
         rocks_db::RocksDb,
-        ColumnType,
-        IterableKeyValueView,
-        KeyValueView,
-        TransactableStorage,
+        ColumnType, IterableKeyValueView, KeyValueView, TransactableStorage,
     },
 };
 use fuel_core_storage::{
-    iter::{
-        BoxedIter,
-        IterDirection,
-        IterableStore,
-        IteratorOverTable,
-    },
-    kv_store::{
-        KVItem,
-        KeyValueInspect,
-        Value,
-        WriteOperation,
-    },
+    iter::{BoxedIter, IterDirection, IterableStore, IteratorOverTable},
+    kv_store::{KVItem, KeyValueInspect, Value, WriteOperation},
     not_found,
-    transactional::{
-        Changes,
-        ConflictPolicy,
-        ReadTransaction,
-        StorageTransaction,
-    },
-    Error as StorageError,
-    Result as StorageResult,
-    StorageAsMut,
-    StorageMut,
+    transactional::{Changes, ConflictPolicy, ReadTransaction, StorageTransaction},
+    Error as StorageError, Result as StorageResult, StorageAsMut, StorageMut,
 };
 use itertools::Itertools;
-use modifications_history::{
-    ModificationsHistoryV1,
-    ModificationsHistoryV2,
-};
-use serde::{
-    Deserialize,
-    Serialize,
-};
-use std::{
-    num::NonZeroU64,
-    path::Path,
-};
+use modifications_history::{ModificationsHistoryV1, ModificationsHistoryV2};
+use serde::{Deserialize, Serialize};
+use std::{num::NonZeroU64, path::Path};
 
 pub mod description;
 pub mod modifications_history;
@@ -646,13 +608,8 @@ mod tests {
     use crate::database::database_description::on_chain::OnChain;
     use fuel_core_storage::{
         tables::ContractsAssets,
-        transactional::{
-            IntoTransaction,
-            ReadTransaction,
-        },
-        ContractsAssetKey,
-        StorageAsMut,
-        StorageAsRef,
+        transactional::{IntoTransaction, ReadTransaction},
+        ContractsAssetKey, StorageAsMut, StorageAsRef,
     };
 
     #[test]

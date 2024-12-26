@@ -3,11 +3,7 @@
 use crate::{
     cli::{
         default_db_path,
-        run::{
-            consensus::PoATriggerArgs,
-            graphql::GraphQLArgs,
-            tx_pool::TxPoolArgs,
-        },
+        run::{consensus::PoATriggerArgs, graphql::GraphQLArgs, tx_pool::TxPoolArgs},
         ShutdownListener,
     },
     FuelService,
@@ -16,71 +12,30 @@ use anyhow::Context;
 use clap::Parser;
 use fuel_core::{
     chain_config::default_consensus_dev_key,
-    combined_database::{
-        CombinedDatabase,
-        CombinedDatabaseConfig,
-    },
+    combined_database::{CombinedDatabase, CombinedDatabaseConfig},
     fuel_core_graphql_api::{
-        worker_service::DaCompressionConfig,
-        Costs,
-        ServiceConfig as GraphQLConfig,
+        worker_service::DaCompressionConfig, Costs, ServiceConfig as GraphQLConfig,
     },
     producer::Config as ProducerConfig,
     service::{
-        config::Trigger,
-        genesis::NotifyCancel,
-        Config,
-        DbType,
-        RelayerConsensusConfig,
+        config::Trigger, genesis::NotifyCancel, Config, DbType, RelayerConsensusConfig,
         VMConfig,
     },
     txpool::config::{
-        BlackList,
-        Config as TxPoolConfig,
-        HeavyWorkConfig,
-        PoolLimits,
+        BlackList, Config as TxPoolConfig, HeavyWorkConfig, PoolLimits,
         ServiceChannelLimits,
     },
-    types::{
-        fuel_tx::ContractId,
-        fuel_vm::SecretKey,
-        secrecy::Secret,
-    },
+    types::{fuel_tx::ContractId, fuel_vm::SecretKey, secrecy::Secret},
 };
-use fuel_core_chain_config::{
-    SnapshotMetadata,
-    SnapshotReader,
-};
-use fuel_core_metrics::config::{
-    DisableConfig,
-    Module,
-};
+use fuel_core_chain_config::{SnapshotMetadata, SnapshotReader};
+use fuel_core_metrics::config::{DisableConfig, Module};
 use fuel_core_poa::signer::SignMode;
 use fuel_core_types::blockchain::header::StateTransitionBytecodeVersion;
-use pyroscope::{
-    pyroscope::PyroscopeAgentRunning,
-    PyroscopeAgent,
-};
-use pyroscope_pprofrs::{
-    pprof_backend,
-    PprofConfig,
-};
-use rlimit::{
-    getrlimit,
-    Resource,
-};
-use std::{
-    env,
-    net,
-    num::NonZeroU64,
-    path::PathBuf,
-    str::FromStr,
-};
-use tracing::{
-    info,
-    trace,
-    warn,
-};
+use pyroscope::{pyroscope::PyroscopeAgentRunning, PyroscopeAgent};
+use pyroscope_pprofrs::{pprof_backend, PprofConfig};
+use rlimit::{getrlimit, Resource};
+use std::{env, net, num::NonZeroU64, path::PathBuf, str::FromStr};
+use tracing::{info, trace, warn};
 
 #[cfg(feature = "rocksdb")]
 use fuel_core::state::historical_rocksdb::StateRewindPolicy;

@@ -1,30 +1,17 @@
 use crate::{
-    database::{
-        Database,
-        OnChainIterableKeyValueView,
-    },
-    service::adapters::{
-        MaybeRelayerAdapter,
-        VerifierAdapter,
-    },
+    database::{Database, OnChainIterableKeyValueView},
+    service::adapters::{MaybeRelayerAdapter, VerifierAdapter},
 };
 use fuel_core_chain_config::ConsensusConfig;
 use fuel_core_consensus_module::block_verifier::{
-    config::Config as VerifierConfig,
-    Verifier,
+    config::Config as VerifierConfig, Verifier,
 };
 use fuel_core_poa::ports::RelayerPort;
 use fuel_core_producer::ports::BlockProducerDatabase;
-use fuel_core_storage::{
-    tables::FuelBlocks,
-    Result as StorageResult,
-    StorageAsRef,
-};
+use fuel_core_storage::{tables::FuelBlocks, Result as StorageResult, StorageAsRef};
 use fuel_core_types::{
     blockchain::{
-        block::CompressedBlock,
-        header::BlockHeader,
-        primitives::DaBlockHeight,
+        block::CompressedBlock, header::BlockHeader, primitives::DaBlockHeight,
     },
     fuel_tx::Bytes32,
     fuel_types::BlockHeight,

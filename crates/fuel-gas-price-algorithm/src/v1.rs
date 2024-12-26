@@ -1,10 +1,5 @@
 use crate::utils::cumulative_percentage_change;
-use std::{
-    cmp::max,
-    collections::BTreeMap,
-    num::NonZeroU64,
-    ops::Div,
-};
+use std::{cmp::max, collections::BTreeMap, num::NonZeroU64, ops::Div};
 
 #[cfg(test)]
 mod tests;

@@ -1,50 +1,24 @@
 #![allow(non_snake_case)]
 
 use super::*;
-use crate::common::utils::{
-    Error as GasPriceError,
-    Result as GasPriceResult,
-};
-use fuel_core_services::stream::{
-    BoxStream,
-    IntoBoxStream,
-};
+use crate::common::utils::{Error as GasPriceError, Result as GasPriceResult};
+use fuel_core_services::stream::{BoxStream, IntoBoxStream};
 use fuel_core_types::{
     blockchain::{
-        block::{
-            Block,
-            CompressedBlock,
-        },
+        block::{Block, CompressedBlock},
         header::ConsensusParametersVersion,
         SealedBlock,
     },
     fuel_tx::{
-        consensus_parameters::{
-            ConsensusParametersV1,
-            FeeParameters,
-            FeeParametersV1,
-        },
-        field::{
-            MintAmount,
-            MintGasPrice,
-        },
-        ConsensusParameters,
-        Mint,
-        Transaction,
-        UniqueIdentifier,
+        consensus_parameters::{ConsensusParametersV1, FeeParameters, FeeParametersV1},
+        field::{MintAmount, MintGasPrice},
+        ConsensusParameters, Mint, Transaction, UniqueIdentifier,
     },
     fuel_types::ChainId,
     services::block_importer::ImportResult,
 };
-use futures::future::{
-    maybe_done,
-    MaybeDone,
-};
-use std::{
-    ops::Deref,
-    sync::Arc,
-    time::Duration,
-};
+use futures::future::{maybe_done, MaybeDone};
+use std::{ops::Deref, sync::Arc, time::Duration};
 use tokio_stream::wrappers::ReceiverStream;
 
 #[derive(Clone)]

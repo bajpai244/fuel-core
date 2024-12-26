@@ -1,29 +1,17 @@
 use crate::{
     fuel_core_graphql_api::validation_extension::visitor::{
-        visit,
-        RuleError,
-        VisitorContext,
+        visit, RuleError, VisitorContext,
     },
     graphql_api::validation_extension::recursion_finder::RecursionFinder,
 };
 use async_graphql::{
     extensions::{
-        Extension,
-        ExtensionContext,
-        ExtensionFactory,
-        NextParseQuery,
-        NextValidation,
+        Extension, ExtensionContext, ExtensionFactory, NextParseQuery, NextValidation,
     },
     parser::types::ExecutableDocument,
-    ServerError,
-    ServerResult,
-    ValidationResult,
-    Variables,
+    ServerError, ServerResult, ValidationResult, Variables,
 };
-use std::sync::{
-    Arc,
-    Mutex,
-};
+use std::sync::{Arc, Mutex};
 
 mod recursion_finder;
 mod visitor;
@@ -101,7 +89,7 @@ impl Extension for ValidationInner {
                 .lock()
                 .expect("Only one instance owns `ValidationInner`; qed");
             if !errors.is_empty() {
-                return Err(errors.drain(..).map(Into::into).collect())
+                return Err(errors.drain(..).map(Into::into).collect());
             }
         }
 

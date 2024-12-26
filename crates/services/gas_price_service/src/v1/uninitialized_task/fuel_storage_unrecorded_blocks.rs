@@ -1,26 +1,13 @@
 use crate::common::fuel_core_storage_adapter::storage::{
-    GasPriceColumn,
-    UnrecordedBlocksTable,
+    GasPriceColumn, UnrecordedBlocksTable,
 };
 use fuel_core_storage::{
-    kv_store::{
-        KeyValueInspect,
-        KeyValueMutate,
-    },
-    transactional::{
-        Modifiable,
-        WriteTransaction,
-    },
-    Error as StorageError,
-    StorageAsMut,
-    StorageAsRef,
-    StorageMutate,
+    kv_store::{KeyValueInspect, KeyValueMutate},
+    transactional::{Modifiable, WriteTransaction},
+    Error as StorageError, StorageAsMut, StorageAsRef, StorageMutate,
 };
 use fuel_core_types::fuel_merkle::storage::StorageMutateInfallible;
-use fuel_gas_price_algorithm::{
-    v1,
-    v1::UnrecordedBlocks,
-};
+use fuel_gas_price_algorithm::{v1, v1::UnrecordedBlocks};
 
 pub trait AsUnrecordedBlocks {
     type Wrapper<'a>: UnrecordedBlocks
@@ -82,10 +69,7 @@ mod tests {
     use super::*;
     use fuel_core_storage::{
         structured_storage::test::InMemoryStorage,
-        transactional::{
-            IntoTransaction,
-            StorageTransaction,
-        },
+        transactional::{IntoTransaction, StorageTransaction},
     };
 
     fn database() -> StorageTransaction<InMemoryStorage<GasPriceColumn>> {

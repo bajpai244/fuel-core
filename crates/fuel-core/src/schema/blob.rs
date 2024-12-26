@@ -2,21 +2,12 @@ use crate::{
     fuel_core_graphql_api::query_costs,
     graphql_api::IntoApiResult,
     schema::{
-        scalars::{
-            BlobId,
-            HexString,
-        },
+        scalars::{BlobId, HexString},
         ReadViewProvider,
     },
 };
-use async_graphql::{
-    Context,
-    Object,
-};
-use fuel_core_storage::{
-    not_found,
-    tables::BlobData,
-};
+use async_graphql::{Context, Object};
+use fuel_core_storage::{not_found, tables::BlobData};
 use fuel_core_types::fuel_types;
 
 pub struct Blob(fuel_types::BlobId);

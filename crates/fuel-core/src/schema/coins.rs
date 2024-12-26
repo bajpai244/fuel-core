@@ -1,41 +1,21 @@
 use crate::{
-    coins_query::{
-        random_improve,
-        SpendQuery,
-    },
-    fuel_core_graphql_api::{
-        query_costs,
-        IntoApiResult,
-    },
+    coins_query::{random_improve, SpendQuery},
+    fuel_core_graphql_api::{query_costs, IntoApiResult},
     graphql_api::api_service::ConsensusProvider,
     query::asset_query::AssetSpendTarget,
     schema::{
-        scalars::{
-            Address,
-            AssetId,
-            Nonce,
-            UtxoId,
-            U16,
-            U32,
-            U64,
-        },
+        scalars::{Address, AssetId, Nonce, UtxoId, U16, U32, U64},
         ReadViewProvider,
     },
 };
 use async_graphql::{
-    connection::{
-        Connection,
-        EmptyFields,
-    },
+    connection::{Connection, EmptyFields},
     Context,
 };
 use fuel_core_types::{
     entities::{
         coins,
-        coins::{
-            coin::Coin as CoinModel,
-            message_coin::MessageCoin as MessageCoinModel,
-        },
+        coins::{coin::Coin as CoinModel, message_coin::MessageCoin as MessageCoinModel},
     },
     fuel_tx,
 };
@@ -183,7 +163,7 @@ impl CoinQuery {
                     if let (Ok(coin), Some(filter_asset_id)) = (&result, &filter.asset_id)
                     {
                         if coin.asset_id != filter_asset_id.0 {
-                            return None
+                            return None;
                         }
                     }
 

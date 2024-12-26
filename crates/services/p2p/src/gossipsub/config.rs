@@ -1,32 +1,16 @@
 use super::topics::NEW_TX_GOSSIP_TOPIC;
 use crate::{
-    config::{
-        Config,
-        MAX_RESPONSE_SIZE,
-    },
+    config::{Config, MAX_RESPONSE_SIZE},
     utils::is_dialable,
     TryPeerId,
 };
 use fuel_core_metrics::global_registry;
 use libp2p::gossipsub::{
-    self,
-    MessageAuthenticity,
-    MessageId,
-    MetricsConfig,
-    PeerScoreParams,
-    PeerScoreThresholds,
-    Sha256Topic,
-    Topic,
-    TopicScoreParams,
+    self, MessageAuthenticity, MessageId, MetricsConfig, PeerScoreParams,
+    PeerScoreThresholds, Sha256Topic, Topic, TopicScoreParams,
 };
-use sha2::{
-    Digest,
-    Sha256,
-};
-use std::{
-    ops::DerefMut,
-    time::Duration,
-};
+use sha2::{Digest, Sha256};
+use std::{ops::DerefMut, time::Duration};
 
 // The number of slots in each epoch.
 const SLOTS_PER_EPOCH: u64 = 32;

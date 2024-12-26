@@ -1,26 +1,15 @@
 use crate::database::OnChainIterableKeyValueView;
 use fuel_core_storage::{
-    iter::{
-        IterDirection,
-        IteratorOverTable,
-    },
+    iter::{IterDirection, IteratorOverTable},
     not_found,
-    tables::{
-        FuelBlocks,
-        SealedBlockConsensus,
-    },
-    Result as StorageResult,
-    StorageAsRef,
+    tables::{FuelBlocks, SealedBlockConsensus},
+    Result as StorageResult, StorageAsRef,
 };
 use fuel_core_types::{
     blockchain::{
         block::CompressedBlock,
-        consensus::{
-            Consensus,
-            Genesis,
-        },
-        SealedBlock,
-        SealedBlockHeader,
+        consensus::{Consensus, Genesis},
+        SealedBlock, SealedBlockHeader,
     },
     fuel_types::BlockHeight,
     services::p2p::Transactions,

@@ -1,11 +1,7 @@
 //! Tests throughput of various transaction types
 
 use criterion::{
-    criterion_group,
-    criterion_main,
-    measurement::WallTime,
-    BenchmarkGroup,
-    Criterion,
+    criterion_group, criterion_main, measurement::WallTime, BenchmarkGroup, Criterion,
     SamplingMode,
 };
 use ed25519_dalek::Signer;
@@ -13,48 +9,19 @@ use fuel_core::service::config::Trigger;
 use fuel_core_benches::*;
 use fuel_core_storage::transactional::AtomicView;
 use fuel_core_types::{
-    fuel_asm::{
-        op,
-        GMArgs,
-        GTFArgs,
-        RegId,
-    },
+    fuel_asm::{op, GMArgs, GTFArgs, RegId},
     fuel_crypto::*,
-    fuel_tx::{
-        Finalizable,
-        Input,
-        Output,
-        Script,
-        Transaction,
-        TransactionBuilder,
-    },
-    fuel_types::{
-        AssetId,
-        Immediate12,
-        Immediate18,
-    },
+    fuel_tx::{Finalizable, Input, Output, Script, Transaction, TransactionBuilder},
+    fuel_types::{AssetId, Immediate12, Immediate18},
     fuel_vm::{
-        checked_transaction::{
-            CheckPredicateParams,
-            EstimatePredicates,
-        },
+        checked_transaction::{CheckPredicateParams, EstimatePredicates},
         interpreter::MemoryInstance,
         predicate::EmptyStorage,
     },
 };
-use rand::{
-    rngs::StdRng,
-    SeedableRng,
-};
-use std::{
-    sync::Arc,
-    time::Duration,
-};
-use test_helpers::builder::{
-    local_chain_config,
-    TestContext,
-    TestSetupBuilder,
-};
+use rand::{rngs::StdRng, SeedableRng};
+use std::{sync::Arc, time::Duration};
+use test_helpers::builder::{local_chain_config, TestContext, TestSetupBuilder};
 
 // Use Jemalloc during benchmarks
 #[global_allocator]
@@ -88,8 +55,8 @@ where
             // disable automated block production
             test_builder.trigger = Trigger::Never;
             test_builder.utxo_validation = true;
-            test_builder.gas_limit = Some(10_000_000_000);
-            test_builder.block_size_limit = Some(1_000_000_000_000);
+            test_builder.gas_limit = Some(100_000_000_000);
+            test_builder.block_size_limit = Some(10_000_000_000_000);
 
             // spin up node
             let transactions: Vec<Transaction> =
@@ -155,7 +122,7 @@ where
 
     let mut group = c.benchmark_group(group_id);
 
-    for i in [100, 500, 1000, 1500] {
+    for i in [1500, 3000, 6000, 10000] {
         group.throughput(criterion::Throughput::Elements(i));
         group.sampling_mode(SamplingMode::Flat);
         group.sample_size(10);
@@ -381,9 +348,9 @@ fn predicate_transfers_ed19(c: &mut Criterion) {
 criterion_group!(
     benches,
     signed_transfers,
-    predicate_transfers,
-    predicate_transfers_eck1,
-    predicate_transfers_ed19
+    // predicate_transfers,
+    // predicate_transfers_eck1,
+    // predicate_transfers_ed19
 );
 criterion_main!(benches);
 

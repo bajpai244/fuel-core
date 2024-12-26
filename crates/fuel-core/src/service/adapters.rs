@@ -1,31 +1,19 @@
-use fuel_core_consensus_module::{
-    block_verifier::Verifier,
-    RelayerConsensusConfig,
-};
+use fuel_core_consensus_module::{block_verifier::Verifier, RelayerConsensusConfig};
 use fuel_core_executor::executor::OnceTransactionsSource;
 use fuel_core_importer::ImporterResult;
-use fuel_core_poa::{
-    ports::BlockSigner,
-    signer::SignMode,
-};
+use fuel_core_poa::{ports::BlockSigner, signer::SignMode};
 use fuel_core_services::stream::BoxStream;
 use fuel_core_storage::transactional::Changes;
 use fuel_core_txpool::BorrowedTxPool;
 #[cfg(feature = "p2p")]
 use fuel_core_types::services::p2p::peer_reputation::AppScore;
 use fuel_core_types::{
-    blockchain::{
-        block::Block,
-        consensus::Consensus,
-    },
+    blockchain::{block::Block, consensus::Consensus},
     fuel_tx::Transaction,
     services::{
         block_importer::SharedImportResult,
         block_producer::Components,
-        executor::{
-            Result as ExecutorResult,
-            UncommittedResult,
-        },
+        executor::{Result as ExecutorResult, UncommittedResult},
     },
     tai64::Tai64,
 };
@@ -33,15 +21,9 @@ use fuel_core_upgradable_executor::executor::Executor;
 use std::sync::Arc;
 
 use crate::{
-    database::{
-        database_description::relayer::Relayer,
-        Database,
-    },
+    database::{database_description::relayer::Relayer, Database},
     service::{
-        sub_services::{
-            BlockProducerService,
-            TxPoolSharedState,
-        },
+        sub_services::{BlockProducerService, TxPoolSharedState},
         vm_pool::MemoryPool,
     },
 };

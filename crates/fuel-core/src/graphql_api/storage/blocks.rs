@@ -1,16 +1,10 @@
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        primitive::Primitive,
-        raw::Raw,
-    },
+    codec::{primitive::Primitive, raw::Raw},
     structured_storage::TableWithBlueprint,
     Mappable,
 };
-use fuel_core_types::{
-    blockchain::primitives::BlockId,
-    fuel_types::BlockHeight,
-};
+use fuel_core_types::{blockchain::primitives::BlockId, fuel_types::BlockHeight};
 
 /// The table of fuel block's secondary key - `BlockId`.
 /// It links the `BlockId` to corresponding `BlockHeight`.

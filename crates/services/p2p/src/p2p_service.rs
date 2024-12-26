@@ -1,87 +1,42 @@
 use crate::{
-    behavior::{
-        FuelBehaviour,
-        FuelBehaviourEvent,
-    },
-    codecs::{
-        postcard::PostcardCodec,
-        GossipsubCodec,
-    },
-    config::{
-        build_transport_function,
-        Config,
-    },
+    behavior::{FuelBehaviour, FuelBehaviourEvent},
+    codecs::{postcard::PostcardCodec, GossipsubCodec},
+    config::{build_transport_function, Config},
     dnsaddr_resolution::DnsResolver,
     gossipsub::{
         messages::{
-            GossipTopicTag,
-            GossipsubBroadcastRequest,
+            GossipTopicTag, GossipsubBroadcastRequest,
             GossipsubMessage as FuelGossipsubMessage,
         },
         topics::GossipsubTopics,
     },
     heartbeat,
-    peer_manager::{
-        PeerManager,
-        Punisher,
-    },
+    peer_manager::{PeerManager, Punisher},
     peer_report::PeerReportEvent,
     request_response::messages::{
-        RequestError,
-        RequestMessage,
-        ResponseError,
-        ResponseSendError,
-        ResponseSender,
+        RequestError, RequestMessage, ResponseError, ResponseSendError, ResponseSender,
         V2ResponseMessage,
     },
     TryPeerId,
 };
-use fuel_core_metrics::{
-    global_registry,
-    p2p_metrics::increment_unique_peers,
-};
+use fuel_core_metrics::{global_registry, p2p_metrics::increment_unique_peers};
 use fuel_core_types::{
-    fuel_types::BlockHeight,
-    services::p2p::peer_reputation::AppScore,
+    fuel_types::BlockHeight, services::p2p::peer_reputation::AppScore,
 };
 use futures::prelude::*;
 use libp2p::{
-    gossipsub::{
-        self,
-        MessageAcceptance,
-        MessageId,
-        PublishError,
-        TopicHash,
-    },
+    gossipsub::{self, MessageAcceptance, MessageId, PublishError, TopicHash},
     identify,
-    metrics::{
-        Metrics,
-        Recorder,
-    },
+    metrics::{Metrics, Recorder},
     multiaddr::Protocol,
-    request_response::{
-        self,
-        InboundRequestId,
-        OutboundRequestId,
-        ResponseChannel,
-    },
+    request_response::{self, InboundRequestId, OutboundRequestId, ResponseChannel},
     swarm::SwarmEvent,
-    tcp,
-    Multiaddr,
-    PeerId,
-    Swarm,
-    SwarmBuilder,
+    tcp, Multiaddr, PeerId, Swarm, SwarmBuilder,
 };
 use rand::seq::IteratorRandom;
-use std::{
-    collections::HashMap,
-    time::Duration,
-};
+use std::{collections::HashMap, time::Duration};
 use tokio::sync::broadcast;
-use tracing::{
-    debug,
-    warn,
-};
+use tracing::{debug, warn};
 
 /// Maximum amount of peer's addresses that we are ready to store per peer
 const MAX_IDENTIFY_ADDRESSES: usize = 10;
@@ -842,82 +797,43 @@ impl FuelP2PService {
 #[allow(clippy::cast_possible_truncation)]
 #[cfg(test)]
 mod tests {
-    use super::{
-        FuelP2PService,
-        PublishError,
-    };
+    use super::{FuelP2PService, PublishError};
     use crate::{
         codecs::postcard::PostcardCodec,
         config::Config,
         gossipsub::{
-            messages::{
-                GossipsubBroadcastRequest,
-                GossipsubMessage,
-            },
+            messages::{GossipsubBroadcastRequest, GossipsubMessage},
             topics::NEW_TX_GOSSIP_TOPIC,
         },
         p2p_service::FuelP2PEvent,
         peer_manager::PeerInfo,
         request_response::messages::{
-            RequestMessage,
-            ResponseError,
-            ResponseSender,
-            V2ResponseMessage,
+            RequestMessage, ResponseError, ResponseSender, V2ResponseMessage,
         },
         service::to_message_acceptance,
     };
     use fuel_core_types::{
         blockchain::{
-            consensus::{
-                poa::PoAConsensus,
-                Consensus,
-            },
+            consensus::{poa::PoAConsensus, Consensus},
             header::BlockHeader,
             SealedBlockHeader,
         },
-        fuel_tx::{
-            Transaction,
-            TransactionBuilder,
-            TxId,
-            UniqueIdentifier,
-        },
+        fuel_tx::{Transaction, TransactionBuilder, TxId, UniqueIdentifier},
         fuel_types::ChainId,
         services::p2p::{
-            GossipsubMessageAcceptance,
-            NetworkableTransactionPool,
-            Transactions,
+            GossipsubMessageAcceptance, NetworkableTransactionPool, Transactions,
         },
     };
-    use futures::{
-        future::join_all,
-        StreamExt,
-    };
+    use futures::{future::join_all, StreamExt};
     use libp2p::{
-        gossipsub::{
-            Sha256Topic,
-            Topic,
-        },
+        gossipsub::{Sha256Topic, Topic},
         identity::Keypair,
-        swarm::{
-            ListenError,
-            SwarmEvent,
-        },
-        Multiaddr,
-        PeerId,
+        swarm::{ListenError, SwarmEvent},
+        Multiaddr, PeerId,
     };
     use rand::Rng;
-    use std::{
-        collections::HashSet,
-        ops::Range,
-        sync::Arc,
-        time::Duration,
-    };
-    use tokio::sync::{
-        broadcast,
-        mpsc,
-        oneshot,
-        watch,
-    };
+    use std::{collections::HashSet, ops::Range, sync::Arc, time::Duration};
+    use tokio::sync::{broadcast, mpsc, oneshot, watch};
     use tracing_attributes::instrument;
 
     type P2PService = FuelP2PService;

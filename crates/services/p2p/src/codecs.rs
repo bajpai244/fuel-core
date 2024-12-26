@@ -1,15 +1,8 @@
 pub mod postcard;
 
 use crate::{
-    gossipsub::messages::{
-        GossipTopicTag,
-        GossipsubBroadcastRequest,
-        GossipsubMessage,
-    },
-    request_response::messages::{
-        RequestMessage,
-        V2ResponseMessage,
-    },
+    gossipsub::messages::{GossipTopicTag, GossipsubBroadcastRequest, GossipsubMessage},
+    request_response::messages::{RequestMessage, V2ResponseMessage},
 };
 use libp2p::request_response;
 use std::io;

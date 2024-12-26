@@ -2,105 +2,55 @@
 use crate::{
     common::{
         fuel_core_storage_adapter::{
-            storage::{
-                GasPriceColumn,
-                GasPriceMetadata,
-            },
-            GasPriceSettings,
-            GasPriceSettingsProvider,
+            storage::{GasPriceColumn, GasPriceMetadata},
+            GasPriceSettings, GasPriceSettingsProvider,
         },
         l2_block_source::L2BlockSource,
         updater_metadata::UpdaterMetadata,
-        utils::{
-            BlockInfo,
-            Error as GasPriceError,
-            Result as GasPriceResult,
-        },
+        utils::{BlockInfo, Error as GasPriceError, Result as GasPriceResult},
     },
     ports::{
-        GasPriceData,
-        GasPriceServiceAtomicStorage,
-        GetDaBundleId,
-        GetMetadataStorage,
-        L2Data,
-        SetDaBundleId,
-        SetMetadataStorage,
+        GasPriceData, GasPriceServiceAtomicStorage, GetDaBundleId, GetMetadataStorage,
+        L2Data, SetDaBundleId, SetMetadataStorage,
     },
     v1::{
         algorithm::SharedV1Algorithm,
         da_source_service::{
-            service::{
-                DaBlockCostsSource,
-                DaSourceService,
-            },
+            service::{DaBlockCostsSource, DaSourceService},
             DaBlockCosts,
         },
-        metadata::{
-            updater_from_config,
-            V1AlgorithmConfig,
-            V1Metadata,
-        },
-        service::{
-            initialize_algorithm,
-            GasPriceServiceV1,
-        },
+        metadata::{updater_from_config, V1AlgorithmConfig, V1Metadata},
+        service::{initialize_algorithm, GasPriceServiceV1},
         uninitialized_task::{
-            fuel_storage_unrecorded_blocks::AsUnrecordedBlocks,
-            UninitializedTask,
+            fuel_storage_unrecorded_blocks::AsUnrecordedBlocks, UninitializedTask,
         },
     },
 };
-use anyhow::{
-    anyhow,
-    Result,
-};
+use anyhow::{anyhow, Result};
 use fuel_core_services::{
-    stream::{
-        BoxStream,
-        IntoBoxStream,
-    },
-    RunnableTask,
-    StateWatcher,
+    stream::{BoxStream, IntoBoxStream},
+    RunnableTask, StateWatcher,
 };
 use fuel_core_storage::{
     iter::IteratorOverTable,
     structured_storage::test::InMemoryStorage,
-    transactional::{
-        AtomicView,
-        IntoTransaction,
-        StorageTransaction,
-        WriteTransaction,
-    },
-    Result as StorageResult,
-    StorageAsMut,
+    transactional::{AtomicView, IntoTransaction, StorageTransaction, WriteTransaction},
+    Result as StorageResult, StorageAsMut,
 };
 use fuel_core_types::{
-    blockchain::{
-        block::Block,
-        header::ConsensusParametersVersion,
-    },
+    blockchain::{block::Block, header::ConsensusParametersVersion},
     fuel_asm::op::exp,
     fuel_tx::Transaction,
     fuel_types::BlockHeight,
-    services::block_importer::{
-        ImportResult,
-        SharedImportResult,
-    },
+    services::block_importer::{ImportResult, SharedImportResult},
 };
 use fuel_gas_price_algorithm::v1::{
-    AlgorithmUpdaterV1,
-    Bytes,
-    Error,
-    Height,
-    UnrecordedBlocks,
+    AlgorithmUpdaterV1, Bytes, Error, Height, UnrecordedBlocks,
 };
 use std::{
     num::NonZeroU64,
     ops::Deref,
-    sync::{
-        Arc,
-        Mutex,
-    },
+    sync::{Arc, Mutex},
 };
 use tokio::sync::mpsc::Receiver;
 

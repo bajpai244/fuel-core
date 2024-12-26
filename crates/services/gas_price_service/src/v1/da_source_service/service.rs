@@ -1,17 +1,10 @@
 use fuel_core_services::{
-    RunnableService,
-    RunnableTask,
-    ServiceRunner,
-    StateWatcher,
-    TaskNextAction,
+    RunnableService, RunnableTask, ServiceRunner, StateWatcher, TaskNextAction,
 };
 use std::time::Duration;
 use tokio::{
     sync::broadcast::Sender,
-    time::{
-        interval,
-        Interval,
-    },
+    time::{interval, Interval},
 };
 
 use crate::v1::da_source_service::DaBlockCosts;

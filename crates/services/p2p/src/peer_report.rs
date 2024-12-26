@@ -1,51 +1,21 @@
-use crate::{
-    utils::is_dialable,
-    TryPeerId,
-};
+use crate::{utils::is_dialable, TryPeerId};
 use libp2p::{
     self,
     core::Endpoint,
     swarm::{
-        derive_prelude::{
-            ConnectionClosed,
-            ConnectionEstablished,
-            FromSwarm,
-        },
-        dial_opts::{
-            DialOpts,
-            PeerCondition,
-        },
-        dummy,
-        ConnectionDenied,
-        ConnectionId,
-        NetworkBehaviour,
-        THandler,
-        THandlerInEvent,
-        THandlerOutEvent,
-        ToSwarm,
+        derive_prelude::{ConnectionClosed, ConnectionEstablished, FromSwarm},
+        dial_opts::{DialOpts, PeerCondition},
+        dummy, ConnectionDenied, ConnectionId, NetworkBehaviour, THandler,
+        THandlerInEvent, THandlerOutEvent, ToSwarm,
     },
-    Multiaddr,
-    PeerId,
+    Multiaddr, PeerId,
 };
 use std::{
-    collections::{
-        BTreeMap,
-        HashSet,
-        VecDeque,
-    },
-    task::{
-        Context,
-        Poll,
-    },
-    time::{
-        Duration,
-        Instant,
-    },
+    collections::{BTreeMap, HashSet, VecDeque},
+    task::{Context, Poll},
+    time::{Duration, Instant},
 };
-use tokio::time::{
-    self,
-    Interval,
-};
+use tokio::time::{self, Interval};
 use void::Void;
 
 const HEALTH_CHECK_INTERVAL_IN_SECONDS: u64 = 10;
@@ -200,7 +170,7 @@ impl NetworkBehaviour for Behaviour {
         cx: &mut Context<'_>,
     ) -> Poll<ToSwarm<Self::ToSwarm, THandlerInEvent<Self>>> {
         if let Some(event) = self.pending_events.pop_front() {
-            return Poll::Ready(event)
+            return Poll::Ready(event);
         }
 
         if let Some((instant, peer_id)) = self.reserved_nodes_to_connect.front() {
@@ -221,12 +191,12 @@ impl NetworkBehaviour for Behaviour {
                     .build();
                 self.pending_connections.insert(opts.connection_id());
 
-                return Poll::Ready(ToSwarm::Dial { opts })
+                return Poll::Ready(ToSwarm::Dial { opts });
             }
         }
 
         if self.decay_interval.poll_tick(cx).is_ready() {
-            return Poll::Ready(ToSwarm::GenerateEvent(PeerReportEvent::PerformDecay))
+            return Poll::Ready(ToSwarm::GenerateEvent(PeerReportEvent::PerformDecay));
         }
 
         Poll::Pending

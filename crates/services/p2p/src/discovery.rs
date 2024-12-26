@@ -2,38 +2,20 @@ use self::mdns_wrapper::MdnsWrapper;
 use futures::FutureExt;
 use libp2p::{
     core::Endpoint,
-    kad::{
-        self,
-        store::MemoryStore,
-    },
+    kad::{self, store::MemoryStore},
     mdns,
     swarm::{
-        derive_prelude::{
-            ConnectionClosed,
-            ConnectionEstablished,
-            FromSwarm,
-        },
-        ConnectionDenied,
-        ConnectionId,
-        NetworkBehaviour,
-        THandler,
+        derive_prelude::{ConnectionClosed, ConnectionEstablished, FromSwarm},
+        ConnectionDenied, ConnectionId, NetworkBehaviour, THandler,
     },
-    Multiaddr,
-    PeerId,
+    Multiaddr, PeerId,
 };
 
-use libp2p::swarm::{
-    THandlerInEvent,
-    THandlerOutEvent,
-    ToSwarm,
-};
+use libp2p::swarm::{THandlerInEvent, THandlerOutEvent, ToSwarm};
 use std::{
     collections::HashSet,
     pin::Pin,
-    task::{
-        Context,
-        Poll,
-    },
+    task::{Context, Poll},
     time::Duration,
 };
 use tracing::trace;
@@ -200,7 +182,7 @@ impl NetworkBehaviour for Behaviour {
 
         // poll sub-behaviors
         if let Poll::Ready(kad_action) = self.kademlia.poll(cx) {
-            return Poll::Ready(kad_action)
+            return Poll::Ready(kad_action);
         };
 
         while let Poll::Ready(mdns_event) = self.mdns.poll(cx) {
@@ -228,28 +210,13 @@ impl NetworkBehaviour for Behaviour {
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        Behaviour,
-        Config,
-        Event,
-    };
-    use futures::{
-        future::poll_fn,
-        StreamExt,
-    };
+    use super::{Behaviour, Config, Event};
+    use futures::{future::poll_fn, StreamExt};
     use libp2p::{
-        identity::Keypair,
-        multiaddr::Protocol,
-        swarm::SwarmEvent,
-        Multiaddr,
-        PeerId,
+        identity::Keypair, multiaddr::Protocol, swarm::SwarmEvent, Multiaddr, PeerId,
         Swarm,
     };
-    use std::{
-        collections::HashSet,
-        task::Poll,
-        time::Duration,
-    };
+    use std::{collections::HashSet, task::Poll, time::Duration};
 
     use libp2p_swarm_test::SwarmExt;
 
@@ -372,10 +339,10 @@ mod tests {
                             }
                             _ => {}
                         }
-                        continue 'polling
+                        continue 'polling;
                     }
                 }
-                break
+                break;
             }
 
             // if there are no swarms left to discover we are done with the discovery

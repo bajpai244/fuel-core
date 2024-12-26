@@ -2,13 +2,9 @@ use crate::cli::default_db_path;
 use anyhow::Context;
 use clap::Parser;
 use fuel_core::{
-    combined_database::CombinedDatabase,
-    state::historical_rocksdb::StateRewindPolicy,
+    combined_database::CombinedDatabase, state::historical_rocksdb::StateRewindPolicy,
 };
-use rlimit::{
-    getrlimit,
-    Resource,
-};
+use rlimit::{getrlimit, Resource};
 use std::path::PathBuf;
 
 /// Rollbacks the state of the blockchain to a specific block height.

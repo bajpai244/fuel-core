@@ -1,12 +1,6 @@
-use fuel_core_storage::codec::{
-    Decode,
-    Encode,
-};
+use fuel_core_storage::codec::{Decode, Encode};
 use fuel_core_types::fuel_tx::ScriptCode;
-use std::{
-    borrow::Cow,
-    ops::Deref,
-};
+use std::{borrow::Cow, ops::Deref};
 
 // TODO: Remove this codec when the `ScriptCode` implements
 //  `AsRef<[u8]>` and `TryFrom<[u8]>` and use `Raw` codec instead.

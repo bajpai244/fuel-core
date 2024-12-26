@@ -1,12 +1,7 @@
-use crate::database::{
-    database_description::relayer::Relayer,
-    Database,
-};
+use crate::database::{database_description::relayer::Relayer, Database};
 use fuel_core_relayer::ports::Transactional;
 use fuel_core_storage::transactional::{
-    HistoricalView,
-    IntoTransaction,
-    StorageTransaction,
+    HistoricalView, IntoTransaction, StorageTransaction,
 };
 use fuel_core_types::blockchain::primitives::DaBlockHeight;
 

@@ -1,93 +1,41 @@
-use super::{
-    input::Input,
-    output::Output,
-    receipt::Receipt,
-};
+use super::{input::Input, output::Output, receipt::Receipt};
 use crate::{
     fuel_core_graphql_api::{
-        api_service::{
-            ConsensusProvider,
-            TxPool,
-        },
+        api_service::{ConsensusProvider, TxPool},
         database::ReadView,
-        query_costs,
-        IntoApiResult,
+        query_costs, IntoApiResult,
     },
     schema::{
         block::Block,
         scalars::{
-            AssetId,
-            BlobId,
-            Bytes32,
-            ContractId,
-            HexString,
-            Salt,
-            Tai64Timestamp,
-            TransactionId,
-            TxPointer,
-            U16,
-            U32,
-            U64,
+            AssetId, BlobId, Bytes32, ContractId, HexString, Salt, Tai64Timestamp,
+            TransactionId, TxPointer, U16, U32, U64,
         },
-        tx::{
-            input,
-            output,
-            upgrade_purpose::UpgradePurpose,
-        },
+        tx::{input, output, upgrade_purpose::UpgradePurpose},
         ReadViewProvider,
     },
 };
-use async_graphql::{
-    Context,
-    Enum,
-    Object,
-    Union,
-};
+use async_graphql::{Context, Enum, Object, Union};
 use fuel_core_storage::Error as StorageError;
 use fuel_core_types::{
     fuel_tx::{
         self,
         field::{
-            BytecodeRoot,
-            BytecodeWitnessIndex,
-            ChargeableBody,
-            InputContract,
-            Inputs,
-            Maturity,
-            MintAmount,
-            MintAssetId,
-            MintGasPrice,
-            OutputContract,
-            Outputs,
-            Policies as PoliciesField,
-            ProofSet,
-            ReceiptsRoot,
-            Salt as SaltField,
-            Script as ScriptField,
-            ScriptData,
-            ScriptGasLimit,
-            StorageSlots,
-            SubsectionIndex,
-            SubsectionsNumber,
-            TxPointer as TxPointerField,
-            UpgradePurpose as UpgradePurposeField,
-            Witnesses,
+            BytecodeRoot, BytecodeWitnessIndex, ChargeableBody, InputContract, Inputs,
+            Maturity, MintAmount, MintAssetId, MintGasPrice, OutputContract, Outputs,
+            Policies as PoliciesField, ProofSet, ReceiptsRoot, Salt as SaltField,
+            Script as ScriptField, ScriptData, ScriptGasLimit, StorageSlots,
+            SubsectionIndex, SubsectionsNumber, TxPointer as TxPointerField,
+            UpgradePurpose as UpgradePurposeField, Witnesses,
         },
         policies::PolicyType,
-        Executable,
-        TxId,
+        Executable, TxId,
     },
     fuel_types::canonical::Serialize,
     fuel_vm::ProgramState as VmProgramState,
     services::{
-        executor::{
-            TransactionExecutionResult,
-            TransactionExecutionStatus,
-        },
-        txpool::{
-            self,
-            TransactionStatus as TxStatus,
-        },
+        executor::{TransactionExecutionResult, TransactionExecutionStatus},
+        txpool::{self, TransactionStatus as TxStatus},
     },
     tai64::Tai64,
 };

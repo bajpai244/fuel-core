@@ -1,25 +1,16 @@
 //! Queries we can run directly on `FuelService`.
 use fuel_core_storage::Result as StorageResult;
 use fuel_core_types::{
-    fuel_tx::{
-        Transaction,
-        UniqueIdentifier,
-    },
+    fuel_tx::{Transaction, UniqueIdentifier},
     fuel_types::Bytes32,
     services::txpool::TransactionStatus as TxPoolTxStatus,
 };
-use futures::{
-    Stream,
-    StreamExt,
-};
+use futures::{Stream, StreamExt};
 use std::time::SystemTimeError;
 
 use crate::{
     database::OffChainIterableKeyValueView,
-    query::{
-        transaction_status_change,
-        TxnStatusChangeState,
-    },
+    query::{transaction_status_change, TxnStatusChangeState},
     schema::tx::types::TransactionStatus,
 };
 

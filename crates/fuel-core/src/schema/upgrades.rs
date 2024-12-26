@@ -1,25 +1,10 @@
 use crate::{
-    graphql_api::{
-        api_service::ConsensusProvider,
-        query_costs,
-        IntoApiResult,
-    },
-    schema::{
-        chain::ConsensusParameters,
-        scalars::HexString,
-        ReadViewProvider,
-    },
+    graphql_api::{api_service::ConsensusProvider, query_costs, IntoApiResult},
+    schema::{chain::ConsensusParameters, scalars::HexString, ReadViewProvider},
 };
-use async_graphql::{
-    Context,
-    Object,
-    SimpleObject,
-};
+use async_graphql::{Context, Object, SimpleObject};
 use fuel_core_types::{
-    blockchain::header::{
-        ConsensusParametersVersion,
-        StateTransitionBytecodeVersion,
-    },
+    blockchain::header::{ConsensusParametersVersion, StateTransitionBytecodeVersion},
     fuel_types,
     fuel_vm::UploadedBytecode as StorageUploadedBytecode,
 };

@@ -1,28 +1,15 @@
 use fuel_core_chain_config::{
-    AddTable,
-    AsTable,
-    StateConfig,
-    StateConfigBuilder,
-    TableEntry,
+    AddTable, AsTable, StateConfig, StateConfigBuilder, TableEntry,
 };
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        postcard::Postcard,
-        raw::Raw,
-    },
+    codec::{postcard::Postcard, raw::Raw},
     structured_storage::TableWithBlueprint,
     Mappable,
 };
-use fuel_core_types::fuel_types::{
-    Address,
-    Nonce,
-};
+use fuel_core_types::fuel_types::{Address, Nonce};
 use rand::{
-    distributions::{
-        Distribution,
-        Standard,
-    },
+    distributions::{Distribution, Standard},
     Rng,
 };
 

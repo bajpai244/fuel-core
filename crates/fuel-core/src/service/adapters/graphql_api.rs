@@ -1,28 +1,17 @@
 use super::{
-    BlockImporterAdapter,
-    BlockProducerAdapter,
-    ConsensusParametersProvider,
-    SharedMemoryPool,
-    StaticGasPrice,
+    BlockImporterAdapter, BlockProducerAdapter, ConsensusParametersProvider,
+    SharedMemoryPool, StaticGasPrice,
 };
 use crate::{
     database::OnChainIterableKeyValueView,
     fuel_core_graphql_api::ports::{
-        worker,
-        worker::BlockAt,
-        BlockProducerPort,
-        ConsensusProvider,
-        DatabaseMessageProof,
-        GasPriceEstimate,
-        P2pPort,
-        TxPoolPort,
+        worker, worker::BlockAt, BlockProducerPort, ConsensusProvider,
+        DatabaseMessageProof, GasPriceEstimate, P2pPort, TxPoolPort,
     },
     graphql_api::ports::MemoryPool,
     service::{
         adapters::{
-            import_result_provider::ImportResultProvider,
-            P2PAdapter,
-            TxPoolAdapter,
+            import_result_provider::ImportResultProvider, P2PAdapter, TxPoolAdapter,
         },
         vm_pool::MemoryFromPool,
     },
@@ -34,25 +23,15 @@ use fuel_core_txpool::TxStatusMessage;
 use fuel_core_types::{
     blockchain::header::ConsensusParametersVersion,
     entities::relayer::message::MerkleProof,
-    fuel_tx::{
-        Bytes32,
-        ConsensusParameters,
-        Transaction,
-        TxId,
-    },
+    fuel_tx::{Bytes32, ConsensusParameters, Transaction, TxId},
     fuel_types::BlockHeight,
     services::{
-        block_importer::SharedImportResult,
-        executor::TransactionExecutionStatus,
-        p2p::PeerInfo,
-        txpool::TransactionStatus,
+        block_importer::SharedImportResult, executor::TransactionExecutionStatus,
+        p2p::PeerInfo, txpool::TransactionStatus,
     },
     tai64::Tai64,
 };
-use std::{
-    ops::Deref,
-    sync::Arc,
-};
+use std::{ops::Deref, sync::Arc};
 
 mod off_chain;
 mod on_chain;

@@ -1,18 +1,9 @@
-use criterion::{
-    criterion_group,
-    criterion_main,
-    Criterion,
-};
+use criterion::{criterion_group, criterion_main, Criterion};
 use fuel_core_benches::db_lookup_times_utils::{
     matrix::matrix,
-    seed::{
-        seed_compressed_blocks_and_transactions_matrix,
-        seed_full_block_matrix,
-    },
+    seed::{seed_compressed_blocks_and_transactions_matrix, seed_full_block_matrix},
     utils::{
-        get_random_block_height,
-        open_rocks_db,
-        LookupMethod,
+        get_random_block_height, open_rocks_db, LookupMethod,
         Result as DbLookupBenchResult,
     },
 };

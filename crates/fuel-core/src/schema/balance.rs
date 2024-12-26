@@ -1,26 +1,14 @@
 use crate::{
-    fuel_core_graphql_api::{
-        api_service::ConsensusProvider,
-        query_costs,
-    },
+    fuel_core_graphql_api::{api_service::ConsensusProvider, query_costs},
     schema::{
-        scalars::{
-            Address,
-            AssetId,
-            U128,
-        },
+        scalars::{Address, AssetId, U128},
         ReadViewProvider,
     },
 };
 use anyhow::anyhow;
 use async_graphql::{
-    connection::{
-        Connection,
-        EmptyFields,
-    },
-    Context,
-    InputObject,
-    Object,
+    connection::{Connection, EmptyFields},
+    Context, InputObject, Object,
 };
 use fuel_core_types::services::graphql_api;
 use futures::StreamExt;
@@ -93,7 +81,7 @@ impl BalanceQuery {
     ) -> async_graphql::Result<Connection<AssetId, Balance, EmptyFields, EmptyFields>>
     {
         if before.is_some() || after.is_some() {
-            return Err(anyhow!("pagination is not yet supported").into())
+            return Err(anyhow!("pagination is not yet supported").into());
         }
         let query = ctx.read_view()?;
         let base_asset_id = *ctx

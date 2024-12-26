@@ -1,51 +1,28 @@
 use crate::{
     database::OnChainIterableKeyValueView,
     service::adapters::{
-        BlockImporterAdapter,
-        ConsensusParametersProvider,
-        P2PAdapter,
-        StaticGasPrice,
+        BlockImporterAdapter, ConsensusParametersProvider, P2PAdapter, StaticGasPrice,
     },
 };
 use fuel_core_services::stream::BoxStream;
 use fuel_core_storage::{
-    tables::{
-        Coins,
-        ContractsRawCode,
-        Messages,
-    },
-    Result as StorageResult,
-    StorageAsRef,
+    tables::{Coins, ContractsRawCode, Messages},
+    Result as StorageResult, StorageAsRef,
 };
 use fuel_core_txpool::ports::{
-    BlockImporter,
-    ConsensusParametersProvider as ConsensusParametersProviderTrait,
+    BlockImporter, ConsensusParametersProvider as ConsensusParametersProviderTrait,
     GasPriceProvider,
 };
 use fuel_core_types::{
     blockchain::header::ConsensusParametersVersion,
-    entities::{
-        coins::coin::CompressedCoin,
-        relayer::message::Message,
-    },
-    fuel_tx::{
-        BlobId,
-        ConsensusParameters,
-        Transaction,
-        TxId,
-        UtxoId,
-    },
-    fuel_types::{
-        ContractId,
-        Nonce,
-    },
+    entities::{coins::coin::CompressedCoin, relayer::message::Message},
+    fuel_tx::{BlobId, ConsensusParameters, Transaction, TxId, UtxoId},
+    fuel_types::{ContractId, Nonce},
     fuel_vm::BlobData,
     services::{
         block_importer::SharedImportResult,
         p2p::{
-            GossipsubMessageAcceptance,
-            GossipsubMessageInfo,
-            PeerId,
+            GossipsubMessageAcceptance, GossipsubMessageInfo, PeerId,
             TransactionGossipData,
         },
     },
@@ -87,10 +64,7 @@ impl fuel_core_txpool::ports::P2PSubscriptions for P2PAdapter {
     type GossipedTransaction = TransactionGossipData;
 
     fn gossiped_transaction_events(&self) -> BoxStream<Self::GossipedTransaction> {
-        use tokio_stream::{
-            wrappers::BroadcastStream,
-            StreamExt,
-        };
+        use tokio_stream::{wrappers::BroadcastStream, StreamExt};
         if let Some(service) = &self.service {
             Box::pin(
                 BroadcastStream::new(service.subscribe_tx())
@@ -102,10 +76,7 @@ impl fuel_core_txpool::ports::P2PSubscriptions for P2PAdapter {
     }
 
     fn subscribe_new_peers(&self) -> BoxStream<PeerId> {
-        use tokio_stream::{
-            wrappers::BroadcastStream,
-            StreamExt,
-        };
+        use tokio_stream::{wrappers::BroadcastStream, StreamExt};
         if let Some(service) = &self.service {
             Box::pin(
                 BroadcastStream::new(service.subscribe_new_peers())

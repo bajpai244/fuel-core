@@ -1,17 +1,8 @@
 use crate::fuel_core_graphql_api::{
-    database::{
-        OffChainView,
-        OnChainView,
-    },
-    ports::{
-        OffChainDatabase,
-        OnChainDatabase,
-    },
+    database::{OffChainView, OnChainView},
+    ports::{OffChainDatabase, OnChainDatabase},
 };
-use fuel_core_storage::{
-    transactional::AtomicView,
-    Result as StorageResult,
-};
+use fuel_core_storage::{transactional::AtomicView, Result as StorageResult};
 use std::sync::Arc;
 
 /// The GraphQL can't work with the generics in [`async_graphql::Context::data_unchecked`] and requires a known type.

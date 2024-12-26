@@ -1,18 +1,8 @@
-use criterion::{
-    criterion_group,
-    criterion_main,
-    Criterion,
-};
+use criterion::{criterion_group, criterion_main, Criterion};
 use fuel_core_benches::import::{
-    provision_import_test,
-    Durations,
-    PressureImport,
-    SharedCounts,
+    provision_import_test, Durations, PressureImport, SharedCounts,
 };
-use fuel_core_services::{
-    SharedMutex,
-    StateWatcher,
-};
+use fuel_core_services::{SharedMutex, StateWatcher};
 use fuel_core_sync::state::State;
 use std::time::Duration;
 use tokio::runtime::Runtime;

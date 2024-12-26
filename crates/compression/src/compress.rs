@@ -1,46 +1,21 @@
 use crate::{
     config::Config,
     eviction_policy::CacheEvictor,
-    ports::{
-        EvictorDb,
-        TemporalRegistry,
-        UtxoIdToPointer,
-    },
+    ports::{EvictorDb, TemporalRegistry, UtxoIdToPointer},
     registry::{
-        EvictorDbAll,
-        PerRegistryKeyspace,
-        RegistrationsPerTable,
-        TemporalRegistryAll,
+        EvictorDbAll, PerRegistryKeyspace, RegistrationsPerTable, TemporalRegistryAll,
     },
-    CompressedBlockPayloadV0,
-    VersionedCompressedBlock,
+    CompressedBlockPayloadV0, VersionedCompressedBlock,
 };
 use anyhow::Context;
 use fuel_core_types::{
     blockchain::block::Block,
-    fuel_compression::{
-        CompressibleBy,
-        ContextError,
-        RegistryKey,
-    },
-    fuel_tx::{
-        input::PredicateCode,
-        CompressedUtxoId,
-        ScriptCode,
-        TxPointer,
-        UtxoId,
-    },
-    fuel_types::{
-        Address,
-        AssetId,
-        ContractId,
-    },
+    fuel_compression::{CompressibleBy, ContextError, RegistryKey},
+    fuel_tx::{input::PredicateCode, CompressedUtxoId, ScriptCode, TxPointer, UtxoId},
+    fuel_types::{Address, AssetId, ContractId},
     tai64::Tai64,
 };
-use std::collections::{
-    HashMap,
-    HashSet,
-};
+use std::collections::{HashMap, HashSet};
 
 pub trait CompressDb: TemporalRegistryAll + EvictorDbAll + UtxoIdToPointer {}
 impl<T> CompressDb for T where T: TemporalRegistryAll + EvictorDbAll + UtxoIdToPointer {}

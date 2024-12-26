@@ -16,11 +16,7 @@ pub mod yield_stream;
 /// Re-exports for streaming utilities
 pub mod stream {
     #[doc(no_inline)]
-    pub use futures::stream::{
-        pending,
-        unfold,
-        Stream,
-    };
+    pub use futures::stream::{pending, unfold, Stream};
 
     /// A `Send` + `Sync` BoxStream with static lifetime.
     pub type BoxStream<T> =
@@ -75,22 +71,11 @@ where
 
 pub use async_processor::AsyncProcessor;
 pub use service::{
-    EmptyShared,
-    RunnableService,
-    RunnableTask,
-    Service,
-    ServiceRunner,
-    TaskNextAction,
+    EmptyShared, RunnableService, RunnableTask, Service, ServiceRunner, TaskNextAction,
 };
-pub use state::{
-    State,
-    StateWatcher,
-};
+pub use state::{State, StateWatcher};
 use std::fmt::Display;
-pub use sync::{
-    Shared,
-    SharedMutex,
-};
+pub use sync::{Shared, SharedMutex};
 #[cfg(feature = "sync-processor")]
 pub use sync_processor::SyncProcessor;
 

@@ -1,16 +1,6 @@
-use criterion::{
-    Criterion,
-    Throughput,
-};
-use fuel_core_types::fuel_tx::{
-    Contract,
-    StorageSlot,
-};
-use rand::{
-    rngs::StdRng,
-    Rng,
-    SeedableRng,
-};
+use criterion::{Criterion, Throughput};
+use fuel_core_types::fuel_tx::{Contract, StorageSlot};
+use rand::{rngs::StdRng, Rng, SeedableRng};
 use std::iter::successors;
 
 fn random_bytes<R: Rng + ?Sized>(n: usize, rng: &mut R) -> Vec<u8> {

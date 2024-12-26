@@ -4,11 +4,7 @@ mod vm_initialization;
 mod vm_set;
 
 use criterion::{
-    black_box,
-    criterion_group,
-    criterion_main,
-    measurement::WallTime,
-    BenchmarkGroup,
+    black_box, criterion_group, criterion_main, measurement::WallTime, BenchmarkGroup,
     Criterion,
 };
 use std::sync::Arc;

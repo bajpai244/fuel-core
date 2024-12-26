@@ -4,25 +4,15 @@
 use clap::ValueEnum;
 use fuel_core_types::{
     fuel_crypto::{
-        rand::{
-            prelude::StdRng,
-            SeedableRng,
-        },
+        rand::{prelude::StdRng, SeedableRng},
         SecretKey,
     },
     fuel_tx::Input,
     fuel_types::Address,
 };
-use libp2p_identity::{
-    secp256k1,
-    Keypair,
-    PeerId,
-};
+use libp2p_identity::{secp256k1, Keypair, PeerId};
 use serde::Serialize;
-use std::{
-    ops::Deref,
-    str::FromStr,
-};
+use std::{ops::Deref, str::FromStr};
 
 #[derive(Clone, Copy, Debug, Default, Serialize, ValueEnum)]
 #[serde(rename_all = "kebab-case")]

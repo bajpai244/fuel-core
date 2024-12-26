@@ -1,30 +1,16 @@
 use crate::{
     fuel_core_graphql_api::database::ReadView,
-    query::asset_query::{
-        AssetQuery,
-        AssetSpendTarget,
-        Exclude,
-    },
+    query::asset_query::{AssetQuery, AssetSpendTarget, Exclude},
 };
 use core::mem::swap;
 use fuel_core_storage::Error as StorageError;
 use fuel_core_types::{
-    entities::coins::{
-        CoinId,
-        CoinType,
-    },
-    fuel_types::{
-        Address,
-        AssetId,
-        Word,
-    },
+    entities::coins::{CoinId, CoinType},
+    fuel_types::{Address, AssetId, Word},
 };
 use futures::TryStreamExt;
 use rand::prelude::*;
-use std::{
-    cmp::Reverse,
-    collections::HashSet,
-};
+use std::{cmp::Reverse, collections::HashSet};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -134,12 +120,12 @@ pub async fn largest_first(
     for coin in inputs {
         // Break if we don't need any more coins
         if collected_amount >= target {
-            break
+            break;
         }
 
         // Error if we can't fit more coins
         if coins.len() >= max as usize {
-            return Err(CoinsQueryError::MaxCoinsReached)
+            return Err(CoinsQueryError::MaxCoinsReached);
         }
 
         // Add to list
@@ -151,7 +137,7 @@ pub async fn largest_first(
         return Err(CoinsQueryError::InsufficientCoins {
             asset_id,
             collected_amount,
-        })
+        });
     }
 
     Ok(coins)
@@ -190,7 +176,7 @@ pub async fn random_improve(
             if collected_amount >= target {
                 // Break if found coin exceeds max `u64` or the upper limit
                 if collected_amount == u64::MAX || coin.amount() > upper_target {
-                    break
+                    break;
                 }
 
                 // Break if adding doesn't improve the distance
@@ -201,7 +187,7 @@ pub async fn random_improve(
                 let next_distance =
                     target.abs_diff(change_amount.saturating_add(coin.amount()));
                 if next_distance >= distance {
-                    break
+                    break;
                 }
             }
 
@@ -231,62 +217,35 @@ impl From<StorageError> for CoinsQueryError {
 #[cfg(test)]
 mod tests {
     use crate::{
-        coins_query::{
-            largest_first,
-            random_improve,
-            CoinsQueryError,
-            SpendQuery,
-        },
+        coins_query::{largest_first, random_improve, CoinsQueryError, SpendQuery},
         combined_database::CombinedDatabase,
         fuel_core_graphql_api::{
             api_service::ReadDatabase as ServiceDatabase,
             storage::{
-                coins::{
-                    owner_coin_id_key,
-                    OwnedCoins,
-                },
-                messages::{
-                    OwnedMessageIds,
-                    OwnedMessageKey,
-                },
+                coins::{owner_coin_id_key, OwnedCoins},
+                messages::{OwnedMessageIds, OwnedMessageKey},
             },
         },
-        query::asset_query::{
-            AssetQuery,
-            AssetSpendTarget,
-        },
+        query::asset_query::{AssetQuery, AssetSpendTarget},
     };
     use assert_matches::assert_matches;
     use fuel_core_storage::{
         iter::IterDirection,
-        tables::{
-            Coins,
-            Messages,
-        },
+        tables::{Coins, Messages},
         StorageMutate,
     };
     use fuel_core_types::{
         blockchain::primitives::DaBlockHeight,
         entities::{
-            coins::coin::{
-                Coin,
-                CompressedCoin,
-            },
-            relayer::message::{
-                Message,
-                MessageV1,
-            },
+            coins::coin::{Coin, CompressedCoin},
+            relayer::message::{Message, MessageV1},
         },
         fuel_asm::Word,
         fuel_tx::*,
     };
     use futures::TryStreamExt;
     use itertools::Itertools;
-    use rand::{
-        rngs::StdRng,
-        Rng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, Rng, SeedableRng};
     use std::cmp::Reverse;
 
     fn setup_coins() -> (Address, [AssetId; 2], AssetId, TestDatabase) {

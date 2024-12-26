@@ -1,56 +1,26 @@
 use crate::{
     database::Database,
-    service::adapters::{
-        BlockImporterAdapter,
-        ExecutorAdapter,
-        VerifierAdapter,
-    },
+    service::adapters::{BlockImporterAdapter, ExecutorAdapter, VerifierAdapter},
 };
 use fuel_core_importer::{
-    ports::{
-        BlockVerifier,
-        ImporterDatabase,
-        Validator,
-    },
-    Config,
-    Importer,
+    ports::{BlockVerifier, ImporterDatabase, Validator},
+    Config, Importer,
 };
 use fuel_core_storage::{
-    iter::{
-        IterDirection,
-        IteratorOverTable,
-    },
+    iter::{IterDirection, IteratorOverTable},
     tables::{
-        merkle::{
-            DenseMetadataKey,
-            FuelBlockMerkleMetadata,
-        },
+        merkle::{DenseMetadataKey, FuelBlockMerkleMetadata},
         FuelBlocks,
     },
     transactional::Changes,
-    MerkleRoot,
-    Result as StorageResult,
-    StorageAsRef,
+    MerkleRoot, Result as StorageResult, StorageAsRef,
 };
-use fuel_core_txpool::ports::{
-    WasmChecker,
-    WasmValidityError,
-};
+use fuel_core_txpool::ports::{WasmChecker, WasmValidityError};
 use fuel_core_types::{
-    blockchain::{
-        block::Block,
-        consensus::Consensus,
-        SealedBlock,
-    },
+    blockchain::{block::Block, consensus::Consensus, SealedBlock},
     fuel_tx::Bytes32,
-    fuel_types::{
-        BlockHeight,
-        ChainId,
-    },
-    services::executor::{
-        Result as ExecutorResult,
-        UncommittedValidationResult,
-    },
+    fuel_types::{BlockHeight, ChainId},
+    services::executor::{Result as ExecutorResult, UncommittedValidationResult},
 };
 use std::sync::Arc;
 

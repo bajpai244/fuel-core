@@ -1,51 +1,24 @@
 //! Utilities and helper methods for writing tests
 
-use anyhow::{
-    anyhow,
-    Context,
-};
+use anyhow::{anyhow, Context};
 use fuel_core_chain_config::ContractConfig;
 use fuel_core_client::client::{
-    types::{
-        CoinType,
-        TransactionStatus,
-    },
+    types::{CoinType, TransactionStatus},
     FuelClient,
 };
 use fuel_core_types::{
-    fuel_asm::{
-        op,
-        GTFArgs,
-        RegId,
-    },
+    fuel_asm::{op, GTFArgs, RegId},
     fuel_crypto::PublicKey,
     fuel_tx::{
-        ConsensusParameters,
-        Contract,
-        ContractId,
-        Finalizable,
-        Input,
-        Output,
-        Transaction,
-        TransactionBuilder,
-        TxId,
-        UniqueIdentifier,
-        UtxoId,
+        ConsensusParameters, Contract, ContractId, Finalizable, Input, Output,
+        Transaction, TransactionBuilder, TxId, UniqueIdentifier, UtxoId,
     },
-    fuel_types::{
-        canonical::Serialize,
-        Address,
-        AssetId,
-        Salt,
-    },
+    fuel_types::{canonical::Serialize, Address, AssetId, Salt},
     fuel_vm::SecretKey,
 };
 use itertools::Itertools;
 
-use crate::config::{
-    ClientConfig,
-    SuiteConfig,
-};
+use crate::config::{ClientConfig, SuiteConfig};
 
 // The base amount needed to cover the cost of a simple transaction
 pub const BASE_AMOUNT: u64 = 100_000_000;

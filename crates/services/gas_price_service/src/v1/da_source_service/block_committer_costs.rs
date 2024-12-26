@@ -1,18 +1,12 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use crate::v1::da_source_service::{
-    service::{
-        DaBlockCostsSource,
-        Result as DaBlockCostsResult,
-    },
+    service::{DaBlockCostsSource, Result as DaBlockCostsResult},
     DaBlockCosts,
 };
 use anyhow::anyhow;
 use fuel_core_types::blockchain::primitives::DaBlockHeight;
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 #[async_trait::async_trait]
 trait BlockCommitterApi: Send + Sync {
@@ -91,7 +85,7 @@ where
         .await?;
 
         let Some(ref raw_da_block_costs) = raw_da_block_costs else {
-            return Err(anyhow!("No response from block committer"))
+            return Err(anyhow!("No response from block committer"));
         };
 
         let da_block_costs = self.last_raw_da_block_costs.iter().fold(

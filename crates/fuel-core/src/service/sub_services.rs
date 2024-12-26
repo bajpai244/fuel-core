@@ -1,10 +1,7 @@
 #![allow(clippy::let_unit_value)]
 
 use super::{
-    adapters::{
-        FuelBlockSigner,
-        P2PAdapter,
-    },
+    adapters::{FuelBlockSigner, P2PAdapter},
     genesis::create_genesis_block,
 };
 #[cfg(feature = "relayer")]
@@ -18,38 +15,22 @@ use crate::{
     service::{
         adapters::{
             consensus_module::poa::InDirectoryPredefinedBlocks,
-            consensus_parameters_provider,
-            fuel_gas_price_provider::FuelGasPriceProvider,
+            consensus_parameters_provider, fuel_gas_price_provider::FuelGasPriceProvider,
             graphql_api::GraphQLBlockImporter,
-            import_result_provider::ImportResultProvider,
-            BlockImporterAdapter,
-            BlockProducerAdapter,
-            ConsensusParametersProvider,
-            ExecutorAdapter,
-            MaybeRelayerAdapter,
-            PoAAdapter,
-            SharedMemoryPool,
-            SystemTime,
-            TxPoolAdapter,
+            import_result_provider::ImportResultProvider, BlockImporterAdapter,
+            BlockProducerAdapter, ConsensusParametersProvider, ExecutorAdapter,
+            MaybeRelayerAdapter, PoAAdapter, SharedMemoryPool, SystemTime, TxPoolAdapter,
             VerifierAdapter,
         },
-        Config,
-        SharedState,
-        SubServices,
+        Config, SharedState, SubServices,
     },
 };
 use fuel_core_gas_price_service::v0::uninitialized_task::{
-    new_gas_price_service_v0,
-    AlgorithmV0,
+    new_gas_price_service_v0, AlgorithmV0,
 };
-use fuel_core_poa::{
-    signer::SignMode,
-    Trigger,
-};
+use fuel_core_poa::{signer::SignMode, Trigger};
 use fuel_core_storage::{
-    self,
-    structured_storage::StructuredStorage,
-    transactional::AtomicView,
+    self, structured_storage::StructuredStorage, transactional::AtomicView,
 };
 #[cfg(feature = "relayer")]
 use fuel_core_types::blockchain::primitives::DaBlockHeight;

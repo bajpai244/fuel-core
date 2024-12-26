@@ -1,43 +1,19 @@
 use crate::fuel_core_graphql_api::database::ReadView;
 use fuel_core_storage::{
-    iter::{
-        BoxedIter,
-        IterDirection,
-    },
+    iter::{BoxedIter, IterDirection},
     not_found,
     tables::Messages,
-    Error as StorageError,
-    Result as StorageResult,
-    StorageAsRef,
+    Error as StorageError, Result as StorageResult, StorageAsRef,
 };
 use fuel_core_types::{
     blockchain::block::CompressedBlock,
-    entities::relayer::message::{
-        MerkleProof,
-        Message,
-        MessageProof,
-        MessageStatus,
-    },
+    entities::relayer::message::{MerkleProof, Message, MessageProof, MessageStatus},
     fuel_merkle::binary::in_memory::MerkleTree,
-    fuel_tx::{
-        input::message::compute_message_id,
-        Receipt,
-        TxId,
-    },
-    fuel_types::{
-        Address,
-        BlockHeight,
-        Bytes32,
-        MessageId,
-        Nonce,
-    },
+    fuel_tx::{input::message::compute_message_id, Receipt, TxId},
+    fuel_types::{Address, BlockHeight, Bytes32, MessageId, Nonce},
     services::txpool::TransactionStatus,
 };
-use futures::{
-    Stream,
-    StreamExt,
-    TryStreamExt,
-};
+use futures::{Stream, StreamExt, TryStreamExt};
 use itertools::Itertools;
 use std::borrow::Cow;
 
@@ -207,7 +183,7 @@ pub fn message_proof<T: MessageProofData + ?Sized>(
     };
 
     let Some(data) = data else {
-        return Err(anyhow::anyhow!("Output message doesn't contain any `data`").into())
+        return Err(anyhow::anyhow!("Output message doesn't contain any `data`").into());
     };
 
     // Get the message fuel block header.
@@ -241,7 +217,7 @@ pub fn message_proof<T: MessageProofData + ?Sized>(
         return Err(anyhow::anyhow!(
             "Impossible to generate proof beyond the genesis block"
         )
-        .into())
+        .into());
     };
     let block_proof = database.block_history_proof(
         message_block_header.height(),
@@ -302,7 +278,7 @@ fn message_receipts_proof<T: MessageProofData + ?Sized>(
         return Err(anyhow::anyhow!(
             "Unable to find the message receipt in the transaction to generate the proof"
         )
-        .into())
+        .into());
     };
 
     // Get the proof set.
@@ -341,24 +317,13 @@ mod tests {
     use fuel_core_types::{
         blockchain::block::CompressedBlock,
         entities::relayer::message::MerkleProof,
-        fuel_tx::{
-            Address,
-            Bytes32,
-            Receipt,
-            TxId,
-        },
-        fuel_types::{
-            BlockHeight,
-            Nonce,
-        },
+        fuel_tx::{Address, Bytes32, Receipt, TxId},
+        fuel_types::{BlockHeight, Nonce},
         services::txpool::TransactionStatus,
         tai64::Tai64,
     };
 
-    use super::{
-        message_proof,
-        MessageProofData,
-    };
+    use super::{message_proof, MessageProofData};
 
     pub struct FakeDB {
         pub blocks: HashMap<BlockHeight, CompressedBlock>,

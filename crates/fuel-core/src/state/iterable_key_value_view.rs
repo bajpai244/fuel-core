@@ -1,16 +1,6 @@
 use fuel_core_storage::{
-    iter::{
-        BoxedIter,
-        IterDirection,
-        IterableStore,
-    },
-    kv_store::{
-        KVItem,
-        KeyItem,
-        KeyValueInspect,
-        StorageColumn,
-        Value,
-    },
+    iter::{BoxedIter, IterDirection, IterableStore},
+    kv_store::{KVItem, KeyItem, KeyValueInspect, StorageColumn, Value},
     Result as StorageResult,
 };
 use std::sync::Arc;

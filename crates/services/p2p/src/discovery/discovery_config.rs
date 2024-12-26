@@ -1,25 +1,14 @@
 use crate::{
-    discovery::{
-        mdns_wrapper::MdnsWrapper,
-        Behaviour,
-    },
+    discovery::{mdns_wrapper::MdnsWrapper, Behaviour},
     utils::is_dialable,
     TryPeerId,
 };
 use libp2p::{
-    kad::{
-        self,
-        store::MemoryStore,
-        Mode,
-    },
+    kad::{self, store::MemoryStore, Mode},
     swarm::StreamProtocol,
-    Multiaddr,
-    PeerId,
+    Multiaddr, PeerId,
 };
-use std::{
-    collections::HashSet,
-    time::Duration,
-};
+use std::{collections::HashSet, time::Duration};
 use tracing::warn;
 
 #[derive(Clone, Debug)]

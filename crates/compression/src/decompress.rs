@@ -1,45 +1,23 @@
 use crate::{
     config::Config,
-    ports::{
-        HistoryLookup,
-        TemporalRegistry,
-    },
+    ports::{HistoryLookup, TemporalRegistry},
     registry::TemporalRegistryAll,
     VersionedCompressedBlock,
 };
 use fuel_core_types::{
     blockchain::block::PartialFuelBlock,
     fuel_compression::{
-        Compressible,
-        ContextError,
-        Decompress,
-        DecompressibleBy,
-        RegistryKey,
+        Compressible, ContextError, Decompress, DecompressibleBy, RegistryKey,
     },
     fuel_tx::{
         input::{
-            coin::{
-                Coin,
-                CoinSpecification,
-            },
-            message::{
-                Message,
-                MessageSpecification,
-            },
-            AsField,
-            PredicateCode,
+            coin::{Coin, CoinSpecification},
+            message::{Message, MessageSpecification},
+            AsField, PredicateCode,
         },
-        AssetId,
-        CompressedUtxoId,
-        Mint,
-        ScriptCode,
-        Transaction,
-        UtxoId,
+        AssetId, CompressedUtxoId, Mint, ScriptCode, Transaction, UtxoId,
     },
-    fuel_types::{
-        Address,
-        ContractId,
-    },
+    fuel_types::{Address, ContractId},
     tai64::Tai64,
 };
 
@@ -224,26 +202,14 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::ports::{
-        EvictorDb,
-        TemporalRegistry,
-    };
+    use crate::ports::{EvictorDb, TemporalRegistry};
 
     use super::*;
     use fuel_core_types::{
         fuel_compression::RegistryKey,
-        fuel_tx::{
-            input::PredicateCode,
-            Address,
-            AssetId,
-            ContractId,
-            ScriptCode,
-        },
+        fuel_tx::{input::PredicateCode, Address, AssetId, ContractId, ScriptCode},
     };
-    use serde::{
-        Deserialize,
-        Serialize,
-    };
+    use serde::{Deserialize, Serialize};
 
     pub struct MockDb;
     impl HistoryLookup for MockDb {

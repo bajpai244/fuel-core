@@ -7,134 +7,60 @@ mod tests {
     use fuel_core::database::Database;
     use fuel_core_executor::{
         executor::OnceTransactionsSource,
-        ports::{
-            MaybeCheckedTransaction,
-            RelayerPort,
-        },
+        ports::{MaybeCheckedTransaction, RelayerPort},
         refs::ContractRef,
     };
     use fuel_core_storage::{
-        tables::{
-            Coins,
-            ConsensusParametersVersions,
-            ContractsRawCode,
-            Messages,
-        },
-        transactional::{
-            AtomicView,
-            WriteTransaction,
-        },
-        Result as StorageResult,
-        StorageAsMut,
-        StorageAsRef,
+        tables::{Coins, ConsensusParametersVersions, ContractsRawCode, Messages},
+        transactional::{AtomicView, WriteTransaction},
+        Result as StorageResult, StorageAsMut, StorageAsRef,
     };
     use fuel_core_types::{
         blockchain::{
-            block::{
-                Block,
-                PartialFuelBlock,
-            },
-            header::{
-                ApplicationHeader,
-                ConsensusHeader,
-                PartialBlockHeader,
-            },
+            block::{Block, PartialFuelBlock},
+            header::{ApplicationHeader, ConsensusHeader, PartialBlockHeader},
             primitives::DaBlockHeight,
         },
         entities::{
             coins::coin::CompressedCoin,
-            relayer::message::{
-                Message,
-                MessageV1,
-            },
+            relayer::message::{Message, MessageV1},
         },
-        fuel_asm::{
-            op,
-            GTFArgs,
-            RegId,
-        },
+        fuel_asm::{op, GTFArgs, RegId},
         fuel_crypto::SecretKey,
-        fuel_merkle::{
-            common::empty_sum_sha256,
-            sparse,
-        },
+        fuel_merkle::{common::empty_sum_sha256, sparse},
         fuel_tx::{
             consensus_parameters::gas::GasCostsValuesV1,
             field::{
-                InputContract,
-                Inputs,
-                MintAmount,
-                MintAssetId,
-                OutputContract,
-                Outputs,
-                Policies,
-                Script as ScriptField,
-                TxPointer as TxPointerTraitTrait,
+                InputContract, Inputs, MintAmount, MintAssetId, OutputContract, Outputs,
+                Policies, Script as ScriptField, TxPointer as TxPointerTraitTrait,
             },
             input::{
-                coin::{
-                    CoinPredicate,
-                    CoinSigned,
-                },
-                contract,
-                Input,
+                coin::{CoinPredicate, CoinSigned},
+                contract, Input,
             },
             policies::PolicyType,
-            Bytes32,
-            Cacheable,
-            ConsensusParameters,
-            Create,
-            DependentCost,
-            FeeParameters,
-            Finalizable,
-            GasCostsValues,
-            Output,
-            Receipt,
-            Script,
-            Transaction,
-            TransactionBuilder,
-            TransactionFee,
-            TxParameters,
-            TxPointer,
-            UniqueIdentifier,
-            UtxoId,
-            ValidityError,
+            Bytes32, Cacheable, ConsensusParameters, Create, DependentCost,
+            FeeParameters, Finalizable, GasCostsValues, Output, Receipt, Script,
+            Transaction, TransactionBuilder, TransactionFee, TxParameters, TxPointer,
+            UniqueIdentifier, UtxoId, ValidityError,
         },
         fuel_types::{
-            canonical::Serialize,
-            Address,
-            AssetId,
-            BlockHeight,
-            ChainId,
-            ContractId,
-            Salt,
-            Word,
+            canonical::Serialize, Address, AssetId, BlockHeight, ChainId, ContractId,
+            Salt, Word,
         },
         fuel_vm::{
-            checked_transaction::{
-                CheckError,
-                EstimatePredicates,
-                IntoChecked,
-            },
-            interpreter::{
-                ExecutableTransaction,
-                MemoryInstance,
-            },
+            checked_transaction::{CheckError, EstimatePredicates, IntoChecked},
+            interpreter::{ExecutableTransaction, MemoryInstance},
             predicate::EmptyStorage,
             script_with_data_offset,
             util::test_helpers::TestBuilder as TxBuilder,
-            Call,
-            CallFrame,
-            Contract,
+            Call, CallFrame, Contract,
         },
         services::{
             block_producer::Components,
             executor::{
-                Error as ExecutorError,
-                Event as ExecutorEvent,
-                ExecutionResult,
-                TransactionExecutionResult,
-                TransactionValidityError,
+                Error as ExecutorError, Event as ExecutorEvent, ExecutionResult,
+                TransactionExecutionResult, TransactionValidityError,
             },
             relayer::Event,
         },
@@ -142,11 +68,7 @@ mod tests {
     };
     use fuel_core_upgradable_executor::executor::Executor;
     use itertools::Itertools;
-    use rand::{
-        prelude::StdRng,
-        Rng,
-        SeedableRng,
-    };
+    use rand::{prelude::StdRng, Rng, SeedableRng};
 
     #[derive(Clone, Debug, Default)]
     struct Config {
@@ -393,10 +315,7 @@ mod tests {
         use super::*;
         use fuel_core_storage::{
             iter::IterDirection,
-            transactional::{
-                AtomicView,
-                Modifiable,
-            },
+            transactional::{AtomicView, Modifiable},
         };
         use fuel_core_types::services::graphql_api::ContractBalance;
 
@@ -3112,26 +3031,19 @@ mod tests {
     mod relayer {
         use super::*;
         use crate::database::database_description::{
-            on_chain::OnChain,
-            relayer::Relayer,
+            on_chain::OnChain, relayer::Relayer,
         };
         use fuel_core_relayer::storage::EventsHistory;
         use fuel_core_storage::{
             column::Column,
-            iter::{
-                changes_iterator::ChangesIterator,
-                IteratorOverTable,
-            },
+            iter::{changes_iterator::ChangesIterator, IteratorOverTable},
             tables::FuelBlocks,
             StorageAsMut,
         };
         use fuel_core_types::{
             entities::RelayedTransaction,
             fuel_merkle::binary::root_calculator::MerkleRootCalculator,
-            fuel_tx::{
-                output,
-                Chargeable,
-            },
+            fuel_tx::{output, Chargeable},
             services::executor::ForcedTransactionFailure,
         };
 

@@ -2,10 +2,7 @@ use std::sync::Arc;
 
 use fuel_core_types::fuel_tx::Transaction;
 
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Used to inform `GossipsubCodec` to which GossipsubMessage decode to
 /// GossipTopicTag is decided by checking received TopicHash from the peer

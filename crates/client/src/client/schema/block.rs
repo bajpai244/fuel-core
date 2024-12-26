@@ -1,20 +1,9 @@
 use super::Bytes32;
 use crate::client::schema::{
-    schema,
-    BlockId,
-    ConnectionArgsFields,
-    PageInfo,
-    Signature,
-    Tai64Timestamp,
-    TransactionId,
-    U16,
-    U32,
-    U64,
+    schema, BlockId, ConnectionArgsFields, PageInfo, Signature, Tai64Timestamp,
+    TransactionId, U16, U32, U64,
 };
-use fuel_core_types::{
-    fuel_crypto,
-    fuel_types::BlockHeight,
-};
+use fuel_core_types::{fuel_crypto, fuel_types::BlockHeight};
 
 #[derive(cynic::QueryVariables, Debug)]
 pub struct BlockByIdArgs {

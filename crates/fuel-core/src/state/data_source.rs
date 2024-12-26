@@ -1,18 +1,9 @@
 use crate::{
-    database::database_description::DatabaseDescription,
-    state::TransactableStorage,
+    database::database_description::DatabaseDescription, state::TransactableStorage,
 };
 use fuel_core_storage::{
-    iter::{
-        BoxedIter,
-        IterDirection,
-        IterableStore,
-    },
-    kv_store::{
-        KVItem,
-        KeyValueInspect,
-        Value,
-    },
+    iter::{BoxedIter, IterDirection, IterableStore},
+    kv_store::{KVItem, KeyValueInspect, Value},
     Result as StorageResult,
 };
 use std::sync::Arc;

@@ -1,36 +1,19 @@
 use fuel_core_types::{
     fuel_types::BlockHeight,
     services::p2p::peer_reputation::{
-        AppScore,
-        DECAY_APP_SCORE,
-        DEFAULT_APP_SCORE,
-        MAX_APP_SCORE,
-        MIN_APP_SCORE,
+        AppScore, DECAY_APP_SCORE, DEFAULT_APP_SCORE, MAX_APP_SCORE, MIN_APP_SCORE,
     },
 };
-use libp2p::{
-    Multiaddr,
-    PeerId,
-};
+use libp2p::{Multiaddr, PeerId};
 use rand::seq::IteratorRandom;
 use std::{
-    collections::{
-        HashMap,
-        HashSet,
-    },
-    sync::{
-        Arc,
-        RwLock,
-    },
+    collections::{HashMap, HashSet},
+    sync::{Arc, RwLock},
 };
-use tracing::{
-    debug,
-    info,
-};
+use tracing::{debug, info};
 
 use crate::{
-    gossipsub_config::GRAYLIST_THRESHOLD,
-    peer_manager::heartbeat_data::HeartbeatData,
+    gossipsub_config::GRAYLIST_THRESHOLD, peer_manager::heartbeat_data::HeartbeatData,
 };
 
 pub mod heartbeat_data;
@@ -183,7 +166,7 @@ impl PeerManager {
 
     pub fn get_peer_info(&self, peer_id: &PeerId) -> Option<&PeerInfo> {
         if self.reserved_peers.contains(peer_id) {
-            return self.reserved_connected_peers.get(peer_id)
+            return self.reserved_connected_peers.get(peer_id);
         }
         self.non_reserved_connected_peers.get(peer_id)
     }
@@ -251,7 +234,7 @@ impl PeerManager {
             // check if all the slots are already taken
             if non_reserved_peers_connected >= self.max_non_reserved_peers {
                 // Too many peers already connected, disconnect the Peer
-                return true
+                return true;
             }
 
             if non_reserved_peers_connected.saturating_add(1)

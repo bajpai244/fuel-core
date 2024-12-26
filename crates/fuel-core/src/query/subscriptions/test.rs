@@ -19,14 +19,9 @@
 //! - `tx_status_message()`: Generates a TxStatusMessage
 //! - `transaction_status()`: Generates a TransactionStatus
 //! - `input_stream()`: Generates a Vec<TxStatusMessage> of length 0 to 5
-use fuel_core_txpool::{
-    error::RemovedReason,
-    TxStatusMessage,
-};
+use fuel_core_txpool::{error::RemovedReason, TxStatusMessage};
 use fuel_core_types::{
-    fuel_types::Bytes32,
-    services::txpool::TransactionStatus,
-    tai64::Tai64,
+    fuel_types::Bytes32, services::txpool::TransactionStatus, tai64::Tai64,
 };
 use futures::StreamExt;
 use std::ops::ControlFlow;
@@ -35,10 +30,7 @@ use fuel_core_storage::Error as StorageError;
 use proptest::{
     prelude::prop,
     prop_oneof,
-    strategy::{
-        Just,
-        Strategy,
-    },
+    strategy::{Just, Strategy},
 };
 use test_strategy::*;
 

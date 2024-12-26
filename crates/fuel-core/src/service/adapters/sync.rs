@@ -1,31 +1,15 @@
-use super::{
-    BlockImporterAdapter,
-    ConsensusAdapter,
-    P2PAdapter,
-};
+use super::{BlockImporterAdapter, ConsensusAdapter, P2PAdapter};
 use fuel_core_poa::ports::RelayerPort;
 use fuel_core_services::stream::BoxStream;
 use fuel_core_sync::ports::{
-    BlockImporterPort,
-    ConsensusPort,
-    PeerReportReason,
-    PeerToPeerPort,
+    BlockImporterPort, ConsensusPort, PeerReportReason, PeerToPeerPort,
 };
 use fuel_core_types::{
-    blockchain::{
-        primitives::DaBlockHeight,
-        SealedBlock,
-        SealedBlockHeader,
-    },
+    blockchain::{primitives::DaBlockHeight, SealedBlock, SealedBlockHeader},
     fuel_types::BlockHeight,
     services::p2p::{
-        peer_reputation::{
-            AppScore,
-            PeerReport,
-        },
-        PeerId,
-        SourcePeer,
-        Transactions,
+        peer_reputation::{AppScore, PeerReport},
+        PeerId, SourcePeer, Transactions,
     },
 };
 use std::ops::Range;

@@ -1,20 +1,8 @@
 use crate::schema::scalars::{
-    Address,
-    AssetId,
-    Bytes32,
-    ContractId,
-    HexString,
-    Nonce,
-    U64,
+    Address, AssetId, Bytes32, ContractId, HexString, Nonce, U64,
 };
-use async_graphql::{
-    Enum,
-    Object,
-};
-use fuel_core_types::{
-    fuel_asm::Word,
-    fuel_tx,
-};
+use async_graphql::{Enum, Object};
+use fuel_core_types::{fuel_asm::Word, fuel_tx};
 
 #[derive(
     Copy, Clone, Debug, derive_more::Display, Enum, Eq, PartialEq, strum_macros::EnumIter,

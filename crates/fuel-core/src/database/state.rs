@@ -1,19 +1,10 @@
 use fuel_core_chain_config::TableEntry;
 use fuel_core_storage::{
-    tables::{
-        merkle::ContractsStateMerkleMetadata,
-        ContractsState,
-    },
-    ContractsStateKey,
-    Error as StorageError,
-    StorageAsRef,
-    StorageBatchMutate,
+    tables::{merkle::ContractsStateMerkleMetadata, ContractsState},
+    ContractsStateKey, Error as StorageError, StorageAsRef, StorageBatchMutate,
     StorageInspect,
 };
-use fuel_core_types::fuel_types::{
-    Bytes32,
-    ContractId,
-};
+use fuel_core_types::fuel_types::{Bytes32, ContractId};
 use itertools::Itertools;
 
 pub trait StateInitializer {
@@ -116,14 +107,8 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::database::{
-        database_description::on_chain::OnChain,
-        Database,
-    };
-    use fuel_core_storage::{
-        transactional::IntoTransaction,
-        StorageAsMut,
-    };
+    use crate::database::{database_description::on_chain::OnChain, Database};
+    use fuel_core_storage::{transactional::IntoTransaction, StorageAsMut};
     use fuel_core_types::fuel_types::Bytes32;
     use rand::Rng;
 
@@ -142,10 +127,7 @@ mod tests {
 
     #[test]
     fn init_contract_state_works() {
-        use rand::{
-            rngs::StdRng,
-            SeedableRng,
-        };
+        use rand::{rngs::StdRng, SeedableRng};
 
         let rng = &mut StdRng::seed_from_u64(1234);
         let gen = || Some((random_bytes32(rng), random_bytes32(rng).to_vec()));
@@ -196,20 +178,11 @@ mod tests {
 
     mod update_contract_state {
         use core::iter::repeat_with;
-        use fuel_core_chain_config::{
-            ContractStateConfig,
-            Randomize,
-        };
+        use fuel_core_chain_config::{ContractStateConfig, Randomize};
 
         use fuel_core_storage::iter::IteratorOverTable;
-        use fuel_core_types::fuel_merkle::sparse::{
-            self,
-            MerkleTreeKey,
-        };
-        use rand::{
-            rngs::StdRng,
-            SeedableRng,
-        };
+        use fuel_core_types::fuel_merkle::sparse::{self, MerkleTreeKey};
+        use rand::{rngs::StdRng, SeedableRng};
         use std::collections::HashSet;
 
         use super::*;

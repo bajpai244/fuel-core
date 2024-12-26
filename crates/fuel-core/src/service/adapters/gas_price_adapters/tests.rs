@@ -1,14 +1,10 @@
 #![allow(non_snake_case)]
 
 use crate::service::adapters::{
-    consensus_parameters_provider,
-    gas_price_adapters::GasPriceSettings,
+    consensus_parameters_provider, gas_price_adapters::GasPriceSettings,
 };
 use fuel_core_services::SharedMutex;
-use std::{
-    collections::HashMap,
-    sync::Arc,
-};
+use std::{collections::HashMap, sync::Arc};
 
 #[test]
 fn settings__can_retrieve_settings() {

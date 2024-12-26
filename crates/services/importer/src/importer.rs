@@ -1,69 +1,34 @@
 use crate::{
     ports::{
-        BlockVerifier,
-        DatabaseTransaction,
-        ImporterDatabase,
-        Transactional,
-        Validator,
+        BlockVerifier, DatabaseTransaction, ImporterDatabase, Transactional, Validator,
     },
-    Config,
-    ImporterResult,
+    Config, ImporterResult,
 };
 use fuel_core_metrics::importer::importer_metrics;
 use fuel_core_storage::{
-    not_found,
-    transactional::Changes,
-    Error as StorageError,
-    MerkleRoot,
+    not_found, transactional::Changes, Error as StorageError, MerkleRoot,
 };
 use fuel_core_types::{
     blockchain::{
-        consensus::{
-            Consensus,
-            Sealed,
-        },
+        consensus::{Consensus, Sealed},
         primitives::BlockId,
         SealedBlock,
     },
-    fuel_tx::{
-        field::MintGasPrice,
-        Transaction,
-    },
-    fuel_types::{
-        BlockHeight,
-        ChainId,
-    },
+    fuel_tx::{field::MintGasPrice, Transaction},
+    fuel_types::{BlockHeight, ChainId},
     services::{
-        block_importer::{
-            ImportResult,
-            UncommittedResult,
-        },
-        executor::{
-            self,
-            ValidationResult,
-        },
+        block_importer::{ImportResult, UncommittedResult},
+        executor::{self, ValidationResult},
         Uncommitted,
     },
 };
 use parking_lot::Mutex;
 use std::{
-    ops::{
-        Deref,
-        DerefMut,
-    },
+    ops::{Deref, DerefMut},
     sync::Arc,
-    time::{
-        Instant,
-        SystemTime,
-        UNIX_EPOCH,
-    },
+    time::{Instant, SystemTime, UNIX_EPOCH},
 };
-use tokio::sync::{
-    broadcast,
-    OwnedSemaphorePermit,
-    Semaphore,
-    TryAcquireError,
-};
+use tokio::sync::{broadcast, OwnedSemaphorePermit, Semaphore, TryAcquireError};
 use tracing::warn;
 
 #[cfg(test)]
@@ -251,7 +216,7 @@ where
                 "The previous block processing \
                     was not finished for {TIMEOUT} seconds."
             );
-            return Err(Error::PreviousBlockProcessingNotFinished)
+            return Err(Error::PreviousBlockProcessingNotFinished);
         };
         let permit = permit.map_err(Error::ActiveBlockResultsSemaphoreClosed)?;
 
@@ -298,13 +263,13 @@ where
                 // Because the genesis block is not committed, it should return `None`.
                 // If we find the latest height, something is wrong with the state of the database.
                 if found {
-                    return Err(Error::InvalidUnderlyingDatabaseGenesisState)
+                    return Err(Error::InvalidUnderlyingDatabaseGenesisState);
                 }
                 actual_next_height
             }
             Consensus::PoA(_) => {
                 if actual_next_height == BlockHeight::from(0u32) {
-                    return Err(Error::ZeroNonGenericHeight)
+                    return Err(Error::ZeroNonGenericHeight);
                 }
 
                 let last_db_height = database
@@ -327,7 +292,7 @@ where
             return Err(Error::IncorrectBlockHeight(
                 expected_next_height,
                 actual_next_height,
-            ))
+            ));
         }
 
         // Importer expects that `UncommittedResult` contains the result of block
@@ -342,11 +307,11 @@ where
             return Err(Error::InvalidDatabaseStateAfterExecution(
                 expected_block_root,
                 actual_block_root,
-            ))
+            ));
         }
 
         if !db_after_execution.store_new_block(&self.chain_id, &result.sealed_block)? {
-            return Err(Error::NotUnique(expected_next_height))
+            return Err(Error::NotUnique(expected_next_height));
         }
 
         db_after_execution.commit()?;
@@ -478,14 +443,14 @@ where
 
         let result_of_verification = verifier.verify_block_fields(&consensus, &block);
         if let Err(err) = result_of_verification {
-            return Err(Error::FailedVerification(err))
+            return Err(Error::FailedVerification(err));
         }
 
         // The current code has a separate function X to process `StateConfig`.
         // It is not possible to execute it via `Executor`.
         // Maybe we need consider to move the function X here, if that possible.
         if let Consensus::Genesis(_) = consensus {
-            return Err(Error::ExecuteGenesis)
+            return Err(Error::ExecuteGenesis);
         }
 
         let (ValidationResult { tx_status, events }, changes) = executor
@@ -497,7 +462,7 @@ where
         if actual_block_id != sealed_block_id {
             // It should not be possible because, during validation, we don't touch the block.
             // But while we pass it by value, let's check it.
-            return Err(Error::BlockIdMismatch(sealed_block_id, actual_block_id))
+            return Err(Error::BlockIdMismatch(sealed_block_id, actual_block_id));
         }
 
         let sealed_block = Sealed {
@@ -555,7 +520,7 @@ where
                 "The previous block processing \
                      was not finished for {TIMEOUT} seconds."
             );
-            return Err(Error::PreviousBlockProcessingNotFinished)
+            return Err(Error::PreviousBlockProcessingNotFinished);
         };
         let permit = permit.map_err(Error::ActiveBlockResultsSemaphoreClosed)?;
 

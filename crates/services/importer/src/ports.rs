@@ -2,41 +2,19 @@ use fuel_core_storage::{
     column::Column,
     kv_store::KeyValueInspect,
     tables::{
-        merkle::{
-            DenseMetadataKey,
-            FuelBlockMerkleMetadata,
-        },
-        FuelBlocks,
-        SealedBlockConsensus,
-        Transactions,
+        merkle::{DenseMetadataKey, FuelBlockMerkleMetadata},
+        FuelBlocks, SealedBlockConsensus, Transactions,
     },
     transactional::{
-        Changes,
-        ConflictPolicy,
-        Modifiable,
-        StorageTransaction,
-        WriteTransaction,
+        Changes, ConflictPolicy, Modifiable, StorageTransaction, WriteTransaction,
     },
-    MerkleRoot,
-    Result as StorageResult,
-    StorageAsMut,
-    StorageAsRef,
+    MerkleRoot, Result as StorageResult, StorageAsMut, StorageAsRef,
 };
 use fuel_core_types::{
-    blockchain::{
-        block::Block,
-        consensus::Consensus,
-        SealedBlock,
-    },
+    blockchain::{block::Block, consensus::Consensus, SealedBlock},
     fuel_tx::UniqueIdentifier,
-    fuel_types::{
-        BlockHeight,
-        ChainId,
-    },
-    services::executor::{
-        Result as ExecutorResult,
-        UncommittedValidationResult,
-    },
+    fuel_types::{BlockHeight, ChainId},
+    services::executor::{Result as ExecutorResult, UncommittedValidationResult},
 };
 
 #[cfg_attr(test, mockall::automock(type Database = crate::importer::test::MockDatabase;))]

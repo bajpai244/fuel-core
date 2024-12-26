@@ -2,23 +2,14 @@
 use ethers_core::types::U256;
 use std::{
     ops::RangeInclusive,
-    sync::atomic::{
-        self,
-        AtomicUsize,
-    },
+    sync::atomic::{self, AtomicUsize},
 };
 
 use crate::{
-    abi::bridge::{
-        MessageSentFilter,
-        TransactionFilter,
-    },
+    abi::bridge::{MessageSentFilter, TransactionFilter},
     service::state::EthSyncGap,
     test_helpers::{
-        middleware::{
-            MockMiddleware,
-            TriggerType,
-        },
+        middleware::{MockMiddleware, TriggerType},
         EvtToLog,
     },
 };

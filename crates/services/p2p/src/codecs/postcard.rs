@@ -1,32 +1,15 @@
-use super::{
-    GossipsubCodec,
-    NetworkCodec,
-};
+use super::{GossipsubCodec, NetworkCodec};
 use crate::{
-    gossipsub::messages::{
-        GossipTopicTag,
-        GossipsubBroadcastRequest,
-        GossipsubMessage,
-    },
+    gossipsub::messages::{GossipTopicTag, GossipsubBroadcastRequest, GossipsubMessage},
     request_response::messages::{
-        RequestMessage,
-        V1ResponseMessage,
-        V2ResponseMessage,
-        V1_REQUEST_RESPONSE_PROTOCOL_ID,
-        V2_REQUEST_RESPONSE_PROTOCOL_ID,
+        RequestMessage, V1ResponseMessage, V2ResponseMessage,
+        V1_REQUEST_RESPONSE_PROTOCOL_ID, V2_REQUEST_RESPONSE_PROTOCOL_ID,
     },
 };
 use async_trait::async_trait;
-use futures::{
-    AsyncRead,
-    AsyncReadExt,
-    AsyncWriteExt,
-};
+use futures::{AsyncRead, AsyncReadExt, AsyncWriteExt};
 use libp2p::request_response;
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 use std::io;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
@@ -211,10 +194,7 @@ mod tests {
     use request_response::Codec as _;
 
     use super::*;
-    use crate::request_response::messages::{
-        ResponseMessageErrorCode,
-        MAX_REQUEST_SIZE,
-    };
+    use crate::request_response::messages::{ResponseMessageErrorCode, MAX_REQUEST_SIZE};
 
     #[test]
     fn test_request_size_fits() {

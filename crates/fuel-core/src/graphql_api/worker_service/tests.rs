@@ -8,9 +8,7 @@ use crate::{
 use fuel_core_services::stream::IntoBoxStream;
 use fuel_core_storage::StorageAsRef;
 use fuel_core_types::{
-    fuel_tx::Bytes32,
-    fuel_types::BlockHeight,
-    services::txpool::TransactionStatus,
+    fuel_tx::Bytes32, fuel_types::BlockHeight, services::txpool::TransactionStatus,
 };
 use std::sync::Arc;
 

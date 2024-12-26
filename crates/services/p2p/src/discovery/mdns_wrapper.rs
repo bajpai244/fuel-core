@@ -1,27 +1,14 @@
 use crate::Multiaddr;
 use libp2p::{
     core::Endpoint,
-    mdns::{
-        self,
-        tokio::Behaviour as TokioMdns,
-    },
+    mdns::{self, tokio::Behaviour as TokioMdns},
     swarm::{
-        dummy,
-        ConnectionDenied,
-        ConnectionId,
-        FromSwarm,
-        NetworkBehaviour,
-        THandler,
-        THandlerInEvent,
-        THandlerOutEvent,
-        ToSwarm,
+        dummy, ConnectionDenied, ConnectionId, FromSwarm, NetworkBehaviour, THandler,
+        THandlerInEvent, THandlerOutEvent, ToSwarm,
     },
     PeerId,
 };
-use std::task::{
-    Context,
-    Poll,
-};
+use std::task::{Context, Poll};
 use tracing::warn;
 
 #[allow(clippy::large_enum_variant)]

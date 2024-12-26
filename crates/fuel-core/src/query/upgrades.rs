@@ -1,16 +1,11 @@
 use crate::fuel_core_graphql_api::database::ReadView;
 use fuel_core_storage::{
     not_found,
-    tables::{
-        StateTransitionBytecodeVersions,
-        UploadedBytecodes,
-    },
-    Result as StorageResult,
-    StorageAsRef,
+    tables::{StateTransitionBytecodeVersions, UploadedBytecodes},
+    Result as StorageResult, StorageAsRef,
 };
 use fuel_core_types::{
-    blockchain::header::StateTransitionBytecodeVersion,
-    fuel_tx::Bytes32,
+    blockchain::header::StateTransitionBytecodeVersion, fuel_tx::Bytes32,
     fuel_vm::UploadedBytecode,
 };
 

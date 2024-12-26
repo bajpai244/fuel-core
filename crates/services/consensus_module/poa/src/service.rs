@@ -1,66 +1,31 @@
-use anyhow::{
-    anyhow,
-    Context,
-};
-use std::{
-    sync::Arc,
-    time::Duration,
-};
+use anyhow::{anyhow, Context};
+use std::{sync::Arc, time::Duration};
 use tokio::{
-    sync::{
-        mpsc,
-        oneshot,
-    },
-    time::{
-        sleep_until,
-        Instant,
-    },
+    sync::{mpsc, oneshot},
+    time::{sleep_until, Instant},
 };
 
 use crate::{
     ports::{
-        BlockImporter,
-        BlockProducer,
-        BlockSigner,
-        GetTime,
-        P2pPort,
-        PredefinedBlocks,
-        TransactionPool,
-        TransactionsSource,
+        BlockImporter, BlockProducer, BlockSigner, GetTime, P2pPort, PredefinedBlocks,
+        TransactionPool, TransactionsSource,
     },
-    sync::{
-        SyncState,
-        SyncTask,
-    },
-    Config,
-    Trigger,
+    sync::{SyncState, SyncTask},
+    Config, Trigger,
 };
 use fuel_core_services::{
-    stream::BoxFuture,
-    RunnableService,
-    RunnableTask,
-    Service as OtherService,
-    ServiceRunner,
-    StateWatcher,
-    TaskNextAction,
+    stream::BoxFuture, RunnableService, RunnableTask, Service as OtherService,
+    ServiceRunner, StateWatcher, TaskNextAction,
 };
 use fuel_core_storage::transactional::Changes;
 use fuel_core_types::{
-    blockchain::{
-        block::Block,
-        header::BlockHeader,
-        SealedBlock,
-    },
-    fuel_tx::{
-        Transaction,
-        TxId,
-    },
+    blockchain::{block::Block, header::BlockHeader, SealedBlock},
+    fuel_tx::{Transaction, TxId},
     fuel_types::BlockHeight,
     services::{
         block_importer::ImportResult,
         executor::{
-            Error as ExecutorError,
-            ExecutionResult,
+            Error as ExecutorError, ExecutionResult,
             UncommittedResult as UncommittedExecutionResult,
         },
         Uncommitted,
@@ -319,11 +284,11 @@ where
         let last_block_created = Instant::now();
         // verify signing key is set
         if !self.signer.is_available() {
-            return Err(anyhow!("unable to produce blocks without a consensus key"))
+            return Err(anyhow!("unable to produce blocks without a consensus key"));
         }
 
         if self.last_timestamp > block_time {
-            return Err(anyhow!("The block timestamp should monotonically increase"))
+            return Err(anyhow!("The block timestamp should monotonically increase"));
         }
 
         // Ask the block producer to create the block
@@ -383,7 +348,7 @@ where
         tracing::info!("Producing predefined block");
         let last_block_created = Instant::now();
         if !self.signer.is_available() {
-            return Err(anyhow!("unable to produce blocks without a signer"))
+            return Err(anyhow!("unable to produce blocks without a signer"));
         }
 
         // Ask the block producer to create the block
@@ -544,7 +509,7 @@ where
             return match res {
                 Ok(()) => TaskNextAction::Continue,
                 Err(err) => TaskNextAction::ErrorContinue(err),
-            }
+            };
         }
 
         let next_block_production: BoxFuture<()> = match self.trigger {

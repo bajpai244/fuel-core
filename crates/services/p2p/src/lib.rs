@@ -21,11 +21,7 @@ mod cached_view;
 pub use gossipsub::config as gossipsub_config;
 pub use heartbeat::Config;
 
-pub use libp2p::{
-    multiaddr::Protocol,
-    Multiaddr,
-    PeerId,
-};
+pub use libp2p::{multiaddr::Protocol, Multiaddr, PeerId};
 use tracing::warn;
 
 #[cfg(feature = "test-helpers")]

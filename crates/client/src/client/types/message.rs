@@ -3,11 +3,7 @@ use crate::client::{
     schema::ConversionError,
     types::{
         block::Header,
-        primitives::{
-            Address,
-            Bytes,
-            Nonce,
-        },
+        primitives::{Address, Bytes, Nonce},
         MerkleProof,
     },
     PaginatedResult,

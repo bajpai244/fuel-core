@@ -50,29 +50,29 @@ test-helpers = { path = "../tests/test-helpers" }
 tikv-jemallocator = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
-[[bench]]
-harness = false
-name = "import"
+# [[bench]]
+# harness = false
+# name = "import"
 
-[[bench]]
-harness = false
-name = "state"
+#[[bench]]
+# harness = false
+# name = "state"
 
-[[bench]]
-harness = false
-name = "vm"
+#[[bench]]
+# harness = false
+# name = "vm"
 
 [features]
 default = ["fuel-core/rocksdb"]
 
-[[bench]]
-harness = false
-name = "block_target_gas"
+# [[bench]]
+# harness = false
+# name = "block_target_gas"
 
 [[bench]]
 harness = false
 name = "transaction_throughput"
 
-[[bench]]
-harness = false
-name = "db_lookup_times"
+#[[bench]]
+# harness = false
+# name = "db_lookup_times"

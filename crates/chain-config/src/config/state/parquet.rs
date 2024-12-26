@@ -7,35 +7,16 @@ mod tests {
     use itertools::Itertools;
     use parquet::{
         basic::ZstdLevel,
-        file::reader::{
-            ChunkReader,
-            Length,
-        },
+        file::reader::{ChunkReader, Length},
     };
-    use rand::{
-        rngs::StdRng,
-        Rng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, Rng, SeedableRng};
     use std::{
-        io::{
-            Cursor,
-            Read,
-            Seek,
-            SeekFrom,
-        },
+        io::{Cursor, Read, Seek, SeekFrom},
         iter::repeat_with,
-        sync::{
-            atomic::AtomicU64,
-            Arc,
-            Mutex,
-        },
+        sync::{atomic::AtomicU64, Arc, Mutex},
     };
 
-    use super::{
-        decode::*,
-        encode::*,
-    };
+    use super::{decode::*, encode::*};
 
     #[derive(Clone)]
     struct TrackingReader {

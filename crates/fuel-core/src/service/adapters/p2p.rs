@@ -1,26 +1,13 @@
-use super::{
-    BlockImporterAdapter,
-    TxPoolAdapter,
-};
+use super::{BlockImporterAdapter, TxPoolAdapter};
 use crate::database::OnChainIterableKeyValueView;
-use fuel_core_p2p::ports::{
-    BlockHeightImporter,
-    P2pDb,
-    TxPool,
-};
+use fuel_core_p2p::ports::{BlockHeightImporter, P2pDb, TxPool};
 use fuel_core_services::stream::BoxStream;
 use fuel_core_storage::Result as StorageResult;
 use fuel_core_types::{
-    blockchain::{
-        consensus::Genesis,
-        SealedBlockHeader,
-    },
+    blockchain::{consensus::Genesis, SealedBlockHeader},
     fuel_tx::TxId,
     fuel_types::BlockHeight,
-    services::p2p::{
-        NetworkableTransactionPool,
-        Transactions,
-    },
+    services::p2p::{NetworkableTransactionPool, Transactions},
 };
 use std::ops::Range;
 
@@ -46,10 +33,7 @@ impl P2pDb for OnChainIterableKeyValueView {
 
 impl BlockHeightImporter for BlockImporterAdapter {
     fn next_block_height(&self) -> BoxStream<BlockHeight> {
-        use tokio_stream::{
-            wrappers::BroadcastStream,
-            StreamExt,
-        };
+        use tokio_stream::{wrappers::BroadcastStream, StreamExt};
         Box::pin(
             BroadcastStream::new(self.block_importer.subscribe())
                 .filter_map(|result| result.ok())

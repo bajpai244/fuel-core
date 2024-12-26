@@ -1,36 +1,17 @@
-use std::{
-    cmp::Ordering,
-    collections::HashMap,
-};
+use std::{cmp::Ordering, collections::HashMap};
 
 use crate::{
     fuel_core_graphql_api::database::ReadView,
     graphql_api::storage::balances::TotalBalanceAmount,
 };
-use asset_query::{
-    AssetQuery,
-    AssetSpendTarget,
-    AssetsQuery,
-};
+use asset_query::{AssetQuery, AssetSpendTarget, AssetsQuery};
 use fuel_core_services::yield_stream::StreamYieldExt;
-use fuel_core_storage::{
-    iter::IterDirection,
-    Result as StorageResult,
-};
+use fuel_core_storage::{iter::IterDirection, Result as StorageResult};
 use fuel_core_types::{
-    fuel_tx::{
-        Address,
-        AssetId,
-    },
+    fuel_tx::{Address, AssetId},
     services::graphql_api::AddressBalance,
 };
-use futures::{
-    stream,
-    FutureExt,
-    Stream,
-    StreamExt,
-    TryStreamExt,
-};
+use futures::{stream, FutureExt, Stream, StreamExt, TryStreamExt};
 
 pub mod asset_query;
 

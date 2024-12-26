@@ -2,32 +2,20 @@ use anyhow::anyhow;
 #[cfg(feature = "aws-kms")]
 use aws_sdk_kms::{
     primitives::Blob,
-    types::{
-        MessageType,
-        SigningAlgorithmSpec,
-    },
+    types::{MessageType, SigningAlgorithmSpec},
 };
 #[cfg(feature = "aws-kms")]
 use fuel_core_types::fuel_crypto::Message;
 use fuel_core_types::{
     blockchain::{
         block::Block,
-        consensus::{
-            poa::PoAConsensus,
-            Consensus,
-        },
+        consensus::{poa::PoAConsensus, Consensus},
         primitives::SecretKeyWrapper,
     },
     fuel_crypto::PublicKey,
-    fuel_tx::{
-        Address,
-        Input,
-    },
+    fuel_tx::{Address, Input},
     fuel_vm::Signature,
-    secrecy::{
-        ExposeSecret,
-        Secret,
-    },
+    secrecy::{ExposeSecret, Secret},
 };
 use std::ops::Deref;
 
@@ -59,7 +47,9 @@ impl SignMode {
         let message = block_hash.into_message();
 
         let poa_signature = match self {
-            SignMode::Unavailable => return Err(anyhow!("no PoA signing key configured")),
+            SignMode::Unavailable => {
+                return Err(anyhow!("no PoA signing key configured"))
+            }
             SignMode::Key(key) => {
                 let signing_key = key.expose_secret().deref();
                 Signature::sign(signing_key, &message)
@@ -111,10 +101,7 @@ async fn sign_with_kms(
     message: Message,
 ) -> anyhow::Result<Signature> {
     use k256::{
-        ecdsa::{
-            RecoveryId,
-            VerifyingKey,
-        },
+        ecdsa::{RecoveryId, VerifyingKey},
         pkcs8::DecodePublicKey,
     };
 
@@ -177,10 +164,7 @@ mod tests {
 
     use super::*;
     use fuel_core_types::fuel_crypto::SecretKey;
-    use rand::{
-        rngs::StdRng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, SeedableRng};
 
     #[cfg(not(feature = "aws-kms"))]
     use aws_config as _;

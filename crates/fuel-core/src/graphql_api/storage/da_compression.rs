@@ -1,30 +1,18 @@
 use self::{
-    evictor_cache::MetadataKey,
-    predicate_code_codec::PredicateCodeCodec,
-    reverse_key::ReverseKey,
-    script_code_codec::ScriptCodeCodec,
+    evictor_cache::MetadataKey, predicate_code_codec::PredicateCodeCodec,
+    reverse_key::ReverseKey, script_code_codec::ScriptCodeCodec,
     timestamps::TimestampKey,
 };
 use fuel_core_compression::VersionedCompressedBlock;
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        postcard::Postcard,
-        primitive::Primitive,
-        raw::Raw,
-    },
+    codec::{postcard::Postcard, primitive::Primitive, raw::Raw},
     structured_storage::TableWithBlueprint,
     Mappable,
 };
 use fuel_core_types::{
     fuel_compression::RegistryKey,
-    fuel_tx::{
-        input::PredicateCode,
-        Address,
-        AssetId,
-        ContractId,
-        ScriptCode,
-    },
+    fuel_tx::{input::PredicateCode, Address, AssetId, ContractId, ScriptCode},
     fuel_types::BlockHeight,
     tai64::Tai64,
 };

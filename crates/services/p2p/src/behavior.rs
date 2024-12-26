@@ -1,38 +1,19 @@
 use crate::{
-    codecs::{
-        postcard::PostcardCodec,
-        NetworkCodec,
-    },
+    codecs::{postcard::PostcardCodec, NetworkCodec},
     config::Config,
     discovery,
     gossipsub::config::build_gossipsub_behaviour,
-    heartbeat,
-    peer_report,
-    request_response::messages::{
-        RequestMessage,
-        V2ResponseMessage,
-    },
+    heartbeat, peer_report,
+    request_response::messages::{RequestMessage, V2ResponseMessage},
 };
 use fuel_core_types::fuel_types::BlockHeight;
 use libp2p::{
     allow_block_list,
-    gossipsub::{
-        self,
-        MessageAcceptance,
-        MessageId,
-        PublishError,
-        TopicHash,
-    },
+    gossipsub::{self, MessageAcceptance, MessageId, PublishError, TopicHash},
     identify,
-    request_response::{
-        self,
-        OutboundRequestId,
-        ProtocolSupport,
-        ResponseChannel,
-    },
+    request_response::{self, OutboundRequestId, ProtocolSupport, ResponseChannel},
     swarm::NetworkBehaviour,
-    Multiaddr,
-    PeerId,
+    Multiaddr, PeerId,
 };
 
 /// Handles all p2p protocols needed for Fuel.

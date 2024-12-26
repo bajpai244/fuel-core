@@ -1,11 +1,6 @@
 use crate::client::{
     schema,
-    types::primitives::{
-        Address,
-        AssetId,
-        Nonce,
-        UtxoId,
-    },
+    types::primitives::{Address, AssetId, Nonce, UtxoId},
     PaginatedResult,
 };
 

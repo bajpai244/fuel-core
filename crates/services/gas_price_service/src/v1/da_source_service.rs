@@ -19,14 +19,10 @@ pub struct DaBlockCosts {
 mod tests {
     use super::*;
     use crate::v1::da_source_service::{
-        dummy_costs::DummyDaBlockCosts,
-        service::new_service,
+        dummy_costs::DummyDaBlockCosts, service::new_service,
     };
     use fuel_core_services::Service;
-    use std::{
-        sync::Arc,
-        time::Duration,
-    };
+    use std::{sync::Arc, time::Duration};
 
     #[tokio::test]
     async fn run__when_da_block_cost_source_gives_value_shared_state_is_updated() {

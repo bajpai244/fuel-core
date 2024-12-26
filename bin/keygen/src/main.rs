@@ -2,17 +2,8 @@
 use atty::Stream;
 use clap::Parser;
 use crossterm::terminal;
-use fuel_core_keygen::{
-    new_key,
-    parse_secret,
-    KeyType,
-};
-use std::io::{
-    stdin,
-    stdout,
-    Read,
-    Write,
-};
+use fuel_core_keygen::{new_key, parse_secret, KeyType};
+use std::io::{stdin, stdout, Read, Write};
 use termion::screen::IntoAlternateScreen;
 
 /// Parse a secret key to view the associated public key

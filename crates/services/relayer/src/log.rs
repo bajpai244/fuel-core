@@ -1,30 +1,17 @@
-use crate::{
-    abi,
-    config,
-};
+use crate::{abi, config};
 use anyhow::anyhow;
 use ethers_contract::EthEvent;
-use ethers_core::{
-    abi::RawLog,
-    types::Log,
-};
+use ethers_core::{abi::RawLog, types::Log};
 use fuel_core_types::{
     blockchain::primitives::DaBlockHeight,
     entities::{
         relayer::{
-            message::{
-                Message,
-                MessageV1,
-            },
+            message::{Message, MessageV1},
             transaction::RelayedTransactionV1,
         },
         RelayedTransaction,
     },
-    fuel_types::{
-        Address,
-        Nonce,
-        Word,
-    },
+    fuel_types::{Address, Nonce, Word},
 };
 
 /// Bridge message send from da to fuel network.
@@ -85,7 +72,7 @@ impl TryFrom<&Log> for EthEventLog {
 
     fn try_from(log: &Log) -> Result<Self, Self::Error> {
         if log.topics.is_empty() {
-            return Err(anyhow!("Topic list is empty"))
+            return Err(anyhow!("Topic list is empty"));
         }
 
         let log = match log.topics[0] {
@@ -101,7 +88,7 @@ impl TryFrom<&Log> for EthEventLog {
 fn parse_message_to_event(log: &Log) -> anyhow::Result<EthEventLog> {
     // event has 3 indexed fields, so it should have 4 topics
     if log.topics.len() != 4 {
-        return Err(anyhow!("Malformed topics for Message"))
+        return Err(anyhow!("Malformed topics for Message"));
     }
 
     let raw_log = RawLog {
@@ -138,7 +125,7 @@ fn parse_message_to_event(log: &Log) -> anyhow::Result<EthEventLog> {
 fn parse_forced_tx_to_event(log: &Log) -> anyhow::Result<EthEventLog> {
     // event has one indexed field, so there are 2 topics
     if log.topics.len() != 2 {
-        return Err(anyhow!("Malformed topics for forced Transaction"))
+        return Err(anyhow!("Malformed topics for forced Transaction"));
     }
 
     let raw_log = RawLog {

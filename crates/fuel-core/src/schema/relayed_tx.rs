@@ -1,18 +1,11 @@
 use crate::{
     fuel_core_graphql_api::query_costs,
     schema::{
-        scalars::{
-            RelayedTransactionId,
-            U32,
-        },
+        scalars::{RelayedTransactionId, U32},
         ReadViewProvider,
     },
 };
-use async_graphql::{
-    Context,
-    Object,
-    Union,
-};
+use async_graphql::{Context, Object, Union};
 use fuel_core_types::{
     entities::relayer::transaction::RelayedTransactionStatus as FuelRelayedTransactionStatus,
     fuel_types::BlockHeight,

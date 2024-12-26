@@ -2,66 +2,34 @@ use crate::{
     fuel_core_graphql_api::{
         metrics_extension::MetricsExtension,
         ports::{
-            BlockProducerPort,
-            ConsensusModulePort,
-            ConsensusProvider as ConsensusProviderTrait,
-            GasPriceEstimate,
-            OffChainDatabase,
-            OnChainDatabase,
-            P2pPort,
-            TxPoolPort,
+            BlockProducerPort, ConsensusModulePort,
+            ConsensusProvider as ConsensusProviderTrait, GasPriceEstimate,
+            OffChainDatabase, OnChainDatabase, P2pPort, TxPoolPort,
         },
         validation_extension::ValidationExtension,
         view_extension::ViewExtension,
         Config,
     },
     graphql_api,
-    schema::{
-        CoreSchema,
-        CoreSchemaBuilder,
-    },
-    service::{
-        adapters::SharedMemoryPool,
-        metrics::metrics,
-    },
+    schema::{CoreSchema, CoreSchemaBuilder},
+    service::{adapters::SharedMemoryPool, metrics::metrics},
 };
-use async_graphql::{
-    http::GraphiQLSource,
-    Request,
-    Response,
-};
+use async_graphql::{http::GraphiQLSource, Request, Response};
 use axum::{
-    extract::{
-        DefaultBodyLimit,
-        Extension,
-    },
+    extract::{DefaultBodyLimit, Extension},
     http::{
         header::{
-            ACCESS_CONTROL_ALLOW_HEADERS,
-            ACCESS_CONTROL_ALLOW_METHODS,
+            ACCESS_CONTROL_ALLOW_HEADERS, ACCESS_CONTROL_ALLOW_METHODS,
             ACCESS_CONTROL_ALLOW_ORIGIN,
         },
         HeaderValue,
     },
-    response::{
-        sse::Event,
-        Html,
-        IntoResponse,
-        Sse,
-    },
-    routing::{
-        get,
-        post,
-    },
-    Json,
-    Router,
+    response::{sse::Event, Html, IntoResponse, Sse},
+    routing::{get, post},
+    Json, Router,
 };
 use fuel_core_services::{
-    AsyncProcessor,
-    RunnableService,
-    RunnableTask,
-    StateWatcher,
-    TaskNextAction,
+    AsyncProcessor, RunnableService, RunnableTask, StateWatcher, TaskNextAction,
 };
 use fuel_core_storage::transactional::AtomicView;
 use fuel_core_types::fuel_types::BlockHeight;
@@ -70,19 +38,14 @@ use hyper::rt::Executor;
 use serde_json::json;
 use std::{
     future::Future,
-    net::{
-        SocketAddr,
-        TcpListener,
-    },
+    net::{SocketAddr, TcpListener},
     pin::Pin,
     sync::Arc,
 };
 use tokio_stream::StreamExt;
 use tower::limit::ConcurrencyLimitLayer;
 use tower_http::{
-    set_header::SetResponseHeaderLayer,
-    timeout::TimeoutLayer,
-    trace::TraceLayer,
+    set_header::SetResponseHeaderLayer, timeout::TimeoutLayer, trace::TraceLayer,
 };
 
 pub type Service = fuel_core_services::ServiceRunner<GraphqlService>;

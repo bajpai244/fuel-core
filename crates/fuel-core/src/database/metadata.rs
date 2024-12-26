@@ -1,24 +1,12 @@
-use super::database_description::{
-    indexation_availability,
-    IndexationKind,
-};
+use super::database_description::{indexation_availability, IndexationKind};
 use crate::database::{
-    database_description::{
-        DatabaseDescription,
-        DatabaseMetadata,
-    },
-    Database,
-    Error as DatabaseError,
+    database_description::{DatabaseDescription, DatabaseMetadata},
+    Database, Error as DatabaseError,
 };
 use fuel_core_storage::{
-    blueprint::plain::Plain,
-    codec::postcard::Postcard,
-    structured_storage::TableWithBlueprint,
-    Error as StorageError,
-    Mappable,
-    Result as StorageResult,
-    StorageAsRef,
-    StorageInspect,
+    blueprint::plain::Plain, codec::postcard::Postcard,
+    structured_storage::TableWithBlueprint, Error as StorageError, Mappable,
+    Result as StorageResult, StorageAsRef, StorageInspect,
 };
 
 /// The table that stores all metadata about the database.
@@ -63,7 +51,7 @@ where
                 found: metadata.version(),
                 expected: Description::version(),
             }
-            .into())
+            .into());
         }
 
         Ok(())

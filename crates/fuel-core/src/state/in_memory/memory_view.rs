@@ -1,23 +1,9 @@
-use crate::database::database_description::{
-    on_chain::OnChain,
-    DatabaseDescription,
-};
+use crate::database::database_description::{on_chain::OnChain, DatabaseDescription};
 use fuel_core_storage::{
     iter::{
-        iterator,
-        keys_iterator,
-        BoxedIter,
-        IntoBoxedIter,
-        IterDirection,
-        IterableStore,
+        iterator, keys_iterator, BoxedIter, IntoBoxedIter, IterDirection, IterableStore,
     },
-    kv_store::{
-        KVItem,
-        KeyItem,
-        KeyValueInspect,
-        StorageColumn,
-        Value,
-    },
+    kv_store::{KVItem, KeyItem, KeyValueInspect, StorageColumn, Value},
     transactional::ReferenceBytesKey,
     Result as StorageResult,
 };

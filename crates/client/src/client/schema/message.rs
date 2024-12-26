@@ -1,23 +1,7 @@
-use super::{
-    block::Header,
-    BlockId,
-    Bytes32,
-    HexString,
-    PageInfo,
-    TransactionId,
-};
+use super::{block::Header, BlockId, Bytes32, HexString, PageInfo, TransactionId};
 use crate::client::{
-    pagination::{
-        PageDirection,
-        PaginationRequest,
-    },
-    schema::{
-        schema,
-        Address,
-        Nonce,
-        U32,
-        U64,
-    },
+    pagination::{PageDirection, PaginationRequest},
+    schema::{schema, Address, Nonce, U32, U64},
 };
 
 #[derive(cynic::QueryFragment, Clone, Debug)]

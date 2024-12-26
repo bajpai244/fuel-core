@@ -1,17 +1,6 @@
 use crate::client::{
-    schema::{
-        schema,
-        Address,
-        AssetId,
-        Nonce,
-        PageInfo,
-        UtxoId,
-        U16,
-        U32,
-        U64,
-    },
-    PageDirection,
-    PaginationRequest,
+    schema::{schema, Address, AssetId, Nonce, PageInfo, UtxoId, U16, U32, U64},
+    PageDirection, PaginationRequest,
 };
 
 #[derive(cynic::QueryVariables, Debug)]

@@ -1,8 +1,5 @@
 use crate::v1::da_source_service::{
-    service::{
-        DaBlockCostsSource,
-        Result as DaBlockCostsResult,
-    },
+    service::{DaBlockCostsSource, Result as DaBlockCostsResult},
     DaBlockCosts,
 };
 use std::sync::Arc;

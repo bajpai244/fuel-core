@@ -1,19 +1,10 @@
 use fuel_core_types::{
     blockchain::SealedBlockHeader,
     fuel_tx::TxId,
-    services::p2p::{
-        NetworkableTransactionPool,
-        Transactions,
-    },
+    services::p2p::{NetworkableTransactionPool, Transactions},
 };
-use libp2p::{
-    request_response::OutboundFailure,
-    PeerId,
-};
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use libp2p::{request_response::OutboundFailure, PeerId};
+use serde::{Deserialize, Serialize};
 use std::ops::Range;
 use thiserror::Error;
 use tokio::sync::oneshot;

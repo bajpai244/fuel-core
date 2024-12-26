@@ -2,29 +2,17 @@ use anyhow::bail;
 use fuel_core_chain_config::TableEntry;
 use fuel_core_storage::{
     structured_storage::TableWithBlueprint,
-    transactional::{
-        Modifiable,
-        StorageTransaction,
-        WriteTransaction,
-    },
-    StorageAsRef,
-    StorageInspect,
-    StorageMutate,
+    transactional::{Modifiable, StorageTransaction, WriteTransaction},
+    StorageAsRef, StorageInspect, StorageMutate,
 };
 
 use crate::{
     database::{
         database_description::DatabaseDescription,
-        genesis_progress::{
-            GenesisMetadata,
-            GenesisProgressMutate,
-        },
+        genesis_progress::{GenesisMetadata, GenesisProgressMutate},
         GenesisDatabase,
     },
-    service::genesis::{
-        progress::ProgressReporter,
-        task_manager::CancellationToken,
-    },
+    service::genesis::{progress::ProgressReporter, task_manager::CancellationToken},
 };
 
 use super::migration_name;
@@ -137,67 +125,31 @@ where
 #[cfg(test)]
 mod tests {
     use crate::{
-        database::{
-            genesis_progress::GenesisProgressInspect,
-            GenesisDatabase,
-        },
+        database::{genesis_progress::GenesisProgressInspect, GenesisDatabase},
         service::genesis::{
-            importer::{
-                import_task::ImportTask,
-                migration_name,
-            },
+            importer::{import_task::ImportTask, migration_name},
             progress::ProgressReporter,
             task_manager::CancellationToken,
         },
     };
-    use std::sync::{
-        Arc,
-        Mutex,
-    };
+    use std::sync::{Arc, Mutex};
 
-    use anyhow::{
-        anyhow,
-        bail,
-    };
-    use fuel_core_chain_config::{
-        Randomize,
-        TableEntry,
-    };
+    use anyhow::{anyhow, bail};
+    use fuel_core_chain_config::{Randomize, TableEntry};
     use fuel_core_storage::{
         column::Column,
-        iter::{
-            BoxedIter,
-            IterDirection,
-            IterableStore,
-        },
-        kv_store::{
-            KVItem,
-            KeyItem,
-            KeyValueInspect,
-            Value,
-        },
+        iter::{BoxedIter, IterDirection, IterableStore},
+        kv_store::{KVItem, KeyItem, KeyValueInspect, Value},
         tables::Coins,
-        transactional::{
-            Changes,
-            StorageTransaction,
-        },
-        Result as StorageResult,
-        StorageAsMut,
-        StorageAsRef,
-        StorageInspect,
+        transactional::{Changes, StorageTransaction},
+        Result as StorageResult, StorageAsMut, StorageAsRef, StorageInspect,
     };
     use fuel_core_types::{
-        entities::coins::coin::{
-            CompressedCoin,
-            CompressedCoinV1,
-        },
+        entities::coins::coin::{CompressedCoin, CompressedCoinV1},
         fuel_tx::UtxoId,
         fuel_types::BlockHeight,
     };
-    use rand::{
-        rngs::StdRng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, SeedableRng};
 
     use crate::{
         database::{
@@ -205,9 +157,7 @@ mod tests {
             genesis_progress::GenesisProgressMutate,
         },
         state::{
-            in_memory::memory_store::MemoryStore,
-            IterableKeyValueView,
-            KeyValueView,
+            in_memory::memory_store::MemoryStore, IterableKeyValueView, KeyValueView,
             TransactableStorage,
         },
     };

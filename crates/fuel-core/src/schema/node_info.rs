@@ -1,15 +1,6 @@
-use super::scalars::{
-    U32,
-    U64,
-};
-use crate::fuel_core_graphql_api::{
-    query_costs,
-    Config as GraphQLConfig,
-};
-use async_graphql::{
-    Context,
-    Object,
-};
+use super::scalars::{U32, U64};
+use crate::fuel_core_graphql_api::{query_costs, Config as GraphQLConfig};
+use async_graphql::{Context, Object};
 use std::time::UNIX_EPOCH;
 
 pub struct NodeInfo {

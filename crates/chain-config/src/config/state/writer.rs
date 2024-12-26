@@ -1,11 +1,6 @@
 use crate::{
-    config::table_entry::TableEntry,
-    AddTable,
-    ChainConfig,
-    LastBlockConfig,
-    SnapshotMetadata,
-    StateConfigBuilder,
-    TableEncoding,
+    config::table_entry::TableEntry, AddTable, ChainConfig, LastBlockConfig,
+    SnapshotMetadata, StateConfigBuilder, TableEncoding,
 };
 use fuel_core_storage::structured_storage::TableWithBlueprint;
 use std::path::PathBuf;
@@ -285,12 +280,8 @@ impl SnapshotWriter {
         chain_config: &ChainConfig,
     ) -> anyhow::Result<SnapshotMetadata> {
         use fuel_core_storage::tables::{
-            Coins,
-            ContractsAssets,
-            ContractsLatestUtxo,
-            ContractsRawCode,
-            ContractsState,
-            Messages,
+            Coins, ContractsAssets, ContractsLatestUtxo, ContractsRawCode,
+            ContractsState, Messages,
         };
         use fuel_core_types::fuel_vm::BlobData;
 
@@ -472,18 +463,11 @@ mod tests {
         kv_store::StorageColumn,
         structured_storage::TableWithBlueprint,
         tables::{
-            Coins,
-            ContractsAssets,
-            ContractsLatestUtxo,
-            ContractsRawCode,
-            ContractsState,
-            Messages,
+            Coins, ContractsAssets, ContractsLatestUtxo, ContractsRawCode,
+            ContractsState, Messages,
         },
     };
-    use rand::{
-        rngs::StdRng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, SeedableRng};
 
     use crate::StateConfig;
 

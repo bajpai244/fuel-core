@@ -1,23 +1,13 @@
 #![cfg(feature = "test-helpers")]
 #![allow(non_snake_case)]
 
-use ethers_core::types::{
-    Log,
-    U256,
-};
+use ethers_core::types::{Log, U256};
 use fuel_core_relayer::{
-    bridge::{
-        MessageSentFilter,
-        TransactionFilter,
-    },
+    bridge::{MessageSentFilter, TransactionFilter},
     mock_db::MockDb,
     new_service_test,
     ports::RelayerDb,
-    test_helpers::{
-        middleware::MockMiddleware,
-        EvtToLog,
-        LogTestHelper,
-    },
+    test_helpers::{middleware::MockMiddleware, EvtToLog, LogTestHelper},
     Config,
 };
 use fuel_core_services::Service;

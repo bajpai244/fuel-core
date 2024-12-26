@@ -1,27 +1,13 @@
-use fuel_core_storage::{
-    Error as StorageError,
-    StorageAsMut,
-};
+use fuel_core_storage::{Error as StorageError, StorageAsMut};
 use fuel_core_types::{
-    entities::{
-        coins::coin::Coin,
-        Message,
-    },
-    fuel_tx::{
-        Address,
-        AssetId,
-    },
+    entities::{coins::coin::Coin, Message},
+    fuel_tx::{Address, AssetId},
     services::executor::Event,
 };
 
 use super::{
     ports::worker::OffChainDatabaseTransaction,
-    storage::balances::{
-        CoinBalances,
-        CoinBalancesKey,
-        MessageBalance,
-        MessageBalances,
-    },
+    storage::balances::{CoinBalances, CoinBalancesKey, MessageBalance, MessageBalances},
 };
 
 #[derive(derive_more::From, derive_more::Display, Debug)]
@@ -203,39 +189,20 @@ where
 
 #[cfg(test)]
 mod tests {
-    use fuel_core_storage::{
-        transactional::WriteTransaction,
-        StorageAsMut,
-    };
+    use fuel_core_storage::{transactional::WriteTransaction, StorageAsMut};
     use fuel_core_types::{
-        entities::{
-            coins::coin::Coin,
-            relayer::message::MessageV1,
-            Message,
-        },
-        fuel_tx::{
-            Address,
-            AssetId,
-        },
+        entities::{coins::coin::Coin, relayer::message::MessageV1, Message},
+        fuel_tx::{Address, AssetId},
         services::executor::Event,
     };
 
     use crate::{
-        database::{
-            database_description::off_chain::OffChain,
-            Database,
-        },
+        database::{database_description::off_chain::OffChain, Database},
         graphql_api::{
-            indexation::{
-                process_balances_update,
-                IndexationError,
-            },
+            indexation::{process_balances_update, IndexationError},
             ports::worker::OffChainDatabaseTransaction,
             storage::balances::{
-                CoinBalances,
-                CoinBalancesKey,
-                MessageBalance,
-                MessageBalances,
+                CoinBalances, CoinBalancesKey, MessageBalance, MessageBalances,
             },
         },
     };

@@ -1,18 +1,9 @@
-use super::{
-    scalars::HexString,
-    ReadViewProvider,
-};
+use super::{scalars::HexString, ReadViewProvider};
 use crate::{
-    fuel_core_graphql_api::{
-        query_costs,
-        IntoApiResult,
-    },
+    fuel_core_graphql_api::{query_costs, IntoApiResult},
     schema::scalars::U32,
 };
-use async_graphql::{
-    Context,
-    Object,
-};
+use async_graphql::{Context, Object};
 
 pub struct DaCompressedBlock {
     bytes: Vec<u8>,

@@ -1,16 +1,7 @@
-use crate::ports::{
-    EvictorDb,
-    TemporalRegistry,
-};
+use crate::ports::{EvictorDb, TemporalRegistry};
 use fuel_core_types::{
     fuel_compression::RegistryKey,
-    fuel_tx::{
-        input::PredicateCode,
-        Address,
-        AssetId,
-        ContractId,
-        ScriptCode,
-    },
+    fuel_tx::{input::PredicateCode, Address, AssetId, ContractId, ScriptCode},
     tai64::Tai64,
 };
 

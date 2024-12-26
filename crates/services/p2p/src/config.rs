@@ -1,37 +1,23 @@
 use crate::{
-    gossipsub::config::default_gossipsub_config,
-    heartbeat,
-    peer_manager::ConnectionState,
-    TryPeerId,
+    gossipsub::config::default_gossipsub_config, heartbeat,
+    peer_manager::ConnectionState, TryPeerId,
 };
 use fuel_core_types::blockchain::consensus::Genesis;
 
 use libp2p::{
     gossipsub,
-    identity::{
-        secp256k1,
-        Keypair,
-    },
-    noise,
-    Multiaddr,
-    PeerId,
+    identity::{secp256k1, Keypair},
+    noise, Multiaddr, PeerId,
 };
 use std::{
     collections::HashSet,
-    net::{
-        IpAddr,
-        Ipv4Addr,
-    },
-    sync::{
-        Arc,
-        RwLock,
-    },
+    net::{IpAddr, Ipv4Addr},
+    sync::{Arc, RwLock},
     time::Duration,
 };
 
 use self::{
-    connection_tracker::ConnectionTracker,
-    fuel_authenticated::FuelAuthenticated,
+    connection_tracker::ConnectionTracker, fuel_authenticated::FuelAuthenticated,
     fuel_upgrade::Checksum,
 };
 mod connection_tracker;

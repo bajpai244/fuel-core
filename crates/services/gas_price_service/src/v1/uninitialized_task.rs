@@ -1,83 +1,45 @@
 use crate::{
     common::{
         fuel_core_storage_adapter::{
-            block_bytes,
-            get_block_info,
-            mint_values,
-            GasPriceSettings,
+            block_bytes, get_block_info, mint_values, GasPriceSettings,
             GasPriceSettingsProvider,
         },
         gas_price_algorithm::SharedGasPriceAlgo,
         l2_block_source::FuelL2BlockSource,
         updater_metadata::UpdaterMetadata,
-        utils::{
-            BlockInfo,
-            Error as GasPriceError,
-            Result as GasPriceResult,
-        },
+        utils::{BlockInfo, Error as GasPriceError, Result as GasPriceResult},
     },
     ports::{
-        GasPriceData,
-        GasPriceServiceAtomicStorage,
-        GasPriceServiceConfig,
-        GetDaBundleId,
-        GetMetadataStorage,
-        L2Data,
-        SetDaBundleId,
-        SetMetadataStorage,
+        GasPriceData, GasPriceServiceAtomicStorage, GasPriceServiceConfig, GetDaBundleId,
+        GetMetadataStorage, L2Data, SetDaBundleId, SetMetadataStorage,
     },
     v1::{
         algorithm::SharedV1Algorithm,
         da_source_service::{
             block_committer_costs::BlockCommitterDaBlockCosts,
-            service::{
-                DaBlockCostsSource,
-                DaSourceService,
-            },
+            service::{DaBlockCostsSource, DaSourceService},
         },
-        metadata::{
-            v1_algorithm_from_metadata,
-            V1AlgorithmConfig,
-            V1Metadata,
-        },
-        service::{
-            initialize_algorithm,
-            GasPriceServiceV1,
-        },
+        metadata::{v1_algorithm_from_metadata, V1AlgorithmConfig, V1Metadata},
+        service::{initialize_algorithm, GasPriceServiceV1},
         uninitialized_task::fuel_storage_unrecorded_blocks::{
-            AsUnrecordedBlocks,
-            FuelStorageUnrecordedBlocks,
+            AsUnrecordedBlocks, FuelStorageUnrecordedBlocks,
         },
     },
 };
 use anyhow::Error;
 use fuel_core_services::{
-    stream::BoxStream,
-    RunnableService,
-    ServiceRunner,
-    StateWatcher,
+    stream::BoxStream, RunnableService, ServiceRunner, StateWatcher,
 };
 use fuel_core_storage::{
-    kv_store::{
-        KeyValueInspect,
-        KeyValueMutate,
-    },
+    kv_store::{KeyValueInspect, KeyValueMutate},
     not_found,
-    transactional::{
-        AtomicView,
-        Modifiable,
-        StorageTransaction,
-    },
+    transactional::{AtomicView, Modifiable, StorageTransaction},
 };
 use fuel_core_types::{
-    fuel_tx::field::MintAmount,
-    fuel_types::BlockHeight,
+    fuel_tx::field::MintAmount, fuel_types::BlockHeight,
     services::block_importer::SharedImportResult,
 };
-use fuel_gas_price_algorithm::v1::{
-    AlgorithmUpdaterV1,
-    UnrecordedBlocks,
-};
+use fuel_gas_price_algorithm::v1::{AlgorithmUpdaterV1, UnrecordedBlocks};
 
 pub mod fuel_storage_unrecorded_blocks;
 

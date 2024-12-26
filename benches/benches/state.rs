@@ -1,45 +1,24 @@
 use criterion::{
-    criterion_group,
-    criterion_main,
-    measurement::WallTime,
-    BenchmarkGroup,
-    Criterion,
+    criterion_group, criterion_main, measurement::WallTime, BenchmarkGroup, Criterion,
 };
 use fuel_core::database::{
-    database_description::on_chain::OnChain,
-    state::StateInitializer,
-    Database,
+    database_description::on_chain::OnChain, state::StateInitializer, Database,
 };
 use fuel_core_storage::{
-    transactional::{
-        IntoTransaction,
-        ReadTransaction,
-        WriteTransaction,
-    },
+    transactional::{IntoTransaction, ReadTransaction, WriteTransaction},
     vm_storage::VmStorage,
 };
 use fuel_core_types::{
     blockchain::{
-        header::{
-            ApplicationHeader,
-            ConsensusHeader,
-        },
+        header::{ApplicationHeader, ConsensusHeader},
         primitives::Empty,
     },
     fuel_tx::Bytes32,
     fuel_types::ContractId,
     fuel_vm::InterpreterStorage,
 };
-use rand::{
-    rngs::StdRng,
-    thread_rng,
-    Rng,
-    SeedableRng,
-};
-use std::{
-    iter,
-    time::Duration,
-};
+use rand::{rngs::StdRng, thread_rng, Rng, SeedableRng};
+use std::{iter, time::Duration};
 
 // Use Jemalloc during benchmarks
 #[global_allocator]

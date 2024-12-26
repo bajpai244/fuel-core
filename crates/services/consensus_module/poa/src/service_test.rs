@@ -4,80 +4,40 @@
 use crate::{
     new_service,
     ports::{
-        BlockProducer,
-        BlockSigner,
-        GetTime,
-        InMemoryPredefinedBlocks,
-        MockBlockImporter,
-        MockBlockProducer,
-        MockP2pPort,
-        MockTransactionPool,
-        TransactionsSource,
+        BlockProducer, BlockSigner, GetTime, InMemoryPredefinedBlocks, MockBlockImporter,
+        MockBlockProducer, MockP2pPort, MockTransactionPool, TransactionsSource,
     },
     service::MainTask,
     signer::SignMode,
-    Config,
-    Service,
-    Trigger,
+    Config, Service, Trigger,
 };
 use async_trait::async_trait;
 use fuel_core_chain_config::default_consensus_dev_key;
-use fuel_core_services::{
-    Service as StorageTrait,
-    ServiceRunner,
-    State,
-};
+use fuel_core_services::{Service as StorageTrait, ServiceRunner, State};
 use fuel_core_storage::transactional::Changes;
 use fuel_core_types::{
     blockchain::{
         block::Block,
         consensus::Consensus,
-        header::{
-            BlockHeader,
-            PartialBlockHeader,
-        },
+        header::{BlockHeader, PartialBlockHeader},
         primitives::SecretKeyWrapper,
         SealedBlock,
     },
     fuel_crypto::SecretKey,
     fuel_tx::*,
-    fuel_types::{
-        BlockHeight,
-        ChainId,
-    },
+    fuel_types::{BlockHeight, ChainId},
     secrecy::Secret,
-    services::executor::{
-        Error as ExecutorError,
-        ExecutionResult,
-        UncommittedResult,
-    },
-    tai64::{
-        Tai64,
-        Tai64N,
-    },
+    services::executor::{Error as ExecutorError, ExecutionResult, UncommittedResult},
+    tai64::{Tai64, Tai64N},
 };
-use rand::{
-    prelude::StdRng,
-    Rng,
-    SeedableRng,
-};
+use rand::{prelude::StdRng, Rng, SeedableRng};
 use std::{
-    collections::{
-        HashMap,
-        HashSet,
-    },
-    sync::{
-        Arc,
-        Mutex as StdMutex,
-        Mutex,
-    },
+    collections::{HashMap, HashSet},
+    sync::{Arc, Mutex as StdMutex, Mutex},
     time::Duration,
 };
 use tokio::{
-    sync::{
-        broadcast,
-        watch,
-    },
+    sync::{broadcast, watch},
     time,
 };
 

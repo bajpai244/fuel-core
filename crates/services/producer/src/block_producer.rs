@@ -1,57 +1,30 @@
 use crate::{
     block_producer::gas_price::{
-        ConsensusParametersProvider,
-        GasPriceProvider as GasPriceProviderConstraint,
+        ConsensusParametersProvider, GasPriceProvider as GasPriceProviderConstraint,
     },
-    ports::{
-        self,
-        BlockProducerDatabase,
-        RelayerBlockInfo,
-    },
+    ports::{self, BlockProducerDatabase, RelayerBlockInfo},
     Config,
 };
-use anyhow::{
-    anyhow,
-    Context,
-};
-use fuel_core_storage::transactional::{
-    AtomicView,
-    Changes,
-};
+use anyhow::{anyhow, Context};
+use fuel_core_storage::transactional::{AtomicView, Changes};
 use fuel_core_types::{
     blockchain::{
         block::Block,
-        header::{
-            ApplicationHeader,
-            ConsensusHeader,
-            PartialBlockHeader,
-        },
+        header::{ApplicationHeader, ConsensusHeader, PartialBlockHeader},
         primitives::DaBlockHeight,
     },
     fuel_tx::{
-        field::{
-            InputContract,
-            MintGasPrice,
-        },
+        field::{InputContract, MintGasPrice},
         Transaction,
     },
-    fuel_types::{
-        BlockHeight,
-        Bytes32,
-    },
+    fuel_types::{BlockHeight, Bytes32},
     services::{
         block_producer::Components,
-        executor::{
-            TransactionExecutionStatus,
-            UncommittedResult,
-        },
+        executor::{TransactionExecutionStatus, UncommittedResult},
     },
     tai64::Tai64,
 };
-use std::{
-    future::Future,
-    sync::Arc,
-};
+use std::{future::Future, sync::Arc};
 use tokio::sync::Mutex;
 use tracing::debug;
 
@@ -139,7 +112,7 @@ where
                 height,
                 previous_block: latest_height,
             }
-            .into())
+            .into());
         }
 
         let maybe_mint_tx = transactions_source.pop();
@@ -221,7 +194,7 @@ where
                 height,
                 previous_block: latest_height,
             }
-            .into())
+            .into());
         }
 
         let component = Components {

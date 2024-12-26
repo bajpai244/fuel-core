@@ -1,23 +1,11 @@
 use async_graphql::{
-    connection::CursorType,
-    InputValueError,
-    InputValueResult,
-    Scalar,
-    ScalarType,
-    Value,
+    connection::CursorType, InputValueError, InputValueResult, Scalar, ScalarType, Value,
 };
-use fuel_core_types::{
-    fuel_types,
-    fuel_types::BlockHeight,
-    tai64::Tai64,
-};
+use fuel_core_types::{fuel_types, fuel_types::BlockHeight, tai64::Tai64};
 use std::{
     array::TryFromSliceError,
     convert::TryInto,
-    fmt::{
-        Display,
-        Formatter,
-    },
+    fmt::{Display, Formatter},
     str::FromStr,
 };
 pub use tx_pointer::TxPointer;

@@ -3,30 +3,15 @@
 
 use std::convert::TryFrom;
 
-use crate::{
-    config,
-    log::EthEventLog,
-};
-use bytes::{
-    Bytes,
-    BytesMut,
-};
+use crate::{config, log::EthEventLog};
+use bytes::{Bytes, BytesMut};
 use ethers_contract::EthEvent;
 use ethers_core::{
     abi::Tokenize,
-    types::{
-        Bytes as EthersBytes,
-        Log,
-        H160,
-        H256,
-        U64,
-    },
+    types::{Bytes as EthersBytes, Log, H160, H256, U64},
 };
 use fuel_core_types::{
-    entities::{
-        Message,
-        RelayedTransaction,
-    },
+    entities::{Message, RelayedTransaction},
     fuel_types::Address,
 };
 

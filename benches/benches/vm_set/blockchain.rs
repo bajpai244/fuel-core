@@ -1,23 +1,14 @@
 use std::sync::Arc;
 
-use crate::utils::{
-    linear,
-    linear_short,
-    make_receipts,
-};
+use crate::utils::{linear, linear_short, make_receipts};
 
 use super::run_group_ref;
 
-use criterion::{
-    Criterion,
-    Throughput,
-};
+use criterion::{Criterion, Throughput};
 use fuel_core::{
     database::{
-        balances::BalancesInitializer,
-        database_description::on_chain::OnChain,
-        state::StateInitializer,
-        GenesisDatabase,
+        balances::BalancesInitializer, database_description::on_chain::OnChain,
+        state::StateInitializer, GenesisDatabase,
     },
     service::Config,
     state::historical_rocksdb::HistoricalRocksDB,
@@ -25,41 +16,19 @@ use fuel_core::{
 use fuel_core_benches::*;
 use fuel_core_storage::{
     tables::FuelBlocks,
-    transactional::{
-        IntoTransaction,
-        StorageTransaction,
-    },
-    vm_storage::{
-        IncreaseStorageKey,
-        VmStorage,
-    },
+    transactional::{IntoTransaction, StorageTransaction},
+    vm_storage::{IncreaseStorageKey, VmStorage},
     StorageAsMut,
 };
 use fuel_core_types::{
-    blockchain::header::{
-        ApplicationHeader,
-        ConsensusHeader,
-    },
-    fuel_asm::{
-        op,
-        GTFArgs,
-        RegId,
-    },
-    fuel_tx::{
-        ContractIdExt,
-        Input,
-        Output,
-        Word,
-    },
+    blockchain::header::{ApplicationHeader, ConsensusHeader},
+    fuel_asm::{op, GTFArgs, RegId},
+    fuel_tx::{ContractIdExt, Input, Output, Word},
     fuel_types::*,
     fuel_vm::consts::*,
     tai64::Tai64,
 };
-use rand::{
-    rngs::StdRng,
-    RngCore,
-    SeedableRng,
-};
+use rand::{rngs::StdRng, RngCore, SeedableRng};
 
 pub struct BenchDb {
     db: GenesisDatabase,

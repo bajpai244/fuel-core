@@ -1,32 +1,17 @@
 use super::{
     block::Header,
-    scalars::{
-        Address,
-        Bytes32,
-        HexString,
-        Nonce,
-        TransactionId,
-        U64,
-    },
+    scalars::{Address, Bytes32, HexString, Nonce, TransactionId, U64},
     ReadViewProvider,
 };
 use crate::{
     fuel_core_graphql_api::query_costs,
     graphql_api::IntoApiResult,
-    schema::scalars::{
-        BlockId,
-        U32,
-    },
+    schema::scalars::{BlockId, U32},
 };
 use anyhow::anyhow;
 use async_graphql::{
-    connection::{
-        Connection,
-        EmptyFields,
-    },
-    Context,
-    Enum,
-    Object,
+    connection::{Connection, EmptyFields},
+    Context, Enum, Object,
 };
 use fuel_core_services::stream::IntoBoxStream;
 use fuel_core_types::entities;

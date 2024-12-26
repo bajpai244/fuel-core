@@ -1,18 +1,9 @@
-use super::{
-    fuel_authenticated::Approver,
-    peer_ids_set_from,
-};
+use super::{fuel_authenticated::Approver, peer_ids_set_from};
 use crate::peer_manager::ConnectionState;
-use libp2p::{
-    Multiaddr,
-    PeerId,
-};
+use libp2p::{Multiaddr, PeerId};
 use std::{
     collections::HashSet,
-    sync::{
-        Arc,
-        RwLock,
-    },
+    sync::{Arc, RwLock},
 };
 
 /// A `ConnectionTracker` allows either Reserved Peers or other peers if there is an available slot.
@@ -38,12 +29,12 @@ impl ConnectionTracker {
 impl Approver for ConnectionTracker {
     fn allow_peer(&self, peer_id: &PeerId) -> bool {
         if self.reserved_nodes.contains(peer_id) {
-            return true
+            return true;
         }
 
         if let Some(connection_state) = &self.connection_state {
             if let Ok(connection_state) = connection_state.read() {
-                return connection_state.available_slot()
+                return connection_state.available_slot();
             }
         }
 

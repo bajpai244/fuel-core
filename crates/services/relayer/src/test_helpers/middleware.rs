@@ -1,33 +1,12 @@
 use async_trait::async_trait;
 use ethers_core::types::{
-    Block,
-    BlockId,
-    Filter,
-    Log,
-    SyncingStatus,
-    Transaction,
-    TransactionReceipt,
-    TxHash,
-    H256,
-    U64,
+    Block, BlockId, Filter, Log, SyncingStatus, Transaction, TransactionReceipt, TxHash,
+    H256, U64,
 };
-use ethers_providers::{
-    JsonRpcClient,
-    Middleware,
-    Provider,
-    ProviderError,
-};
+use ethers_providers::{JsonRpcClient, Middleware, Provider, ProviderError};
 use parking_lot::Mutex;
-use serde::{
-    de::DeserializeOwned,
-    Serialize,
-};
-use std::{
-    fmt,
-    fmt::Debug,
-    str::FromStr,
-    sync::Arc,
-};
+use serde::{de::DeserializeOwned, Serialize};
+use std::{fmt, fmt::Debug, str::FromStr, sync::Arc};
 use thiserror::Error;
 
 #[derive(Clone)]

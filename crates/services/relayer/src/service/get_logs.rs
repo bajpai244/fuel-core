@@ -1,8 +1,6 @@
 use super::*;
 use fuel_core_types::{
-    entities::RelayedTransaction,
-    fuel_types::Bytes20,
-    services::relayer::Event,
+    entities::RelayedTransaction, fuel_types::Bytes20, services::relayer::Event,
 };
 use futures::TryStreamExt;
 use std::collections::HashMap;

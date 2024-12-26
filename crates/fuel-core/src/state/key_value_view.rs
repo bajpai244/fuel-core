@@ -1,9 +1,5 @@
 use fuel_core_storage::{
-    kv_store::{
-        KeyValueInspect,
-        StorageColumn,
-        Value,
-    },
+    kv_store::{KeyValueInspect, StorageColumn, Value},
     Result as StorageResult,
 };
 use std::sync::Arc;

@@ -1,16 +1,10 @@
 use fuel_core_services::stream::BoxStream;
 use fuel_core_storage::Result as StorageResult;
 use fuel_core_types::{
-    blockchain::{
-        consensus::Genesis,
-        SealedBlockHeader,
-    },
+    blockchain::{consensus::Genesis, SealedBlockHeader},
     fuel_tx::TxId,
     fuel_types::BlockHeight,
-    services::p2p::{
-        NetworkableTransactionPool,
-        Transactions,
-    },
+    services::p2p::{NetworkableTransactionPool, Transactions},
 };
 use std::ops::Range;
 

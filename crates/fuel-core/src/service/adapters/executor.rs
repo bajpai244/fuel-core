@@ -1,13 +1,9 @@
 use crate::{
-    database::RelayerIterableKeyValueView,
-    service::adapters::TransactionsSource,
+    database::RelayerIterableKeyValueView, service::adapters::TransactionsSource,
 };
 use fuel_core_executor::ports::MaybeCheckedTransaction;
 use fuel_core_txpool::Constraints;
-use fuel_core_types::{
-    blockchain::primitives::DaBlockHeight,
-    services::relayer::Event,
-};
+use fuel_core_types::{blockchain::primitives::DaBlockHeight, services::relayer::Event};
 use std::sync::Arc;
 
 impl fuel_core_executor::ports::TransactionsSource for TransactionsSource {

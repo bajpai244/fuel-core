@@ -1,21 +1,6 @@
-use crate::schema::scalars::{
-    Address,
-    AssetId,
-    Bytes32,
-    ContractId,
-    U16,
-    U64,
-};
-use async_graphql::{
-    Object,
-    Union,
-};
-use fuel_core_types::{
-    fuel_asm::Word,
-    fuel_tx,
-    fuel_tx::output,
-    fuel_types,
-};
+use crate::schema::scalars::{Address, AssetId, Bytes32, ContractId, U16, U64};
+use async_graphql::{Object, Union};
+use fuel_core_types::{fuel_asm::Word, fuel_tx, fuel_tx::output, fuel_types};
 
 #[derive(Union)]
 pub enum Output {

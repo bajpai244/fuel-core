@@ -1,14 +1,8 @@
 use ethers_contract::EthEvent;
 use ethers_core::types::H256;
-use fuel_core_types::{
-    blockchain::primitives::DaBlockHeight,
-    fuel_types::Bytes20,
-};
+use fuel_core_types::{blockchain::primitives::DaBlockHeight, fuel_types::Bytes20};
 use once_cell::sync::Lazy;
-use std::{
-    str::FromStr,
-    time::Duration,
-};
+use std::{str::FromStr, time::Duration};
 
 pub(crate) static ETH_LOG_MESSAGE: Lazy<H256> =
     Lazy::new(crate::abi::bridge::MessageSentFilter::signature);

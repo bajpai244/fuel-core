@@ -1,10 +1,7 @@
 use fuel_core_relayer as _;
 use std::ops::RangeInclusive;
 
-use crate::test_helpers::middleware::{
-    MockMiddleware,
-    TriggerType,
-};
+use crate::test_helpers::middleware::{MockMiddleware, TriggerType};
 
 use super::*;
 

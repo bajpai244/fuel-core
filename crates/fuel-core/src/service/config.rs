@@ -1,29 +1,16 @@
-use std::{
-    path::PathBuf,
-    time::Duration,
-};
+use std::{path::PathBuf, time::Duration};
 
 use clap::ValueEnum;
 use fuel_core_poa::signer::SignMode;
-use strum_macros::{
-    Display,
-    EnumString,
-    EnumVariantNames,
-};
+use strum_macros::{Display, EnumString, EnumVariantNames};
 
 use fuel_core_chain_config::SnapshotReader;
 #[cfg(feature = "test-helpers")]
-use fuel_core_chain_config::{
-    ChainConfig,
-    StateConfig,
-};
+use fuel_core_chain_config::{ChainConfig, StateConfig};
 pub use fuel_core_consensus_module::RelayerConsensusConfig;
 pub use fuel_core_importer;
 #[cfg(feature = "p2p")]
-use fuel_core_p2p::config::{
-    Config as P2PConfig,
-    NotInitialized,
-};
+use fuel_core_p2p::config::{Config as P2PConfig, NotInitialized};
 pub use fuel_core_poa::Trigger;
 #[cfg(feature = "relayer")]
 use fuel_core_relayer::Config as RelayerConfig;
@@ -32,10 +19,7 @@ use fuel_core_types::blockchain::header::StateTransitionBytecodeVersion;
 
 use crate::{
     combined_database::CombinedDatabaseConfig,
-    graphql_api::{
-        worker_service::DaCompressionConfig,
-        ServiceConfig as GraphQLConfig,
-    },
+    graphql_api::{worker_service::DaCompressionConfig, ServiceConfig as GraphQLConfig},
 };
 
 #[derive(Clone, Debug)]

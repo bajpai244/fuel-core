@@ -1,23 +1,13 @@
 use crate::cli::default_db_path;
 use anyhow::Context;
-use clap::{
-    Parser,
-    Subcommand,
-};
+use clap::{Parser, Subcommand};
 use fuel_core::{
-    combined_database::CombinedDatabase,
-    state::historical_rocksdb::StateRewindPolicy,
+    combined_database::CombinedDatabase, state::historical_rocksdb::StateRewindPolicy,
     types::fuel_types::ContractId,
 };
 use fuel_core_chain_config::ChainConfig;
-use rlimit::{
-    getrlimit,
-    Resource,
-};
-use std::path::{
-    Path,
-    PathBuf,
-};
+use rlimit::{getrlimit, Resource};
+use std::path::{Path, PathBuf};
 
 use super::local_testnet_chain_config;
 
@@ -136,10 +126,7 @@ fn get_default_max_fds() -> i32 {
 #[cfg(feature = "rocksdb")]
 pub async fn exec(command: Command) -> anyhow::Result<()> {
     use fuel_core::service::genesis::Exporter;
-    use fuel_core_chain_config::{
-        SnapshotWriter,
-        MAX_GROUP_SIZE,
-    };
+    use fuel_core_chain_config::{SnapshotWriter, MAX_GROUP_SIZE};
 
     use crate::cli::ShutdownListener;
 
@@ -224,73 +211,37 @@ mod tests {
 
     use fuel_core::{
         fuel_core_graphql_api::storage::transactions::{
-            OwnedTransactionIndexKey,
-            OwnedTransactions,
-            TransactionStatuses,
+            OwnedTransactionIndexKey, OwnedTransactions, TransactionStatuses,
         },
         producer::ports::BlockProducerDatabase,
     };
     use fuel_core_chain_config::{
-        AddTable,
-        AsTable,
-        LastBlockConfig,
-        SnapshotMetadata,
-        SnapshotReader,
-        StateConfig,
-        StateConfigBuilder,
-        TableEntry,
+        AddTable, AsTable, LastBlockConfig, SnapshotMetadata, SnapshotReader,
+        StateConfig, StateConfigBuilder, TableEntry,
     };
     use fuel_core_storage::{
         structured_storage::TableWithBlueprint,
         tables::{
-            Coins,
-            ContractsAssets,
-            ContractsLatestUtxo,
-            ContractsRawCode,
-            ContractsState,
-            FuelBlocks,
-            Messages,
-            Transactions,
+            Coins, ContractsAssets, ContractsLatestUtxo, ContractsRawCode,
+            ContractsState, FuelBlocks, Messages, Transactions,
         },
         transactional::AtomicView,
-        ContractsAssetKey,
-        ContractsStateKey,
-        StorageAsMut,
+        ContractsAssetKey, ContractsStateKey, StorageAsMut,
     };
     use fuel_core_types::{
-        blockchain::{
-            block::CompressedBlock,
-            primitives::DaBlockHeight,
-        },
+        blockchain::{block::CompressedBlock, primitives::DaBlockHeight},
         entities::{
-            coins::coin::{
-                CompressedCoin,
-                CompressedCoinV1,
-            },
+            coins::coin::{CompressedCoin, CompressedCoinV1},
             contract::ContractUtxoInfo,
-            relayer::message::{
-                Message,
-                MessageV1,
-            },
+            relayer::message::{Message, MessageV1},
         },
-        fuel_tx::{
-            Receipt,
-            TransactionBuilder,
-            TxPointer,
-            UniqueIdentifier,
-            UtxoId,
-        },
+        fuel_tx::{Receipt, TransactionBuilder, TxPointer, UniqueIdentifier, UtxoId},
         fuel_types::ChainId,
         services::txpool::TransactionStatus,
         tai64::Tai64,
     };
     use itertools::Itertools;
-    use rand::{
-        rngs::StdRng,
-        seq::SliceRandom,
-        Rng,
-        SeedableRng,
-    };
+    use rand::{rngs::StdRng, seq::SliceRandom, Rng, SeedableRng};
     use test_case::test_case;
 
     use crate::cli::DEFAULT_DATABASE_CACHE_SIZE;

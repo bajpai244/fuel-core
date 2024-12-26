@@ -1,60 +1,27 @@
-use super::scalars::{
-    Bytes32,
-    Tai64Timestamp,
-    TransactionId,
-};
+use super::scalars::{Bytes32, Tai64Timestamp, TransactionId};
 use crate::{
     fuel_core_graphql_api::{
-        api_service::ConsensusModule,
-        database::ReadView,
-        query_costs,
-        Config as GraphQLConfig,
-        IntoApiResult,
+        api_service::ConsensusModule, database::ReadView, query_costs,
+        Config as GraphQLConfig, IntoApiResult,
     },
     schema::{
-        scalars::{
-            BlockId,
-            Signature,
-            U16,
-            U32,
-            U64,
-        },
+        scalars::{BlockId, Signature, U16, U32, U64},
         tx::types::Transaction,
         ReadViewProvider,
     },
 };
 use anyhow::anyhow;
 use async_graphql::{
-    connection::{
-        Connection,
-        EmptyFields,
-    },
-    Context,
-    Enum,
-    Object,
-    SimpleObject,
-    Union,
+    connection::{Connection, EmptyFields},
+    Context, Enum, Object, SimpleObject, Union,
 };
-use fuel_core_storage::{
-    iter::IterDirection,
-    Result as StorageResult,
-};
+use fuel_core_storage::{iter::IterDirection, Result as StorageResult};
 use fuel_core_types::{
-    blockchain::{
-        block::CompressedBlock,
-        header::BlockHeader,
-    },
+    blockchain::{block::CompressedBlock, header::BlockHeader},
     fuel_tx::TxId,
-    fuel_types::{
-        self,
-        BlockHeight,
-    },
+    fuel_types::{self, BlockHeight},
 };
-use futures::{
-    Stream,
-    StreamExt,
-    TryStreamExt,
-};
+use futures::{Stream, StreamExt, TryStreamExt};
 
 pub struct Block(pub(crate) CompressedBlock);
 
@@ -384,7 +351,7 @@ impl BlockMutation {
         let config = ctx.data_unchecked::<GraphQLConfig>().clone();
 
         if !config.debug {
-            return Err(anyhow!("`debug` must be enabled to use this endpoint").into())
+            return Err(anyhow!("`debug` must be enabled to use this endpoint").into());
         }
 
         let consensus_module = ctx.data_unchecked::<ConsensusModule>();

@@ -1,7 +1,4 @@
-use crate::v1::{
-    tests::UpdaterBuilder,
-    AlgorithmV1,
-};
+use crate::v1::{tests::UpdaterBuilder, AlgorithmV1};
 use proptest::prelude::*;
 
 #[test]

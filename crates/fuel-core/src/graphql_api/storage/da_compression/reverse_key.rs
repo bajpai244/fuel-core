@@ -1,14 +1,6 @@
 use fuel_core_types::{
-    fuel_tx::{
-        input::PredicateCode,
-        ScriptCode,
-    },
-    fuel_types::{
-        Address,
-        AssetId,
-        Bytes32,
-        ContractId,
-    },
+    fuel_tx::{input::PredicateCode, ScriptCode},
+    fuel_types::{Address, AssetId, Bytes32, ContractId},
 };
 use std::ops::Deref;
 

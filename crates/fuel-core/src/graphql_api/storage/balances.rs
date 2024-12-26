@@ -1,24 +1,14 @@
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        postcard::Postcard,
-        raw::Raw,
-    },
+    codec::{postcard::Postcard, raw::Raw},
     structured_storage::TableWithBlueprint,
     Mappable,
 };
 use fuel_core_types::{
-    fuel_tx::{
-        Address,
-        AssetId,
-    },
+    fuel_tx::{Address, AssetId},
     fuel_vm::double_key,
 };
-use rand::{
-    distributions::Standard,
-    prelude::Distribution,
-    Rng,
-};
+use rand::{distributions::Standard, prelude::Distribution, Rng};
 
 pub type ItemAmount = u64;
 pub type TotalBalanceAmount = u128;

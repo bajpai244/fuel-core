@@ -1,31 +1,15 @@
 use clap::Parser;
 use fuel_core_types::fuel_tx::{
-    consensus_parameters::gas::GasCostsValuesV4,
-    ConsensusParameters,
-    GasCosts,
+    consensus_parameters::gas::GasCostsValuesV4, ConsensusParameters, GasCosts,
 };
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{
-    collections::{
-        HashMap,
-        HashSet,
-    },
+    collections::{HashMap, HashSet},
     fmt::Display,
-    io::{
-        BufRead,
-        BufReader,
-        BufWriter,
-        Write,
-    },
+    io::{BufRead, BufReader, BufWriter, Write},
     path::PathBuf,
-    sync::mpsc::{
-        channel,
-        TryRecvError,
-    },
+    sync::mpsc::{channel, TryRecvError},
     time::Duration,
 };
 

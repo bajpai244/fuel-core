@@ -1,56 +1,27 @@
 use self::adapters::BlockImporterAdapter;
 use crate::{
-    combined_database::{
-        CombinedDatabase,
-        ShutdownListener,
-    },
+    combined_database::{CombinedDatabase, ShutdownListener},
     database::Database,
     service::{
-        adapters::{
-            ExecutorAdapter,
-            PoAAdapter,
-        },
+        adapters::{ExecutorAdapter, PoAAdapter},
         sub_services::TxPoolSharedState,
     },
 };
-use fuel_core_chain_config::{
-    ConsensusConfig,
-    GenesisCommitment,
-};
-use fuel_core_poa::{
-    ports::BlockImporter,
-    verifier::verify_consensus,
-};
+use fuel_core_chain_config::{ConsensusConfig, GenesisCommitment};
+use fuel_core_poa::{ports::BlockImporter, verifier::verify_consensus};
 use fuel_core_services::{
-    RunnableService,
-    RunnableTask,
-    ServiceRunner,
-    State,
-    StateWatcher,
-    TaskNextAction,
+    RunnableService, RunnableTask, ServiceRunner, State, StateWatcher, TaskNextAction,
 };
 use fuel_core_storage::{
     not_found,
     tables::SealedBlockConsensus,
-    transactional::{
-        AtomicView,
-        ReadTransaction,
-    },
-    IsNotFound,
-    StorageAsMut,
+    transactional::{AtomicView, ReadTransaction},
+    IsNotFound, StorageAsMut,
 };
 use fuel_core_types::blockchain::consensus::Consensus;
-use std::{
-    net::SocketAddr,
-    sync::Arc,
-};
+use std::{net::SocketAddr, sync::Arc};
 
-pub use config::{
-    Config,
-    DbType,
-    RelayerConsensusConfig,
-    VMConfig,
-};
+pub use config::{Config, DbType, RelayerConsensusConfig, VMConfig};
 pub use fuel_core_services::Service as ServiceTrait;
 
 pub mod adapters;
@@ -466,17 +437,11 @@ impl RunnableTask for Task {
 #[cfg(test)]
 mod tests {
     use crate::{
-        service::{
-            Config,
-            FuelService,
-        },
+        service::{Config, FuelService},
         ShutdownListener,
     };
     use fuel_core_services::State;
-    use std::{
-        thread::sleep,
-        time::Duration,
-    };
+    use std::{thread::sleep, time::Duration};
 
     #[tokio::test]
     async fn stop_sub_service_shutdown_all_services() {

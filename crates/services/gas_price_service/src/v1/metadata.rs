@@ -1,8 +1,5 @@
 use crate::v0::metadata::V0Metadata;
-use fuel_gas_price_algorithm::v1::{
-    AlgorithmUpdaterV1,
-    L2ActivityTracker,
-};
+use fuel_gas_price_algorithm::v1::{AlgorithmUpdaterV1, L2ActivityTracker};
 use std::num::NonZeroU64;
 
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq)]

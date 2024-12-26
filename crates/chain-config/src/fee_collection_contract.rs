@@ -1,14 +1,6 @@
 use fuel_core_types::{
-    fuel_asm::{
-        op,
-        GTFArgs,
-        Instruction,
-        RegId,
-    },
-    fuel_tx::{
-        Address,
-        AssetId,
-    },
+    fuel_asm::{op, GTFArgs, Instruction, RegId},
+    fuel_tx::{Address, AssetId},
 };
 
 /// Generates the bytecode for the fee collection contract.

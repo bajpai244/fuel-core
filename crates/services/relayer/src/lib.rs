@@ -26,15 +26,8 @@ pub use abi::*;
 pub use service::new_service_test;
 
 pub use config::Config;
-pub use ethers_core::types::{
-    H160,
-    H256,
-};
-pub use service::{
-    new_service,
-    Service,
-    SharedState,
-};
+pub use ethers_core::types::{H160, H256};
+pub use service::{new_service, Service, SharedState};
 
 #[cfg(test)]
 fuel_core_trace::enable_tracing!();

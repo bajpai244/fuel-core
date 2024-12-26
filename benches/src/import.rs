@@ -1,28 +1,15 @@
-use fuel_core_services::{
-    SharedMutex,
-    StateWatcher,
-};
+use fuel_core_services::{SharedMutex, StateWatcher};
 pub use fuel_core_sync::import::test_helpers::SharedCounts;
 use fuel_core_sync::{
     import::{
-        test_helpers::{
-            PressureBlockImporter,
-            PressureConsensus,
-            PressurePeerToPeer,
-        },
+        test_helpers::{PressureBlockImporter, PressureConsensus, PressurePeerToPeer},
         Import,
     },
     state::State,
     Config,
 };
-use std::{
-    sync::Arc,
-    time::Duration,
-};
-use tokio::sync::{
-    watch::Sender,
-    Notify,
-};
+use std::{sync::Arc, time::Duration};
+use tokio::sync::{watch::Sender, Notify};
 
 pub type PressureImport =
     Import<PressurePeerToPeer, PressureBlockImporter, PressureConsensus>;

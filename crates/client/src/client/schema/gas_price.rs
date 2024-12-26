@@ -1,8 +1,4 @@
-use crate::client::schema::{
-    schema,
-    U32,
-    U64,
-};
+use crate::client::schema::{schema, U32, U64};
 
 #[derive(cynic::QueryFragment, Clone, Debug)]
 #[cynic(schema_path = "./assets/schema.sdl")]

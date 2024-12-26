@@ -2,31 +2,17 @@ use crate::{
     database::database_description::DatabaseDescription,
     state::{
         historical_rocksdb::{
-            description::{
-                Column,
-                Historical,
-            },
-            deserialize,
-            height_key,
+            description::{Column, Historical},
+            deserialize, height_key,
         },
-        rocks_db::{
-            KeyAndValue,
-            RocksDb,
-        },
+        rocks_db::{KeyAndValue, RocksDb},
     },
 };
 use fuel_core_storage::{
-    kv_store::{
-        KeyValueInspect,
-        Value,
-        WriteOperation,
-    },
+    kv_store::{KeyValueInspect, Value, WriteOperation},
     Result as StorageResult,
 };
-use rocksdb::{
-    IteratorMode,
-    ReadOptions,
-};
+use rocksdb::{IteratorMode, ReadOptions};
 
 pub struct ViewAtHeight<Description> {
     height: u64,
@@ -76,7 +62,7 @@ where
                 return match value {
                     WriteOperation::Insert(value) => Ok(Some(value)),
                     WriteOperation::Remove => Ok(None),
-                }
+                };
             }
         }
 
@@ -90,22 +76,14 @@ mod tests {
     use crate::{
         database::database_description::on_chain::OnChain,
         state::{
-            historical_rocksdb::{
-                HistoricalRocksDB,
-                StateRewindPolicy,
-            },
+            historical_rocksdb::{HistoricalRocksDB, StateRewindPolicy},
             TransactableStorage,
         },
     };
     use fuel_core_storage::{
         tables::ContractsAssets,
-        transactional::{
-            IntoTransaction,
-            ReadTransaction,
-        },
-        ContractsAssetKey,
-        StorageAsMut,
-        StorageAsRef,
+        transactional::{IntoTransaction, ReadTransaction},
+        ContractsAssetKey, StorageAsMut, StorageAsRef,
     };
 
     fn key() -> ContractsAssetKey {

@@ -1,12 +1,6 @@
-use clap::{
-    builder::ArgPredicate::IsPresent,
-    Args,
-};
+use clap::{builder::ArgPredicate::IsPresent, Args};
 use core::time::Duration;
-use fuel_core::{
-    relayer::Config,
-    types::blockchain::primitives::DaBlockHeight,
-};
+use fuel_core::{relayer::Config, types::blockchain::primitives::DaBlockHeight};
 use fuel_core_types::fuel_types::Bytes20;
 
 #[derive(Debug, Clone, Args)]
@@ -54,7 +48,7 @@ impl RelayerArgs {
     pub fn into_config(self) -> Option<Config> {
         if !self.enable_relayer {
             tracing::info!("Relayer service disabled");
-            return None
+            return None;
         }
 
         let config = Config {

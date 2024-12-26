@@ -1,80 +1,36 @@
 use super::scalars::U64;
 use crate::{
     fuel_core_graphql_api::{
-        api_service::{
-            BlockProducer,
-            ConsensusProvider,
-            TxPool,
-        },
-        query_costs,
-        IntoApiResult,
+        api_service::{BlockProducer, ConsensusProvider, TxPool},
+        query_costs, IntoApiResult,
     },
-    graphql_api::{
-        database::ReadView,
-        ports::MemoryPool,
-    },
-    query::{
-        transaction_status_change,
-        TxnStatusChangeState,
-    },
+    graphql_api::{database::ReadView, ports::MemoryPool},
+    query::{transaction_status_change, TxnStatusChangeState},
     schema::{
-        scalars::{
-            Address,
-            HexString,
-            SortedTxCursor,
-            TransactionId,
-            TxPointer,
-        },
+        scalars::{Address, HexString, SortedTxCursor, TransactionId, TxPointer},
         tx::types::TransactionStatus,
         ReadViewProvider,
     },
     service::adapters::SharedMemoryPool,
 };
 use async_graphql::{
-    connection::{
-        Connection,
-        EmptyFields,
-    },
-    Context,
-    Object,
-    Subscription,
+    connection::{Connection, EmptyFields},
+    Context, Object, Subscription,
 };
 use fuel_core_executor::ports::TransactionExt;
 use fuel_core_storage::{
-    iter::IterDirection,
-    Error as StorageError,
-    Result as StorageResult,
+    iter::IterDirection, Error as StorageError, Result as StorageResult,
 };
 use fuel_core_txpool::TxStatusMessage;
 use fuel_core_types::{
-    fuel_tx::{
-        Bytes32,
-        Cacheable,
-        Transaction as FuelTx,
-        UniqueIdentifier,
-    },
-    fuel_types::{
-        self,
-        canonical::Deserialize,
-    },
-    fuel_vm::checked_transaction::{
-        CheckPredicateParams,
-        EstimatePredicates,
-    },
+    fuel_tx::{Bytes32, Cacheable, Transaction as FuelTx, UniqueIdentifier},
+    fuel_types::{self, canonical::Deserialize},
+    fuel_vm::checked_transaction::{CheckPredicateParams, EstimatePredicates},
     services::txpool,
 };
-use futures::{
-    Stream,
-    TryStreamExt,
-};
-use std::{
-    borrow::Cow,
-    iter,
-};
-use types::{
-    DryRunTransactionExecutionStatus,
-    Transaction,
-};
+use futures::{Stream, TryStreamExt};
+use std::{borrow::Cow, iter};
+use types::{DryRunTransactionExecutionStatus, Transaction};
 
 pub mod input;
 pub mod output;

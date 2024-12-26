@@ -1,25 +1,12 @@
 use crate::database::OnChainIterableKeyValueView;
 use fuel_core_chain_config::TableEntry;
 use fuel_core_storage::{
-    iter::{
-        IterDirection,
-        IteratorOverTable,
-    },
+    iter::{IterDirection, IteratorOverTable},
     not_found,
-    tables::{
-        ContractsAssets,
-        ContractsLatestUtxo,
-        ContractsRawCode,
-        ContractsState,
-    },
-    ContractsAssetKey,
-    Result as StorageResult,
-    StorageAsRef,
+    tables::{ContractsAssets, ContractsLatestUtxo, ContractsRawCode, ContractsState},
+    ContractsAssetKey, Result as StorageResult, StorageAsRef,
 };
-use fuel_core_types::fuel_types::{
-    AssetId,
-    ContractId,
-};
+use fuel_core_types::fuel_types::{AssetId, ContractId};
 use itertools::Itertools;
 
 impl OnChainIterableKeyValueView {
@@ -97,16 +84,10 @@ impl OnChainIterableKeyValueView {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::database::{
-        database_description::on_chain::OnChain,
-        Database,
-    };
+    use crate::database::{database_description::on_chain::OnChain, Database};
     use fuel_core_storage::StorageAsMut;
     use fuel_core_types::fuel_tx::Contract;
-    use rand::{
-        RngCore,
-        SeedableRng,
-    };
+    use rand::{RngCore, SeedableRng};
 
     #[test]
     fn raw_code_put_huge_contract() {

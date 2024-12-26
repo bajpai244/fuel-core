@@ -1,14 +1,8 @@
-use anyhow::{
-    anyhow,
-    Context,
-};
+use anyhow::{anyhow, Context};
 use parquet::{
     data_type::AsBytes,
     file::{
-        reader::{
-            ChunkReader,
-            FileReader,
-        },
+        reader::{ChunkReader, FileReader},
         serialized_reader::SerializedFileReader,
     },
     record::RowAccessor,

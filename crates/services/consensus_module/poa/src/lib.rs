@@ -16,14 +16,8 @@ pub mod service;
 pub mod signer;
 pub mod verifier;
 
-pub use config::{
-    Config,
-    Trigger,
-};
-pub use service::{
-    new_service,
-    Service,
-};
+pub use config::{Config, Trigger};
+pub use service::{new_service, Service};
 
 #[cfg(test)]
 fuel_core_trace::enable_tracing!();

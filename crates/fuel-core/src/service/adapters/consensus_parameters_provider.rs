@@ -1,36 +1,20 @@
-use crate::{
-    database::Database,
-    service::adapters::BlockImporterAdapter,
-};
+use crate::{database::Database, service::adapters::BlockImporterAdapter};
 use fuel_core_producer::ports::BlockProducerDatabase;
 use fuel_core_services::{
-    stream::BoxStream,
-    RunnableService,
-    RunnableTask,
-    ServiceRunner,
-    SharedMutex,
-    StateWatcher,
-    TaskNextAction,
+    stream::BoxStream, RunnableService, RunnableTask, ServiceRunner, SharedMutex,
+    StateWatcher, TaskNextAction,
 };
 use fuel_core_storage::{
-    not_found,
-    tables::ConsensusParametersVersions,
-    transactional::AtomicView,
-    Result as StorageResult,
-    StorageAsRef,
+    not_found, tables::ConsensusParametersVersions, transactional::AtomicView,
+    Result as StorageResult, StorageAsRef,
 };
 use fuel_core_txpool::ports::BlockImporter;
 use fuel_core_types::{
-    blockchain::header::ConsensusParametersVersion,
-    fuel_tx::ConsensusParameters,
+    blockchain::header::ConsensusParametersVersion, fuel_tx::ConsensusParameters,
     services::block_importer::SharedImportResult,
 };
 use futures::StreamExt;
-use std::{
-    collections::HashMap,
-    fmt::Debug,
-    sync::Arc,
-};
+use std::{collections::HashMap, fmt::Debug, sync::Arc};
 
 #[derive(Clone, Debug)]
 pub struct SharedState {
@@ -195,33 +179,18 @@ pub fn new_service(
 mod tests {
     use crate::{
         database::Database,
-        service::adapters::consensus_parameters_provider::{
-            SharedState,
-            Task,
-        },
+        service::adapters::consensus_parameters_provider::{SharedState, Task},
     };
     use fuel_core_services::{
-        stream::IntoBoxStream,
-        RunnableService,
-        RunnableTask,
-        StateWatcher,
+        stream::IntoBoxStream, RunnableService, RunnableTask, StateWatcher,
     };
     use fuel_core_storage::{
-        tables::ConsensusParametersVersions,
-        transactional::IntoTransaction,
-        StorageAsMut,
+        tables::ConsensusParametersVersions, transactional::IntoTransaction, StorageAsMut,
     };
     use fuel_core_types::{
-        blockchain::{
-            block::Block,
-            header::ConsensusParametersVersion,
-            SealedBlock,
-        },
+        blockchain::{block::Block, header::ConsensusParametersVersion, SealedBlock},
         fuel_tx::ConsensusParameters,
-        services::block_importer::{
-            ImportResult,
-            SharedImportResult,
-        },
+        services::block_importer::{ImportResult, SharedImportResult},
     };
     use futures::stream;
 

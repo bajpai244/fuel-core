@@ -14,8 +14,7 @@ pub use config::Config;
 pub use registry::RegistryKeyspace;
 
 use fuel_core_types::{
-    blockchain::header::PartialBlockHeader,
-    fuel_tx::CompressedTransaction,
+    blockchain::header::PartialBlockHeader, fuel_tx::CompressedTransaction,
     fuel_types::BlockHeight,
 };
 use registry::RegistrationsPerTable;
@@ -57,10 +56,7 @@ mod tests {
     use fuel_core_compression as _;
     use fuel_core_types::{
         blockchain::{
-            header::{
-                ApplicationHeader,
-                ConsensusHeader,
-            },
+            header::{ApplicationHeader, ConsensusHeader},
             primitives::Empty,
         },
         fuel_compression::RegistryKey,

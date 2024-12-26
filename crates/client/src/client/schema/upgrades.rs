@@ -1,10 +1,7 @@
 use crate::client::schema::schema;
 
 use crate::client::{
-    schema::{
-        chain::ConsensusParameters,
-        primitives::HexString,
-    },
+    schema::{chain::ConsensusParameters, primitives::HexString},
     ConversionError,
 };
 

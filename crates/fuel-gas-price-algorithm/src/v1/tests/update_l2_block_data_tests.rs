@@ -1,12 +1,6 @@
 use crate::v1::{
-    tests::{
-        BlockBytes,
-        UpdaterBuilder,
-    },
-    Bytes,
-    Error,
-    Height,
-    L2ActivityTracker,
+    tests::{BlockBytes, UpdaterBuilder},
+    Bytes, Error, Height, L2ActivityTracker,
 };
 use std::collections::BTreeMap;
 

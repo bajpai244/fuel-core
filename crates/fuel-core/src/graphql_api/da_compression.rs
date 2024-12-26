@@ -2,43 +2,23 @@ use crate::fuel_core_graphql_api::{
     ports::worker::OffChainDatabaseTransaction,
     storage::da_compression::{
         evictor_cache::MetadataKey,
-        timestamps::{
-            TimestampKey,
-            TimestampKeyspace,
-        },
+        timestamps::{TimestampKey, TimestampKeyspace},
         *,
     },
 };
 use fuel_core_compression::{
     compress::compress,
     config::Config,
-    ports::{
-        EvictorDb,
-        HistoryLookup,
-        TemporalRegistry,
-        UtxoIdToPointer,
-    },
+    ports::{EvictorDb, HistoryLookup, TemporalRegistry, UtxoIdToPointer},
 };
 use fuel_core_storage::{
     not_found,
-    tables::{
-        Coins,
-        FuelBlocks,
-        Messages,
-    },
-    StorageAsMut,
-    StorageAsRef,
-    StorageInspect,
+    tables::{Coins, FuelBlocks, Messages},
+    StorageAsMut, StorageAsRef, StorageInspect,
 };
 use fuel_core_types::{
     blockchain::block::Block,
-    fuel_tx::{
-        input::PredicateCode,
-        Address,
-        AssetId,
-        ContractId,
-        ScriptCode,
-    },
+    fuel_tx::{input::PredicateCode, Address, AssetId, ContractId, ScriptCode},
     services::executor::Event,
     tai64::Tai64,
 };

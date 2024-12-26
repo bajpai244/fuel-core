@@ -1,12 +1,5 @@
-use fuel_core_storage::{
-    Error as StorageError,
-    IsNotFound,
-};
-use std::{
-    net::SocketAddr,
-    sync::OnceLock,
-    time::Duration,
-};
+use fuel_core_storage::{Error as StorageError, IsNotFound};
+use std::{net::SocketAddr, sync::OnceLock, time::Duration};
 
 pub mod api_service;
 pub mod da_compression;

@@ -1,78 +1,37 @@
 //! # Helpers for creating networks of nodes
 
 use crate::{
-    chain_config::{
-        CoinConfig,
-        CoinConfigGenerator,
-    },
+    chain_config::{CoinConfig, CoinConfigGenerator},
     combined_database::CombinedDatabase,
-    database::{
-        database_description::off_chain::OffChain,
-        Database,
-    },
+    database::{database_description::off_chain::OffChain, Database},
     fuel_core_graphql_api::storage::transactions::TransactionStatuses,
     p2p::Multiaddr,
     schema::tx::types::TransactionStatus,
-    service::{
-        Config,
-        FuelService,
-    },
+    service::{Config, FuelService},
 };
-use fuel_core_chain_config::{
-    ConsensusConfig,
-    StateConfig,
-};
+use fuel_core_chain_config::{ConsensusConfig, StateConfig};
 use fuel_core_p2p::{
     codecs::postcard::PostcardCodec,
     network_service::FuelP2PService,
     p2p_service::FuelP2PEvent,
-    request_response::messages::{
-        RequestMessage,
-        V2ResponseMessage,
-    },
+    request_response::messages::{RequestMessage, V2ResponseMessage},
     service::to_message_acceptance,
 };
-use fuel_core_poa::{
-    ports::BlockImporter,
-    signer::SignMode,
-    Trigger,
-};
-use fuel_core_storage::{
-    transactional::AtomicView,
-    StorageAsRef,
-};
+use fuel_core_poa::{ports::BlockImporter, signer::SignMode, Trigger};
+use fuel_core_storage::{transactional::AtomicView, StorageAsRef};
 use fuel_core_types::{
-    fuel_asm::{
-        op,
-        RegId,
-    },
+    fuel_asm::{op, RegId},
     fuel_crypto::SecretKey,
-    fuel_tx::{
-        Input,
-        Transaction,
-        TransactionBuilder,
-        TxId,
-        UniqueIdentifier,
-    },
-    fuel_types::{
-        Address,
-        Bytes32,
-        ChainId,
-    },
+    fuel_tx::{Input, Transaction, TransactionBuilder, TxId, UniqueIdentifier},
+    fuel_types::{Address, Bytes32, ChainId},
     secrecy::Secret,
     services::p2p::GossipsubMessageAcceptance,
 };
 use futures::StreamExt;
-use rand::{
-    rngs::StdRng,
-    SeedableRng,
-};
+use rand::{rngs::StdRng, SeedableRng};
 use std::{
     collections::HashMap,
-    ops::{
-        Index,
-        IndexMut,
-    },
+    ops::{Index, IndexMut},
     time::Duration,
 };
 use tokio::sync::broadcast;

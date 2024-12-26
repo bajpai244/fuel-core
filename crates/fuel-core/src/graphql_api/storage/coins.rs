@@ -1,18 +1,10 @@
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        postcard::Postcard,
-        primitive::utxo_id_to_bytes,
-        raw::Raw,
-    },
+    codec::{postcard::Postcard, primitive::utxo_id_to_bytes, raw::Raw},
     structured_storage::TableWithBlueprint,
     Mappable,
 };
-use fuel_core_types::fuel_tx::{
-    Address,
-    TxId,
-    UtxoId,
-};
+use fuel_core_types::fuel_tx::{Address, TxId, UtxoId};
 
 // TODO: Reuse `fuel_vm::storage::double_key` macro.
 pub fn owner_coin_id_key(owner: &Address, coin_id: &UtxoId) -> OwnedCoinKey {

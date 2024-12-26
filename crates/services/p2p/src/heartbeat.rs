@@ -1,30 +1,16 @@
 use crate::Multiaddr;
 use fuel_core_types::fuel_types::BlockHeight;
 pub use handler::Config;
-use handler::{
-    HeartbeatHandler,
-    HeartbeatInEvent,
-    HeartbeatOutEvent,
-};
+use handler::{HeartbeatHandler, HeartbeatInEvent, HeartbeatOutEvent};
 use libp2p::{
     core::Endpoint,
     swarm::{
-        derive_prelude::ConnectionId,
-        ConnectionDenied,
-        FromSwarm,
-        NetworkBehaviour,
-        NotifyHandler,
-        THandler,
-        THandlerInEvent,
-        THandlerOutEvent,
-        ToSwarm,
+        derive_prelude::ConnectionId, ConnectionDenied, FromSwarm, NetworkBehaviour,
+        NotifyHandler, THandler, THandlerInEvent, THandlerOutEvent, ToSwarm,
     },
     PeerId,
 };
-use std::{
-    collections::VecDeque,
-    task::Poll,
-};
+use std::{collections::VecDeque, task::Poll};
 
 mod handler;
 
@@ -141,7 +127,7 @@ impl NetworkBehaviour for Behaviour {
         _: &mut std::task::Context<'_>,
     ) -> Poll<ToSwarm<Self::ToSwarm, THandlerInEvent<Self>>> {
         if let Some(action) = self.pending_events.pop_front() {
-            return Poll::Ready(action.build())
+            return Poll::Ready(action.build());
         }
 
         Poll::Pending

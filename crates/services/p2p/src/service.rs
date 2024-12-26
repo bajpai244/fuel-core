@@ -1,106 +1,49 @@
 use crate::{
     cached_view::CachedView,
     codecs::postcard::PostcardCodec,
-    config::{
-        Config,
-        NotInitialized,
-    },
-    gossipsub::messages::{
-        GossipTopicTag,
-        GossipsubBroadcastRequest,
-        GossipsubMessage,
-    },
-    p2p_service::{
-        FuelP2PEvent,
-        FuelP2PService,
-    },
+    config::{Config, NotInitialized},
+    gossipsub::messages::{GossipTopicTag, GossipsubBroadcastRequest, GossipsubMessage},
+    p2p_service::{FuelP2PEvent, FuelP2PService},
     peer_manager::PeerInfo,
-    ports::{
-        BlockHeightImporter,
-        P2pDb,
-        TxPool,
-    },
+    ports::{BlockHeightImporter, P2pDb, TxPool},
     request_response::messages::{
-        OnResponse,
-        OnResponseWithPeerSelection,
-        RequestMessage,
-        ResponseMessageErrorCode,
-        ResponseSender,
-        V2ResponseMessage,
+        OnResponse, OnResponseWithPeerSelection, RequestMessage,
+        ResponseMessageErrorCode, ResponseSender, V2ResponseMessage,
     },
 };
 use anyhow::anyhow;
 use fuel_core_metrics::p2p_metrics::set_blocks_requested;
 use fuel_core_services::{
-    stream::BoxStream,
-    AsyncProcessor,
-    RunnableService,
-    RunnableTask,
-    ServiceRunner,
-    StateWatcher,
-    SyncProcessor,
-    TaskNextAction,
-    TraceErr,
+    stream::BoxStream, AsyncProcessor, RunnableService, RunnableTask, ServiceRunner,
+    StateWatcher, SyncProcessor, TaskNextAction, TraceErr,
 };
 use fuel_core_storage::transactional::AtomicView;
 use fuel_core_types::{
     blockchain::SealedBlockHeader,
-    fuel_tx::{
-        Transaction,
-        TxId,
-        UniqueIdentifier,
-    },
-    fuel_types::{
-        BlockHeight,
-        ChainId,
-    },
+    fuel_tx::{Transaction, TxId, UniqueIdentifier},
+    fuel_types::{BlockHeight, ChainId},
     services::p2p::{
-        peer_reputation::{
-            AppScore,
-            PeerReport,
-        },
-        BlockHeightHeartbeatData,
-        GossipData,
-        GossipsubMessageAcceptance,
-        GossipsubMessageInfo,
-        NetworkableTransactionPool,
-        PeerId as FuelPeerId,
-        TransactionGossipData,
-        Transactions,
+        peer_reputation::{AppScore, PeerReport},
+        BlockHeightHeartbeatData, GossipData, GossipsubMessageAcceptance,
+        GossipsubMessageInfo, NetworkableTransactionPool, PeerId as FuelPeerId,
+        TransactionGossipData, Transactions,
     },
 };
-use futures::{
-    future::BoxFuture,
-    StreamExt,
-};
+use futures::{future::BoxFuture, StreamExt};
 use libp2p::{
-    gossipsub::{
-        MessageAcceptance,
-        PublishError,
-    },
+    gossipsub::{MessageAcceptance, PublishError},
     request_response::InboundRequestId,
     PeerId,
 };
-use std::{
-    fmt::Debug,
-    future::Future,
-    ops::Range,
-    sync::Arc,
-};
+use std::{fmt::Debug, future::Future, ops::Range, sync::Arc};
 use thiserror::Error;
 use tokio::{
     sync::{
         broadcast,
-        mpsc::{
-            self,
-            Receiver,
-        },
+        mpsc::{self, Receiver},
         oneshot,
     },
-    time::{
-        Duration,
-        Instant,
-    },
+    time::{Duration, Instant},
 };
 use tracing::warn;
 
@@ -1407,20 +1350,11 @@ pub mod tests {
     use super::*;
 
     use crate::peer_manager::heartbeat_data::HeartbeatData;
-    use fuel_core_services::{
-        Service,
-        State,
-    };
+    use fuel_core_services::{Service, State};
     use fuel_core_storage::Result as StorageResult;
-    use fuel_core_types::{
-        blockchain::consensus::Genesis,
-        fuel_types::BlockHeight,
-    };
+    use fuel_core_types::{blockchain::consensus::Genesis, fuel_types::BlockHeight};
     use futures::FutureExt;
-    use std::{
-        collections::VecDeque,
-        time::SystemTime,
-    };
+    use std::{collections::VecDeque, time::SystemTime};
 
     #[derive(Clone, Debug)]
     struct FakeDb;

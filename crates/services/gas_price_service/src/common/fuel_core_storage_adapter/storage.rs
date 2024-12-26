@@ -1,10 +1,7 @@
 use crate::common::updater_metadata::UpdaterMetadata;
 use fuel_core_storage::{
     blueprint::plain::Plain,
-    codec::{
-        postcard::Postcard,
-        primitive::Primitive,
-    },
+    codec::{postcard::Postcard, primitive::Primitive},
     kv_store::StorageColumn,
     structured_storage::TableWithBlueprint,
     Mappable,

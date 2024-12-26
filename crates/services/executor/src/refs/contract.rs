@@ -1,23 +1,12 @@
 use core::fmt;
 use fuel_core_storage::{
-    not_found,
-    tables::ContractsLatestUtxo,
-    Error as StorageError,
-    Mappable,
-    MerkleRoot,
-    StorageAsRef,
-    StorageInspect,
+    not_found, tables::ContractsLatestUtxo, Error as StorageError, Mappable, MerkleRoot,
+    StorageAsRef, StorageInspect,
 };
 use fuel_core_types::{
     fuel_crypto::Hasher,
-    fuel_types::{
-        Bytes32,
-        ContractId,
-    },
-    services::executor::{
-        Error as ExecutorError,
-        Result as ExecutorResult,
-    },
+    fuel_types::{Bytes32, ContractId},
+    services::executor::{Error as ExecutorError, Result as ExecutorResult},
 };
 
 #[cfg(feature = "std")]
@@ -97,10 +86,7 @@ where
 mod smt {
     use super::*;
     use fuel_core_storage::{
-        tables::{
-            ContractsAssets,
-            ContractsState,
-        },
+        tables::{ContractsAssets, ContractsState},
         MerkleRootStorage,
     };
 

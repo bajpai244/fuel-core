@@ -1,15 +1,8 @@
 use crate::fuel_core_graphql_api::validation_extension::visitor::{
-    Visitor,
-    VisitorContext,
+    Visitor, VisitorContext,
 };
-use async_graphql::{
-    parser::types::Field,
-    Positioned,
-};
-use std::collections::{
-    hash_map::Entry,
-    HashMap,
-};
+use async_graphql::{parser::types::Field, Positioned};
+use std::collections::{hash_map::Entry, HashMap};
 
 pub(super) struct RecursionFinder<'a> {
     visited: HashMap<&'a str, usize>,
@@ -37,7 +30,7 @@ impl<'a> Visitor<'a> for RecursionFinder<'a> {
             let name = ty.name();
 
             if name == "__Type" {
-                return
+                return;
             }
 
             let old = self.visited.entry(name).or_default();
@@ -58,7 +51,7 @@ impl<'a> Visitor<'a> for RecursionFinder<'a> {
             let name = ty.name();
 
             if name == "__Type" {
-                return
+                return;
             }
 
             let old = self.visited.entry(name);

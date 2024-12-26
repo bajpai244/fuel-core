@@ -1,50 +1,21 @@
 //! This module handles bridge communications between the fuel node and the data availability layer.
 
-use crate::{
-    log::EthEventLog,
-    ports::RelayerDb,
-    service::state::EthLocal,
-    Config,
-};
+use crate::{log::EthEventLog, ports::RelayerDb, service::state::EthLocal, Config};
 use async_trait::async_trait;
 use core::time::Duration;
-use ethers_core::types::{
-    Filter,
-    Log,
-    SyncingStatus,
-    ValueOrArray,
-};
+use ethers_core::types::{Filter, Log, SyncingStatus, ValueOrArray};
 use ethers_providers::{
-    Http,
-    Middleware,
-    Provider,
-    ProviderError,
-    Quorum,
-    QuorumProvider,
-    WeightedProvider,
+    Http, Middleware, Provider, ProviderError, Quorum, QuorumProvider, WeightedProvider,
 };
 use fuel_core_services::{
-    RunnableService,
-    RunnableTask,
-    ServiceRunner,
-    StateWatcher,
-    TaskNextAction,
+    RunnableService, RunnableTask, ServiceRunner, StateWatcher, TaskNextAction,
 };
-use fuel_core_types::{
-    blockchain::primitives::DaBlockHeight,
-    entities::Message,
-};
+use fuel_core_types::{blockchain::primitives::DaBlockHeight, entities::Message};
 use futures::StreamExt;
-use std::{
-    convert::TryInto,
-    ops::Deref,
-};
+use std::{convert::TryInto, ops::Deref};
 use tokio::sync::watch;
 
-use self::{
-    get_logs::*,
-    run::RelayerData,
-};
+use self::{get_logs::*, run::RelayerData};
 
 mod get_logs;
 mod run;

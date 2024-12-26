@@ -1,17 +1,10 @@
 use std::fmt::Debug;
 
-use fuel_core_storage::{
-    structured_storage::TableWithBlueprint,
-    Mappable,
-};
+use fuel_core_storage::{structured_storage::TableWithBlueprint, Mappable};
 use itertools::Itertools;
 
 use crate::{
-    config::table_entry::TableEntry,
-    AsTable,
-    ChainConfig,
-    LastBlockConfig,
-    StateConfig,
+    config::table_entry::TableEntry, AsTable, ChainConfig, LastBlockConfig, StateConfig,
     MAX_GROUP_SIZE,
 };
 
